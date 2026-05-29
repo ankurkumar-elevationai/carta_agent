@@ -2,13 +2,14 @@
 
 Automated portfolio data export system for Carta via OpenClaw AI agent.
 
-**Author:** Nikhil Kumar | **Team:** Elevation AI | **Status:** Active
+**Author:** Ankur Kumar | **Team:** Elevation AI | **Status:** Active
 
 ---
 
 ## What This Does
 
 Per company:
+
 1. Authenticates into Carta via a persistent Chrome session
 2. Navigates to the investor portfolio dashboard
 3. Searches and resolves the target company via fuzzy entity matching
@@ -57,11 +58,11 @@ The codebase uses a `ProviderAgent` interface:
 ```
 services/providers/
 ├── base.py        ← abstract ProviderAgent
-├── carta.py       ← CartaProvider (active)
-└── openclaw.py   ← OpenClawProvider (reference implementation)
+└── carta/         ← CartaProvider (active implementation)
 ```
 
 To add a new provider (Crunchbase, Affinity, DealRoom…):
+
 1. Create `services/providers/crunchbase.py` implementing `ProviderAgent`
 2. Import and swap in `api/server.py`
 3. MCP tools and queue are unchanged
@@ -70,12 +71,12 @@ To add a new provider (Crunchbase, Affinity, DealRoom…):
 
 ## Prerequisites
 
-| Requirement | Version  |
-|-------------|----------|
-| Python      | 3.11+    |
-| Playwright  | Latest   |
-| Chrome      | Latest   |
-| Node.js     | 18+      |
+| Requirement | Version |
+| ----------- | ------- |
+| Python      | 3.11+   |
+| Playwright  | Latest  |
+| Chrome      | Latest  |
+| Node.js     | 18+     |
 
 ---
 
@@ -126,7 +127,7 @@ Edit `config/companies.json`:
 python scripts/start_persistent_browser.py
 ```
 
-Chrome opens to `https://app.carta.com/login/`. **Log in manually.**  
+Chrome opens to `https://app.carta.com/login/`. **Log in manually.**
 Keep the terminal open — the browser must stay running.
 
 ### Step 2 — Start the API Server
@@ -154,6 +155,7 @@ curl -X POST http://127.0.0.1:8082/api/download-report \
 ```
 
 Response:
+
 ```json
 {"task_id": "uuid", "status": "pending", "company_name": "OpenAI"}
 ```
@@ -165,6 +167,7 @@ curl http://127.0.0.1:8082/api/status/<task_id>
 ```
 
 Response (completed):
+
 ```json
 {
   "task_id": "uuid",
@@ -175,8 +178,8 @@ Response (completed):
 
 ### MCP Tools
 
-| Tool             | Description                              |
-|------------------|------------------------------------------|
+| Tool                | Description                             |
+| ------------------- | --------------------------------------- |
 | `download_report` | Export data for a single company        |
 | `download_batch`  | Export data for a list of companies     |
 | `get_status`      | Check if the Carta export service is up |
@@ -189,28 +192,24 @@ MCP authentication: `X-API-Key` header (default: `openclaw-dev-key`, set via `MC
 
 ```
 openclaw_carta/
-├── PRD/                             # Product Requirements Document
+├── legacy/
+│   ├── PRD.docx                    # Product Requirements Document
+│   └── pitchbook.zip               # Legacy Pitchbook automation code
 ├── api/
 │   └── server.py                   # FastAPI + SQLite worker
 ├── services/
 │   ├── entity_resolver.py          # Fuzzy company matching (RapidFuzz)
 │   └── providers/
 │       ├── base.py                 # ProviderAgent interface
-│       ├── carta.py                # CartaProvider (active)
-│       └── openclaw.py            # OpenClawProvider (reference)
+│       └── carta/                  # Carta provider implementation
 ├── scripts/
 │   ├── start_persistent_browser.py # Launch Chrome for CDP
 │   └── mcp_server.py              # MCP SSE server
 ├── utils/
-│   ├── db.py                       # SQLite WAL helpers
-│   └── gcs.py                      # GCS upload utility
+│   └── db.py                       # SQLite WAL helpers
 ├── config/
-│   ├── companies.json              # Company list
-│   ├── settings.json               # Credentials + settings
-│   └── login_state.json            # Session state
-├── output/
-│   └── exports/                    # Downloaded files (CSV, XLSX, PDFs)
-├── .env                            # Secrets (DO NOT COMMIT)
+│   ├── companies.json.example      # Example company list template
+│   └── settings.json.example       # Example credentials settings template
 ├── requirements.txt
 └── Dockerfile
 ```
@@ -219,19 +218,19 @@ openclaw_carta/
 
 ## Known Issues & Workarounds
 
-| Issue | Workaround |
-|-------|------------|
+| Issue                          | Workaround                                                        |
+| ------------------------------ | ----------------------------------------------------------------- |
 | Carta session expires mid-task | Re-login in persistent browser; provider detects and retries auth |
-| MFA/SSO required | Log in manually in persistent browser; session is reused |
-| Export button not found | Verify account has investor/holdings access on Carta |
-| Company not found in portfolio | Check company name spelling; fuzzy matching has a 75% threshold |
-| CDP port conflict | Restart Chrome or ensure only one Chrome instance uses port 9222 |
+| MFA/SSO required               | Log in manually in persistent browser; session is reused          |
+| Export button not found        | Verify account has investor/holdings access on Carta              |
+| Company not found in portfolio | Check company name spelling; fuzzy matching has a 75% threshold   |
+| CDP port conflict              | Restart Chrome or ensure only one Chrome instance uses port 9222  |
 
 ---
 
 ## Contact
 
-- **Nikhil Kumar** — project lead  
-- **Saumya Garg** — stakeholder  
-- **Hanzel Corella** — provides company lists  
-- **Alan Abraham** — stakeholder  
+- **Nikhil Kumar** — project lead
+- **Saumya Garg** — stakeholder
+- **Hanzel Corella** — provides company lists
+- **Alan Abraham** — stakeholder
