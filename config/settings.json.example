@@ -1,0 +1,28 @@
+{
+  "openclaw": {
+    "gateway_url": "http://127.0.0.1:18789",
+    "token": "YOUR_OPENCLAW_TOKEN",
+    "session_name": "carta-session"
+  },
+  "carta": {
+    "email": "YOUR_CARTA_EMAIL",
+    "password": "YOUR_CARTA_PASSWORD",
+    "base_url": "https://app.carta.com/"
+  },
+  "pitchbook": {
+    "_comment": "Reference implementation — kept for multi-provider fallback",
+    "email": "YOUR_PITCHBOOK_EMAIL",
+    "password": "YOUR_PITCHBOOK_PASSWORD",
+    "base_url": "https://my.pitchbook.com/"
+  },
+  "output": {
+    "export_dir": "./output/exports",
+    "data_dir": "./output/data",
+    "reports_dir": "./output/reports"
+  },
+  "automation": {
+    "delay_between_companies_sec": 300,
+    "download_wait_sec": 300,
+    "request_timeout_sec": 460
+  }
+}
