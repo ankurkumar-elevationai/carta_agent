@@ -1,6 +1,6 @@
 import msgspec
 from typing import Optional, List
-from .extraction import EventEnrichment, GraphQLMetadata
+from .extraction import EventEnrichment, GraphQLMetadata, ActiveEntityContext
 
 class NetworkEvent(msgspec.Struct):
     request_id: str
@@ -16,6 +16,7 @@ class NetworkEvent(msgspec.Struct):
     response_body: Optional[bytes]
     enrichment: Optional[EventEnrichment] = None
     graphql_metadata: Optional[GraphQLMetadata] = None
+    active_context: Optional[ActiveEntityContext] = None
 class WebSocketFrame(msgspec.Struct):
     timestamp: float
     is_sent: bool

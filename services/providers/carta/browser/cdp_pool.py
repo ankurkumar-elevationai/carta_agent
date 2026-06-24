@@ -7,6 +7,7 @@ import asyncio
 from typing import Dict, Any
 from playwright.async_api import Page, CDPSession
 from ..models.events import NetworkEvent
+from ..models.extraction import active_entity_context_var
 
 try:
     import brotli
@@ -33,6 +34,7 @@ class CDPPageObserver:
         self._on_req_bound = self._on_request_will_be_sent
         self._on_res_bound = self._on_response_received
         self._on_load_bound = self._on_loading_finished
+        self._on_fail_bound = self._on_loading_failed
         self._on_ws_recv_bound = self._on_ws_frame_received
         self._on_ws_sent_bound = self._on_ws_frame_sent
         
@@ -40,6 +42,7 @@ class CDPPageObserver:
         self.cdp.on("Network.requestWillBeSent", self._on_req_bound)
         self.cdp.on("Network.responseReceived", self._on_res_bound)
         self.cdp.on("Network.loadingFinished", self._on_load_bound)
+        self.cdp.on("Network.loadingFailed", self._on_fail_bound)
         self.cdp.on("Network.webSocketFrameReceived", self._on_ws_recv_bound)
         self.cdp.on("Network.webSocketFrameSent", self._on_ws_sent_bound)
 
@@ -48,6 +51,7 @@ class CDPPageObserver:
             self.cdp.remove_listener("Network.requestWillBeSent", self._on_req_bound)
             self.cdp.remove_listener("Network.responseReceived", self._on_res_bound)
             self.cdp.remove_listener("Network.loadingFinished", self._on_load_bound)
+            self.cdp.remove_listener("Network.loadingFailed", self._on_fail_bound)
             self.cdp.remove_listener("Network.webSocketFrameReceived", self._on_ws_recv_bound)
             self.cdp.remove_listener("Network.webSocketFrameSent", self._on_ws_sent_bound)
         except Exception:
@@ -87,6 +91,14 @@ class CDPPageObserver:
                 
         # Fire off an async task to fetch body without blocking the listener loop
         asyncio.create_task(self._process_loading_finished(event))
+
+    def _on_loading_failed(self, event: dict):
+        req_id = event.get("requestId")
+        if req_id in self._pending_requests:
+            url = self._pending_requests[req_id].get("url", "")
+            if self.network_collector and hasattr(self.network_collector, "request_finished"):
+                self.network_collector.request_finished(url)
+            self._pending_requests.pop(req_id, None)
 
     async def _process_loading_finished(self, event: dict):
         req_id = event.get("requestId")
@@ -149,7 +161,8 @@ class CDPPageObserver:
             request_headers=pending.get("request_headers", {}),
             response_headers=headers,
             request_body=pending.get("request_body"),
-            response_body=response_body
+            response_body=response_body,
+            active_context=active_entity_context_var.get()
         )
         
         if self.network_collector and hasattr(self.network_collector, "process_event"):

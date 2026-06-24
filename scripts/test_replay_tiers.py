@@ -75,11 +75,11 @@ class ReplayValidationSuite:
         
         await self.provider._ensure_authenticated(self.page)
         
-        auth_ctx = await self.provider._extract_auth_context(self.page)
+        auth_ctx, _ = await self.provider._extract_auth_context(self.page)
         
         async def refresh_cb():
             await self.provider._ensure_authenticated(self.page)
-            new_ctx = await self.provider._extract_auth_context(self.page)
+            new_ctx, _ = await self.provider._extract_auth_context(self.page)
             new_ctx.version = auth_ctx.version + 1
             return new_ctx
             

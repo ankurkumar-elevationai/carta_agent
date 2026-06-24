@@ -13,6 +13,19 @@ class TrafficClass(str, Enum):
     AUTH = "auth"
     CONFIG = "config"
     CDN = "cdn"
+    EXTERNAL_SERVICE = "external_service"
+    EXPORT = "export"
+    UNKNOWN = "unknown"
+
+class BusinessDomain(str, Enum):
+    CAPITAL_CALLS = "capital_calls"
+    DISTRIBUTIONS = "distributions"
+    PARTNERS = "partners"
+    INVESTMENTS = "investments"
+    VALUATIONS = "valuations"
+    CAP_TABLE = "cap_table"
+    TAX = "tax"
+    FINANCIAL_REPORTING = "financial_reporting"
     UNKNOWN = "unknown"
 
 class CapabilityTag(str, Enum):
@@ -40,12 +53,31 @@ class EndpointCategory(str, Enum):
     INVESTORS = "investors"
     CAP_TABLE = "cap_table"
     SECURITIES = "securities"
+    HOLDINGS = "holdings"
     REPORTING = "reporting"
     TASKS = "tasks"
     PERMISSIONS = "permissions"
     GRAPHQL = "graphql"
     INTERNAL = "internal"
+    EXPORT = "export"
     UNKNOWN = "unknown"
+
+from contextvars import ContextVar
+
+class ActiveEntityContext(msgspec.Struct, kw_only=True):
+    organization_id: str
+    entity_id: str
+    entity_type: str
+    entity_name: str | None = None
+    parent_fund_id: str | None = None
+    parent_fund_name: str | None = None
+    route: str = ""
+    tab_name: str | None = None
+    traversal_session_id: str = ""
+    depth: int = 0
+    capture_timestamp: float = 0.0
+
+active_entity_context_var: ContextVar[ActiveEntityContext | None] = ContextVar("active_entity_context", default=None)
 
 class TraversalContext(msgspec.Struct, kw_only=True):
     page_url: str
@@ -165,6 +197,13 @@ class InteractionProvenance(msgspec.Struct, kw_only=True):
     ui_path: tuple[str, ...] = ()   # ["Tasks", "Capital Calls", "Review Capital Call"]
     triggered_endpoints: tuple[str, ...] = ()
     entity_context: str | None = None
+    
+    # Advanced Attribution
+    entity_id: str | None = None
+    entity_type: str | None = None
+    organization_id: str | None = None
+    drilldown_session: str | None = None
+    
     timestamp: float = 0.0
 
 
@@ -183,11 +222,41 @@ class DrilldownResult(msgspec.Struct, kw_only=True):
     apis_discovered: int = 0
     tabs_explored: int = 0
     errors: tuple[str, ...] = ()
+    status: str = "SUCCESS"
 
 
-# ────────────────────────────────────────────────────────────────────
 # Phase 6: Entity Graph
 # ────────────────────────────────────────────────────────────────────
+
+class NormalizedEntity(msgspec.Struct, kw_only=True):
+    """Canonical representation of an entity after normalization."""
+    canonical_id: str
+    entity_type: str
+    display_name: str
+    aliases: list[str] = msgspec.field(default_factory=list)
+    properties: dict = msgspec.field(default_factory=dict)
+    source_url: str | None = None
+
+
+class CanonicalEntity(msgspec.Struct, kw_only=True):
+    """Canonicalized entity ready for graph construction."""
+    canonical_id: str
+    entity_type: str
+    display_name: str
+    aliases: list[str] = msgspec.field(default_factory=list)
+    properties: dict = msgspec.field(default_factory=dict)
+    confidence: float = 1.0
+    first_seen_artifact: str = ""
+    last_seen_artifact: str = ""
+    source_count: int = 0
+
+
+class GraphNodeProvenance(msgspec.Struct, kw_only=True):
+    """Provenance for a specific graph node."""
+    source_artifacts: list[str] = msgspec.field(default_factory=list)
+    source_endpoints: list[str] = msgspec.field(default_factory=list)
+    confidence: float = 1.0
+
 
 class GraphNode(msgspec.Struct, kw_only=True):
     """A node in the canonical entity graph."""
@@ -195,7 +264,27 @@ class GraphNode(msgspec.Struct, kw_only=True):
     node_type: str              # "organization", "fund", "investment", "valuation", "cap_table", "security"
     name: str
     properties: dict = msgspec.field(default_factory=dict)
-    source_urls: tuple[str, ...] = ()
+    provenance: GraphNodeProvenance = msgspec.field(default_factory=lambda: GraphNodeProvenance())
+
+
+class RelationshipEvidence(msgspec.Struct, kw_only=True):
+    """Provenance and confidence for a specific graph edge."""
+    relationship_type: str
+    source_artifact: str = ""
+    source_endpoint: str = ""
+    evidence_sources: list[str] = msgspec.field(default_factory=list)
+    confidence: float = 1.0
+
+
+class RelationshipCandidate(msgspec.Struct, kw_only=True):
+    """A proposed edge to be vetted by the GraphBuilder."""
+    source: str
+    target: str
+    edge_type: str
+    confidence: float = 1.0
+    evidence: list[str] = msgspec.field(default_factory=list)
+    origin_artifact_id: str = ""
+    metadata: dict = msgspec.field(default_factory=dict)
 
 
 class GraphEdge(msgspec.Struct, kw_only=True):
@@ -203,6 +292,7 @@ class GraphEdge(msgspec.Struct, kw_only=True):
     source_id: str
     target_id: str
     edge_type: str              # "owns", "invested_in", "valued_at", "has_security", "managed_by"
+    evidence: RelationshipEvidence | None = None
     metadata: dict = msgspec.field(default_factory=dict)
 
 
@@ -226,3 +316,16 @@ class CartaEntityGraph(msgspec.Struct, kw_only=True):
     nodes: dict[str, GraphNode] = msgspec.field(default_factory=dict)
     edges: list[GraphEdge] = msgspec.field(default_factory=list)
     provenance: GraphProvenance | None = None
+
+class ExportArtifact(msgspec.Struct, kw_only=True):
+    """Represents a downloaded and parsed export file"""
+    export_id: str
+    entity_id: str
+    organization_id: str
+    business_domain: str
+    source_url: str
+    file_format: str           # "csv", "xlsx", "pdf", "json"
+    raw_file_path: str
+    row_count: int = 0
+    parsed_rows: list[dict] = msgspec.field(default_factory=list)
+    timestamp: float = 0.0

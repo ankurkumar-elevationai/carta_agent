@@ -40,6 +40,11 @@ class ReplayScenario(str, Enum):
     AUTO_FALLBACK = "auto_fallback"
     SESSION_REFRESH = "session_refresh"
 
+class BrowserHealth(str, Enum):
+    ALIVE = "alive"
+    DEGRADED = "degraded"
+    DEAD = "dead"
+
 class ReplayMode(str, Enum):
     DISCOVERY = "discovery"
     EXTRACTION = "extraction"
@@ -50,7 +55,43 @@ class ReplayFailureType(str, Enum):
     CLOUDFLARE = "cloudflare"
     TIMEOUT = "timeout"
     SESSION_EXPIRED = "session_expired"
+    PERMISSION_DENIED = "permission_denied"
+    AUTH_FAILURE = "auth_failure"
+    INVALID_REQUEST = "invalid_request"
+    EXTERNAL_SERVICE = "external_service"
+    CSRF_MISMATCH = "csrf_mismatch"
+    NOT_FOUND = "not_found"
+    UNPROCESSABLE = "unprocessable"
     UNKNOWN = "unknown"
+
+class FailureClassification(BaseModel):
+    failure_type: ReplayFailureType
+    retryable: bool
+
+class FailureClassifier:
+    @staticmethod
+    def classify(status_code: int, content: str = "") -> FailureClassification:
+        if status_code == 401:
+            return FailureClassification(failure_type=ReplayFailureType.AUTH_FAILURE, retryable=False)
+        elif status_code == 403:
+            return FailureClassification(failure_type=ReplayFailureType.FORBIDDEN, retryable=False)
+        elif status_code == 404:
+            return FailureClassification(failure_type=ReplayFailureType.NOT_FOUND, retryable=False)
+        elif status_code == 422:
+            return FailureClassification(failure_type=ReplayFailureType.UNPROCESSABLE, retryable=False)
+        
+        content_lower = content.lower()
+        if "csrf" in content_lower and "mismatch" in content_lower:
+            return FailureClassification(failure_type=ReplayFailureType.CSRF_MISMATCH, retryable=False)
+        if "permission denied" in content_lower:
+            return FailureClassification(failure_type=ReplayFailureType.PERMISSION_DENIED, retryable=False)
+        if "invalid request" in content_lower:
+            return FailureClassification(failure_type=ReplayFailureType.INVALID_REQUEST, retryable=False)
+            
+        if status_code in (429, 500, 502, 503, 504):
+            return FailureClassification(failure_type=ReplayFailureType.EXTERNAL_SERVICE, retryable=True)
+            
+        return FailureClassification(failure_type=ReplayFailureType.UNKNOWN, retryable=True)
 
 class ReplayDecision(BaseModel):
     selected_strategy: CartaReplayStrategy
@@ -66,7 +107,7 @@ class ReplayResult(BaseModel):
     strategy_used: CartaReplayStrategy
     status_code: int
     latency_ms: int
-    payload: Optional[Union[dict, list]] = None
+    payload: Any = None
     trace_id: Optional[str] = None
     fallback_count: int = 0
     failure_type: Optional[ReplayFailureType] = None
@@ -134,6 +175,8 @@ class CartaReplayClient:
         
         # Endpoint-scoped circuit breakers
         self.circuit_breakers: Dict[str, ReplayTierHealth] = {}
+        
+        self.browser_health = BrowserHealth.ALIVE
         
         # Strategy success counters
         self.stats = {
@@ -204,13 +247,41 @@ class CartaReplayClient:
         timeline = []
         decision = self._decide_strategy(target, path)
 
-        
         try:
             return await self._execute_with_strategy(decision.selected_strategy, path, params, trace_id, timeline)
         except ReplayException as e:
-            if decision.selected_strategy == CartaReplayStrategy.API_REQUEST_CONTEXT:
+            if decision.selected_strategy == CartaReplayStrategy.HTTPX:
+                log.warning(f"[ReplayClient][{trace_id}] Tier-1 HTTPX failed: {e}. Dropping to Tier-2 API Context.")
+                
+                if self.browser_health == BrowserHealth.DEAD:
+                    log.error(f"[ReplayClient][{trace_id}] Browser is DEAD. Skipping browser tiers.")
+                    raise ReplayException(f"Failed to replay {path}: HTTPX failed and Browser is DEAD.")
+                
+                try:
+                    res = await self._execute_with_strategy(CartaReplayStrategy.API_REQUEST_CONTEXT, path, params, trace_id, timeline)
+                    res.fallback_count = 1
+                    return res
+                except ReplayException as e2:
+                    log.warning(f"[ReplayClient][{trace_id}] Tier-2 API Context failed: {e2}. Dropping to Tier-3 Browser Fetch.")
+                    if self.browser_health == BrowserHealth.DEAD:
+                        log.error(f"[ReplayClient][{trace_id}] Browser is DEAD. Skipping Tier-3.")
+                        raise ReplayException(f"Failed to replay {path} across all tiers.")
+                        
+                    try:
+                        res = await self._execute_with_strategy(CartaReplayStrategy.BROWSER_FETCH, path, params, trace_id, timeline)
+                        res.fallback_count = 2
+                        return res
+                    except ReplayException as e3:
+                        log.error(f"[ReplayClient][{trace_id}] All replay tiers exhausted.")
+                        raise ReplayException(f"Failed to replay {path} across all tiers.")
+            elif decision.selected_strategy == CartaReplayStrategy.API_REQUEST_CONTEXT:
                 self.stats["browser_fallback_count"] += 1
-                log.warning(f"[ReplayClient][{trace_id}] Tier-1 API Context failed: {e}. Dropping to Tier-2 Browser Fetch.")
+                log.warning(f"[ReplayClient][{trace_id}] Tier-2 API Context failed: {e}. Dropping to Tier-3 Browser Fetch.")
+                
+                if self.browser_health == BrowserHealth.DEAD:
+                    log.error(f"[ReplayClient][{trace_id}] Browser is DEAD. Skipping Tier-3.")
+                    raise ReplayException(f"Failed to replay {path} across all tiers.")
+                    
                 try:
                     res = await self._execute_with_strategy(CartaReplayStrategy.BROWSER_FETCH, path, params, trace_id, timeline)
                     res.fallback_count = 1
@@ -221,23 +292,24 @@ class CartaReplayClient:
             raise
 
     def _decide_strategy(self, target: ReplayTarget, path: str) -> ReplayDecision:
+        health = self._get_health(path)
+
         if "requires_browser" in target.inferred_capabilities:
             return ReplayDecision(
-                selected_strategy=CartaReplayStrategy.BROWSER_FETCH,
-                reason="Endpoint capability requires browser context"
+                selected_strategy=CartaReplayStrategy.API_REQUEST_CONTEXT,
+                reason="Endpoint capability requires browser context, skipping HTTPX"
             )
 
-        health = self._get_health(path)
         if health.temporarily_disabled:
             return ReplayDecision(
-                selected_strategy=CartaReplayStrategy.BROWSER_FETCH,
-                reason=f"API Context circuit breaker tripped until {health.disabled_until}",
+                selected_strategy=CartaReplayStrategy.API_REQUEST_CONTEXT,
+                reason=f"HTTPX circuit breaker tripped until {health.disabled_until}",
                 fallback_attempted=True
             )
 
         return ReplayDecision(
-            selected_strategy=CartaReplayStrategy.API_REQUEST_CONTEXT,
-            reason="Playwright context healthy path"
+            selected_strategy=CartaReplayStrategy.HTTPX,
+            reason="HTTPX healthy path"
         )
 
     async def _execute_with_strategy(
@@ -278,7 +350,16 @@ class CartaReplayClient:
                         retry_res.timeline = timeline
                         return retry_res
                 
-                raise ReplayException(f"Tier-1 HTTPX returned non-200 status: {res.status_code}")
+                # Classify failure and check if retryable
+                classification = FailureClassifier.classify(res.status_code, str(res.payload) if res.payload else "")
+                res.failure_type = classification.failure_type
+                
+                if not classification.retryable:
+                    log.warning(f"[ReplayClient][{trace_id}] {classification.failure_type.value.upper()} on Tier-1. Terminal error, aborting fallback.")
+                    res.timeline = timeline
+                    return res
+                    
+                raise ReplayException(f"Tier-1 HTTPX returned retryable status: {res.status_code}", status_code=res.status_code)
                 
         elif strategy == CartaReplayStrategy.API_REQUEST_CONTEXT:
             timeline.append("API_REQUEST_CONTEXT_ATTEMPT")
@@ -288,11 +369,25 @@ class CartaReplayClient:
                     timeline.append("SUCCESS")
                 else:
                     timeline.append("API_REQUEST_CONTEXT_FAILED")
-                    raise ReplayException(f"Tier-2 failed with status: {res.status_code}")
+                    
+                    classification = FailureClassifier.classify(res.status_code, str(res.payload) if res.payload else "")
+                    res.failure_type = classification.failure_type
+                    
+                    if not classification.retryable:
+                        log.warning(f"[ReplayClient][{trace_id}] {classification.failure_type.value.upper()} on Tier-2. Terminal error, aborting fallback.")
+                        res.timeline = timeline
+                        return res
+                        
+                    raise ReplayException(f"Tier-2 failed with retryable status: {res.status_code}", status_code=res.status_code)
                 res.timeline = timeline
                 return res
             except Exception as e:
                 timeline.append("API_REQUEST_CONTEXT_FAILED")
+                error_str = str(e)
+                if "TargetClosedError" in error_str:
+                    self.browser_health = BrowserHealth.DEGRADED
+                elif "Browser closed" in error_str or "Connection closed" in error_str:
+                    self.browser_health = BrowserHealth.DEAD
                 raise
             
         elif strategy == CartaReplayStrategy.BROWSER_FETCH:
@@ -308,6 +403,11 @@ class CartaReplayClient:
                 return res
             except Exception as e:
                 timeline.append("BROWSER_FETCH_FAILED")
+                error_str = str(e)
+                if "TargetClosedError" in error_str:
+                    self.browser_health = BrowserHealth.DEGRADED
+                elif "Browser closed" in error_str or "Connection closed" in error_str:
+                    self.browser_health = BrowserHealth.DEAD
                 raise
             
         raise ReplayException(f"Unsupported strategy: {strategy}")
@@ -320,7 +420,7 @@ class CartaReplayClient:
             raise ReplayException("Browser context invalid: page is on login domain", page_url=url)
         
         try:
-            await self.page.wait_for_load_state("networkidle", timeout=5000)
+            await self.page.wait_for_load_state("networkidle", timeout=1000)
         except Exception as e:
             log.warning(f"wait_for_load_state networkidle timed out or failed: {e}")
 
@@ -336,6 +436,13 @@ class CartaReplayClient:
             "X-CSRFToken": self.auth_context.csrf_token,
             "Referer": base_url,
         }
+        
+        from urllib.parse import urlparse
+        if urlparse(absolute_url).netloc != urlparse(base_url).netloc:
+            headers.pop("X-CSRFToken", None)
+            headers.pop("Referer", None)
+            headers.pop("Origin", None)
+            log.info(f"[Replay] Stripping auth bounds for cross-subdomain API: {absolute_url}")
         
         async def _run():
             async with httpx.AsyncClient(timeout=10.0) as client:
@@ -361,7 +468,15 @@ class CartaReplayClient:
                 if is_cf:
                     failure = ReplayFailureType.CLOUDFLARE
                 elif response.status_code in (401, 403):
-                    failure = ReplayFailureType.SESSION_EXPIRED
+                    if "permission" in content.lower():
+                        failure = ReplayFailureType.PERMISSION_DENIED
+                    elif response.status_code == 401 or "auth" in content.lower():
+                        failure = ReplayFailureType.AUTH_FAILURE
+                    else:
+                        failure = ReplayFailureType.SESSION_EXPIRED
+                elif response.status_code == 400:
+                    failure = ReplayFailureType.INVALID_REQUEST
+                    log.warning(f"[ReplayClient] 400 Bad Request on {path}. Params: {params}")
                 else:
                     failure = ReplayFailureType.FORBIDDEN
                     
@@ -403,19 +518,27 @@ class CartaReplayClient:
         
         context = self.page.context
         query_str = ""
+        
+        req_headers = {
+            "x-csrftoken": self.auth_context.csrf_token,
+            "Accept": "application/json, text/plain, */*"
+        }
+        
         if params:
-            from urllib.parse import urlencode
-            query_str = "?" + urlencode(params)
+            from urllib.parse import urlencode, urlparse
+            query_str = "?" + urlencode(params, doseq=True)
             
+            base_url = self.page.url.split("/investors")[0] if "/investors" in self.page.url else URLBuilder.APP_BASE_URL
+            if urlparse(absolute_url).netloc != urlparse(base_url).netloc:
+                req_headers.pop("x-csrftoken", None)
+                log.info(f"[Replay] Stripping x-csrftoken for cross-subdomain API context: {absolute_url}")
+                
         full_url = f"{absolute_url}{query_str}"
         
         async def _run():
             return await context.request.get(
                 full_url,
-                headers={
-                    "x-csrftoken": self.auth_context.csrf_token,
-                    "Accept": "application/json, text/plain, */*"
-                },
+                headers=req_headers,
                 timeout=20000
             )
             
@@ -471,13 +594,13 @@ class CartaReplayClient:
         query_str = ""
         if params:
             from urllib.parse import urlencode
-            query_str = "?" + urlencode(params)
+            query_str = "?" + urlencode(params, doseq=True)
             
         full_url = f"{absolute_url}{query_str}"
         csrf_token = self.auth_context.csrf_token
         
         fetch_js = """
-            async (url, csrf) => {
+            async ([url, csrf]) => {
                 const headers = {
                     'Accept': 'application/json, text/plain, */*',
                     'x-csrftoken': csrf

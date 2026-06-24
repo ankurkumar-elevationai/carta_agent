@@ -41,6 +41,7 @@ class PassiveNetworkCollector:
         # Phase 3 Trackers
         self.interaction_tracker = InteractionProvenanceTracker()
         self.dependency_tracker = APIDependencyTracker()
+        self.discovered_exports = []
         
         self._ws_sessions: Dict[str, WebSocketSession] = {}
         
@@ -54,6 +55,7 @@ class PassiveNetworkCollector:
         
         self.last_network_activity_ts = time.time()
         self.active_request_count = 0
+        self.active_urls = set()
 
     def start(self):
         if not self._is_running:
@@ -61,23 +63,33 @@ class PassiveNetworkCollector:
             self._writer_task = asyncio.create_task(self._writer_loop())
             log.info("[Collector] Started async background writer.")
 
+    # Traffic classes that matter for network quiescence detection.
+    # Static assets, CDN, microfrontend chunks, telemetry, analytics, auth,
+    # config, and external services load continuously in the Carta SPA and
+    # must NOT prevent wait_for_network_quiet from resolving.
+    _QUIET_RELEVANT_CLASSES = frozenset({
+        TrafficClass.BUSINESS_API,
+        TrafficClass.GRAPHQL,
+        TrafficClass.EXPORT,
+    })
+
     def request_started(self, url: str, headers: Optional[dict] = None, body: Optional[bytes] = None):
         tc = classify_traffic(url)
-        if tc in (TrafficClass.TELEMETRY, TrafficClass.ANALYTICS):
-            return
-        self.active_request_count += 1
-        self.last_network_activity_ts = time.time()
+        if tc in self._QUIET_RELEVANT_CLASSES:
+            self.active_request_count += 1
+            self.active_urls.add(url)
+            self.last_network_activity_ts = time.time()
         
-        # Track dependencies and interaction triggers
+        # Track dependencies and interaction triggers regardless of class
         self.dependency_tracker.observe_request(url, headers or {}, body)
         self.interaction_tracker.record_endpoint_triggered(url)
 
     def request_finished(self, url: str):
         tc = classify_traffic(url)
-        if tc in (TrafficClass.TELEMETRY, TrafficClass.ANALYTICS):
-            return
-        self.active_request_count = max(0, self.active_request_count - 1)
-        self.last_network_activity_ts = time.time()
+        if tc in self._QUIET_RELEVANT_CLASSES:
+            self.active_request_count = max(0, self.active_request_count - 1)
+            self.active_urls.discard(url)
+            self.last_network_activity_ts = time.time()
 
     async def wait_for_network_quiet(self, silence_ms: int = 1200, timeout_ms: int = 8000):
         start_time = time.time()
@@ -87,7 +99,7 @@ class PassiveNetworkCollector:
         while True:
             now = time.time()
             if now - start_time > timeout_sec:
-                log.warning("[Collector] wait_for_network_quiet timeout reached.")
+                log.warning(f"[Collector] wait_for_network_quiet timeout reached. Count: {self.active_request_count}. URLs: {list(self.active_urls)[:5]}")
                 return
 
             delta = now - self.last_network_activity_ts
@@ -124,6 +136,17 @@ class PassiveNetworkCollector:
         """
         # 1. Early Telemetry Bypass
         traffic_class = classify_traffic(event.url)
+        
+        if traffic_class == TrafficClass.EXPORT:
+            entity_id = getattr(self.interaction_tracker, '_current_entity_id', None)
+            org_id = getattr(self.interaction_tracker, '_current_organization_id', None)
+            self.discovered_exports.append({
+                "url": event.url,
+                "entity_id": entity_id,
+                "organization_id": org_id,
+                "headers": event.request_headers,
+                "method": event.method
+            })
         if traffic_class in (TrafficClass.TELEMETRY, TrafficClass.ANALYTICS):
             if random.random() > 0.05:
                 return  # Drop 95% of telemetry

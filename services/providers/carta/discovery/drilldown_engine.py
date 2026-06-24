@@ -8,11 +8,13 @@ entity's detail page to stimulate and capture entity-specific APIs
 
 import asyncio
 import logging
+import time
 from typing import List
 from playwright.async_api import Page
 
-from ..models.extraction import DiscoveredEntity, DrilldownResult
+from ..models.extraction import DiscoveredEntity, DrilldownResult, ActiveEntityContext, active_entity_context_var
 from ..browser.traversal import CartaEntityTraversalEngine
+import uuid
 
 log = logging.getLogger(__name__)
 
@@ -31,7 +33,7 @@ class InvestmentDrilldownEngine:
         app_base_url: str = "https://app.playground.carta.team",
         max_entities: int = 50,
         max_depth: int = 2,
-        tab_timeout: int = 10_000,
+        tab_timeout: int = 3000,
         entity_cooldown: float = 2.0,
     ):
         self.page = page
@@ -77,6 +79,24 @@ class InvestmentDrilldownEngine:
         if not target_url.startswith("http"):
             target_url = f"{self.app_base_url}{target_url}"
             
+        # Extract parent fund info if available
+        parent_fund_id = entity.raw_data.get("fund_id") or entity.raw_data.get("parent_fund_id") or entity.raw_data.get("fund_uuid")
+        parent_fund_name = entity.raw_data.get("fund_name") or entity.raw_data.get("parent_fund_name")
+
+        import uuid
+        ctx = ActiveEntityContext(
+            organization_id=str(entity.parent_org_pk) if entity.parent_org_pk else "",
+            entity_id=entity.entity_id,
+            entity_type=entity.entity_type,
+            entity_name=entity.name,
+            parent_fund_id=str(parent_fund_id) if parent_fund_id else None,
+            parent_fund_name=str(parent_fund_name) if parent_fund_name else None,
+            route=target_url,
+            traversal_session_id=str(uuid.uuid4()),
+            capture_timestamp=time.time()
+        )
+        token = active_entity_context_var.set(ctx)
+        
         try:
             # 1. Navigate to the entity's page
             await self.page.goto(target_url, wait_until="domcontentloaded")
@@ -84,7 +104,7 @@ class InvestmentDrilldownEngine:
             routes_visited.append(self.page.url)
             
             if hasattr(self.api_collector, "wait_for_network_quiet"):
-                await self.api_collector.wait_for_network_quiet(silence_ms=1000, timeout_ms=8000)
+                await self.api_collector.wait_for_network_quiet(silence_ms=500, timeout_ms=10000)
 
             # 2. Run Traversal Engine with provenance tracking
             traversal_engine = CartaEntityTraversalEngine(
@@ -98,24 +118,36 @@ class InvestmentDrilldownEngine:
                 self.api_collector.interaction_tracker.begin_interaction(
                     interaction_type="PAGE_LOAD",
                     ui_path=["Entity Detail", entity.name],
-                    entity_context=entity.entity_id
+                    entity_context=entity.entity_id,
+                    entity_id=entity.entity_id,
+                    entity_type=entity.entity_type,
+                    organization_id=str(entity.parent_org_pk),
+                    drilldown_session=f"session_{int(time.time())}"
                 )
                 
             await traversal_engine.traverse()
             
-            return DrilldownResult(
+            # TraversalQualityGate
+            status = "NO_INTELLIGENCE_DISCOVERED" if traversal_engine.metrics.tabs_clicked == 0 else "SUCCESS"
+            
+            result = DrilldownResult(
                 entity_id=entity.entity_id,
                 routes_visited=tuple(routes_visited + list(traversal_engine.state.visited_routes)),
                 apis_discovered=self.api_collector.classifier.total_classified if hasattr(self.api_collector, "classifier") else 0,
                 tabs_explored=traversal_engine.metrics.tabs_explored,
-                errors=tuple(errors)
+                errors=tuple(errors),
+                status=status
             )
             
         except Exception as e:
             log.warning(f"[DrilldownEngine] Failed on {entity.name}: {e}")
             errors.append(str(e))
-            return DrilldownResult(
+            result = DrilldownResult(
                 entity_id=entity.entity_id,
                 routes_visited=tuple(routes_visited),
                 errors=tuple(errors)
             )
+        finally:
+            active_entity_context_var.reset(token)
+            
+        return result

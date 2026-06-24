@@ -1,0 +1,404 @@
+/* ─── Design Tokens ─── */
+:root {
+    --bg-body: #0b0f1a;
+    --bg-sidebar: #0f1525;
+    --bg-card: #141b2d;
+    --bg-card-hover: #1a2340;
+    --bg-table-row: #161e33;
+    --bg-table-hover: #1d2747;
+    --bg-input: #1a2340;
+    --border: #1e2a45;
+    --border-light: #253050;
+
+    --text-primary: #e8ecf4;
+    --text-secondary: #8b95b0;
+    --text-muted: #5a6580;
+    --text-accent: #6c8cff;
+
+    --accent-blue: #4f7cff;
+    --accent-emerald: #34d399;
+    --accent-amber: #fbbf24;
+    --accent-rose: #f472b6;
+    --accent-violet: #a78bfa;
+    --accent-cyan: #22d3ee;
+
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(0,0,0,.35);
+    --transition: 0.2s ease;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body {
+    font-family: var(--font);
+    background: var(--bg-body);
+    color: var(--text-primary);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ─── Sidebar ─── */
+#sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 0;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 100;
+}
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+}
+.brand-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.25rem; color: #fff;
+    flex-shrink: 0;
+}
+.brand-name { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+.brand-sub { font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px; }
+.nav-links { list-style: none; flex: 1; }
+.nav-link {
+    display: flex; align-items: center; gap: 0.65rem;
+    padding: 0.7rem 1.25rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    transition: all var(--transition);
+}
+.nav-link:hover { color: var(--text-primary); background: rgba(79,124,255,.06); }
+.nav-link.active {
+    color: var(--accent-blue);
+    background: rgba(79,124,255,.1);
+    border-left-color: var(--accent-blue);
+}
+.nav-icon { font-size: 1.1rem; width: 22px; text-align: center; }
+.sidebar-footer {
+    padding: 1rem 1.25rem 0;
+    border-top: 1px solid var(--border);
+}
+.extraction-badge {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.78rem; color: var(--text-muted);
+}
+.badge-dot {
+    width: 7px; height: 7px;
+    background: var(--accent-emerald);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent-emerald);
+}
+
+/* ─── Main ─── */
+#main {
+    flex: 1;
+    margin-left: 260px;
+    padding: 2rem 2.5rem;
+    min-height: 100vh;
+}
+.section { display: none; animation: fadeIn .3s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.page-title {
+    font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+}
+.count-badge {
+    background: rgba(79,124,255,.15);
+    color: var(--accent-blue);
+    font-size: 0.85rem; font-weight: 600;
+    padding: 0.2rem 0.7rem; border-radius: 20px;
+}
+
+/* ─── KPI Row ─── */
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.75rem; }
+.kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+.kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.kpi-value { font-size: 2rem; font-weight: 800; line-height: 1.1; }
+.kpi-label { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+/* ─── Cards ─── */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+.card-title { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); }
+.grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+/* ─── Tables ─── */
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.data-table thead th {
+    text-align: left; padding: 0.75rem 1rem;
+    font-weight: 600; font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--bg-card);
+}
+.data-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition);
+}
+.data-table tbody tr:hover { background: var(--bg-table-hover); }
+.data-table td { padding: 0.75rem 1rem; color: var(--text-primary); }
+.data-table .cell-muted { color: var(--text-muted); font-size: 0.82rem; }
+.data-table .cell-mono { font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 0.78rem; color: var(--text-muted); }
+
+/* ─── Fund type badges ─── */
+.type-badge {
+    display: inline-block; padding: 0.2rem 0.6rem;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+}
+.type-badge.fund { background: rgba(79,124,255,.15); color: var(--accent-blue); }
+.type-badge.gp { background: rgba(167,139,250,.15); color: var(--accent-violet); }
+.type-badge.spv { background: rgba(244,114,182,.15); color: var(--accent-rose); }
+.type-badge.mgmt { background: rgba(251,191,36,.15); color: var(--accent-amber); }
+.type-badge.feeder { background: rgba(34,211,238,.15); color: var(--accent-cyan); }
+.type-badge.entity { background: rgba(139,149,176,.15); color: var(--text-secondary); }
+
+/* Permission pills */
+.perm-pill {
+    display: inline-block; padding: 0.15rem 0.45rem;
+    background: rgba(79,124,255,.08); color: var(--text-secondary);
+    border-radius: 4px; font-size: 0.72rem; margin: 0.1rem;
+}
+
+/* ─── Investment cards ─── */
+.investments-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+.inv-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+.inv-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-violet));
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+.inv-card:hover { border-color: var(--accent-blue); transform: translateY(-2px); box-shadow: var(--shadow); }
+.inv-card:hover::before { opacity: 1; }
+.inv-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.85rem; }
+.inv-company-name { font-weight: 700; font-size: 1.05rem; }
+.inv-share-class { font-size: 0.78rem; color: var(--accent-blue); font-weight: 500; }
+.inv-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.inv-metric-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.inv-metric-value { font-size: 1rem; font-weight: 600; margin-top: 2px; }
+.inv-stakeholders { margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+.inv-stakeholders-title { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem; letter-spacing: 0.04em; }
+.stakeholder-row { display: flex; justify-content: space-between; padding: 0.25rem 0; font-size: 0.82rem; }
+.stakeholder-row .name { color: var(--text-primary); }
+.stakeholder-row .pct { color: var(--accent-emerald); font-weight: 600; font-family: 'SF Mono', monospace; }
+
+/* ─── Top Investors bar chart ─── */
+.investor-bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+.investor-bar-name { width: 140px; font-size: 0.82rem; color: var(--text-primary); flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.investor-bar-track { flex: 1; height: 20px; background: var(--bg-table-row); border-radius: 4px; overflow: hidden; }
+.investor-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-violet)); transition: width 0.6s ease; }
+.investor-bar-pct { width: 55px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--accent-emerald); font-family: 'SF Mono', monospace; }
+
+/* ─── Entity Breakdown ─── */
+.breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+.breakdown-row:last-child { border-bottom: none; }
+.breakdown-label { font-size: 0.88rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem; }
+.breakdown-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.breakdown-value { font-weight: 700; font-size: 1.1rem; }
+
+/* ─── Modal ─── */
+.modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.65);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    align-items: center; justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+    background: var(--bg-sidebar);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    width: min(680px, 92vw);
+    max-height: 85vh; overflow-y: auto;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    animation: modalIn .25s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+.modal-close {
+    position: absolute; top: 1rem; right: 1.2rem;
+    background: none; border: none; color: var(--text-muted);
+    font-size: 1.5rem; cursor: pointer; line-height: 1;
+}
+.modal-close:hover { color: var(--text-primary); }
+.modal-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; }
+.modal-section { margin-bottom: 1.5rem; }
+.modal-section h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.75rem; }
+.modal-props { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; }
+.modal-prop { background: var(--bg-card); border-radius: var(--radius-sm); padding: 0.75rem; }
+.modal-prop .label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.modal-prop .value { font-size: 1.05rem; font-weight: 600; margin-top: 0.25rem; }
+.modal-table-wrap { overflow-x: auto; }
+.modal-table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.modal-table-wrap th { text-align: left; padding: 0.5rem 0.6rem; color: var(--text-muted); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.modal-table-wrap td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
+
+/* ─── Empty State ─── */
+.empty-state { text-align: center; color: var(--text-muted); padding: 3rem 0; font-size: 0.95rem; }
+
+/* ─── Investment card extras ─── */
+.inv-legal-name { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+.inv-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.7rem; }
+.info-pill {
+    display: inline-block; padding: 0.2rem 0.55rem;
+    border-radius: 12px; font-size: 0.7rem; font-weight: 600;
+}
+.info-pill.fmv { background: rgba(251,191,36,.12); color: var(--accent-amber); }
+.info-pill.contact { background: rgba(79,124,255,.12); color: var(--accent-blue); }
+.info-pill.sec { background: rgba(34,211,153,.12); color: var(--accent-emerald); }
+.info-pill.irr { background: rgba(167,139,250,.12); color: var(--accent-violet); }
+.inv-ceo { font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.5rem; }
+.inv-address { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.3; }
+
+/* ─── Contact row in modal ─── */
+.contact-row {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-name { font-weight: 600; color: var(--text-primary); }
+.contact-email { color: var(--accent-blue); font-size: 0.82rem; }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+    #sidebar { width: 200px; min-width: 200px; }
+    #main { margin-left: 200px; padding: 1.5rem; }
+    .grid-2col { grid-template-columns: 1fr; }
+    .investments-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Entity Graph ─── */
+#graphCanvas {
+    width: 100%;
+    height: 500px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: grab;
+}
+#graphCanvas:active { cursor: grabbing; }
+.graph-legend {
+    display: flex; flex-wrap: wrap; gap: 1.25rem;
+    margin-top: 1rem; padding: 1rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+.graph-legend-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.82rem; color: var(--text-secondary);
+}
+.graph-legend-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+}
+.graph-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap: 0.75rem; margin-bottom: 1.25rem;
+}
+.graph-stat {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 1rem;
+    text-align: center;
+}
+.graph-stat-value { font-size: 1.6rem; font-weight: 800; }
+.graph-stat-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem; }
+
+/* ─── Pipeline Health ─── */
+.pipeline-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+.phase-bar-row {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 0.65rem;
+}
+.phase-bar-label {
+    width: 120px; font-size: 0.82rem; color: var(--text-primary);
+    flex-shrink: 0; text-align: right;
+}
+.phase-bar-track {
+    flex: 1; height: 22px; background: var(--bg-table-row);
+    border-radius: 4px; overflow: hidden; position: relative;
+}
+.phase-bar-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    transition: width 0.8s ease;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.4rem;
+    font-size: 0.7rem; font-weight: 600; color: #fff;
+    min-width: 40px;
+}
+.replay-donut-wrap {
+    display: flex; align-items: center; justify-content: center;
+    gap: 2rem; padding: 1rem 0;
+}
+.donut-label { text-align: center; }
+.donut-label .value { font-size: 2rem; font-weight: 800; }
+.donut-label .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; }
+
+/* ─── ROI Metrics ─── */
+.roi-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 0.75rem;
+}
+.roi-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 1rem;
+}
+.roi-card-title { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; text-transform: capitalize; }
+.roi-card-row { display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.15rem 0; }
+.roi-card-row .label { color: var(--text-muted); }
+.roi-card-row .value { font-weight: 600; color: var(--accent-emerald); }
+
+/* ─── Domain badges ─── */
+.domain-pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.75rem; margin: 0.25rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 20px; font-size: 0.82rem; color: var(--text-primary);
+}
+.domain-pill .icon { font-size: 1rem; }
+.domains-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }

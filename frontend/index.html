@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krakatoa Ventures — Intelligence Dashboard</title>
+    <meta name="description" content="Carta enterprise intelligence dashboard for Krakatoa Ventures — Funds, SPVs, Investments, Cap Tables, and Investors.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ─── Sidebar ─── -->
+    <nav id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">K</div>
+            <div>
+                <div class="brand-name" id="firmName">Loading…</div>
+                <div class="brand-sub" id="firmAdmin"></div>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active" data-section="overview"><span class="nav-icon">📊</span> Overview</a></li>
+            <li><a href="#" class="nav-link" data-section="funds"><span class="nav-icon">🏦</span> Funds</a></li>
+            <li><a href="#" class="nav-link" data-section="spvs"><span class="nav-icon">🔗</span> SPVs</a></li>
+            <li><a href="#" class="nav-link" data-section="investments"><span class="nav-icon">📈</span> Investments</a></li>
+            <li><a href="#" class="nav-link" data-section="investors"><span class="nav-icon">👤</span> Investors</a></li>
+            <li><a href="#" class="nav-link" data-section="documents"><span class="nav-icon">📄</span> Documents</a></li>
+            <li><a href="#" class="nav-link" data-section="exports"><span class="nav-icon">📁</span> Export Records</a></li>
+            <li><a href="#" class="nav-link" data-section="graph"><span class="nav-icon">🕸️</span> Entity Graph</a></li>
+            <li><a href="#" class="nav-link" data-section="pipeline"><span class="nav-icon">⚙️</span> Pipeline Health</a></li>
+            <li><a href="#" class="nav-link" data-section="relationships"><span class="nav-icon">🔗</span> Relationships</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="extraction-badge">
+                <span class="badge-dot"></span>
+                <span id="fileCount">–</span> files processed
+            </div>
+        </div>
+    </nav>
+
+    <!-- ─── Main ─── -->
+    <main id="main">
+        <!-- Overview -->
+        <section id="sec-overview" class="section active">
+            <h1 class="page-title">Dashboard Overview</h1>
+            <div class="kpi-row" id="kpiRow"></div>
+            <div class="grid-2col">
+                <div class="card" id="topInvestorsCard">
+                    <h2 class="card-title">Top Investors by Ownership</h2>
+                    <div id="topInvestorsList"></div>
+                </div>
+                <div class="card" id="fundBreakdownCard">
+                    <h2 class="card-title">Fund Structure</h2>
+                    <div id="fundBreakdownChart" style="max-height:400px; overflow-y:auto;"></div>
+                </div>
+            </div>
+            <div class="card" style="margin-top:1.5rem">
+                <h2 class="card-title">Cap Table Snapshots</h2>
+                <div id="recentCapTables"></div>
+            </div>
+        </section>
+
+        <!-- Funds -->
+        <section id="sec-funds" class="section">
+            <h1 class="page-title">Funds <span class="count-badge" id="fundsCount"></span></h1>
+            <div class="table-wrap">
+                <table class="data-table" id="fundsTable">
+                    <thead><tr><th>Fund Name</th><th>Type</th><th>UUID</th><th>Permissions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SPVs -->
+        <section id="sec-spvs" class="section">
+            <h1 class="page-title">Special Purpose Vehicles <span class="count-badge" id="spvsCount"></span></h1>
+            <div class="table-wrap">
+                <table class="data-table" id="spvsTable">
+                    <thead><tr><th>SPV Name</th><th>Type</th><th>UUID</th><th>Permissions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Investments -->
+        <section id="sec-investments" class="section">
+            <h1 class="page-title">Portfolio Investments <span class="count-badge" id="investmentsCount"></span></h1>
+            <div class="investments-grid" id="investmentsGrid"></div>
+        </section>
+
+        <!-- Investors -->
+        <section id="sec-investors" class="section">
+            <h1 class="page-title">Investors <span class="count-badge" id="investorsCount"></span></h1>
+            <div class="table-wrap">
+                <table class="data-table" id="investorsTable">
+                    <thead><tr><th>Investor</th><th>Total Ownership %</th><th>Portfolio Companies</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Documents -->
+        <section id="sec-documents" class="section">
+            <h1 class="page-title">Documents <span class="count-badge" id="documentsCount"></span></h1>
+            <div class="table-wrap">
+                <table class="data-table" id="documentsTable">
+                    <thead><tr><th>Document</th><th>Type</th><th>Date</th><th>Fund</th><th>Stakeholder</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p id="noDocsMsg" class="empty-state" style="display:none">No documents were captured in this extraction run.</p>
+        </section>
+
+        <!-- Export Records -->
+        <section id="sec-exports" class="section">
+            <h1 class="page-title">Export Records <span class="count-badge" id="exportsCount"></span></h1>
+            <div class="table-wrap">
+                <table class="data-table" id="exportsTable">
+                    <thead><tr><th>Entity</th><th>Domain</th><th>Format</th><th>Source URL</th><th>Row Count</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p id="noExportsMsg" class="empty-state" style="display:none">No export data was captured in this extraction run.</p>
+        </section>
+
+        <!-- Entity Graph -->
+        <section id="sec-graph" class="section">
+            <h1 class="page-title">Entity Graph</h1>
+            <div class="graph-stats" id="graphStats"></div>
+            <canvas id="graphCanvas"></canvas>
+            <div class="graph-legend" id="graphLegend"></div>
+        </section>
+
+        <!-- Pipeline Health -->
+        <section id="sec-pipeline" class="section">
+            <h1 class="page-title">Pipeline Health</h1>
+            <div class="kpi-row" id="pipelineKpis"></div>
+            <div class="pipeline-grid">
+                <div class="card">
+                    <h2 class="card-title">Phase Duration Breakdown</h2>
+                    <div id="phaseBreakdown"></div>
+                </div>
+                <div class="card">
+                    <h2 class="card-title">Replay Success Rate</h2>
+                    <div id="replayStats"></div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:1.25rem">
+                <h2 class="card-title">ROI by API Family</h2>
+                <div class="roi-grid" id="roiGrid"></div>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Business Domains Traversed</h2>
+                <div class="domains-wrap" id="domainsWrap"></div>
+            </div>
+        </section>
+
+        <!-- Relationships -->
+        <section id="sec-relationships" class="section">
+            <h1 class="page-title">Fund Relationships <span class="count-badge" id="relationshipsCount"></span></h1>
+            <div class="table-wrap">
+                <table class="data-table" id="relationshipsTable">
+                    <thead><tr><th>Entity</th><th>Type</th><th>Direction</th><th>Related Fund</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p id="noRelsMsg" class="empty-state" style="display:none">No cross-entity relationships were captured.</p>
+        </section>
+    </main>
+
+    <!-- Investment Detail Modal -->
+    <div class="modal-overlay" id="investmentModal">
+        <div class="modal">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2 class="modal-title" id="modalCompanyName"></h2>
+
+            <div id="modalProfile"></div>
+
+            <div class="modal-section">
+                <h3>Valuation & Performance</h3>
+                <div id="modalValuation"></div>
+            </div>
+
+            <div class="modal-section">
+                <h3>Cap Table</h3>
+                <div class="modal-table-wrap" id="modalCapTable"></div>
+            </div>
+
+            <div class="modal-section">
+                <h3>Securities & Holdings</h3>
+                <div class="modal-table-wrap" id="modalHoldings"></div>
+            </div>
+
+            <div class="modal-section">
+                <h3>409A Fair Market Values</h3>
+                <div class="modal-table-wrap" id="modalFMV"></div>
+            </div>
+
+            <div class="modal-section">
+                <h3>Contacts</h3>
+                <div id="modalContacts"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

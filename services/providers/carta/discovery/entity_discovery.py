@@ -194,7 +194,9 @@ class EntityDiscoveryEngine:
 
             entity_id = self._extract_id(item, prefix="investment")
             name = (
-                item.get("company_name")
+                item.get("legal_name")
+                or item.get("dba")
+                or item.get("company_name")
                 or item.get("companyName")
                 or item.get("name")
                 or item.get("display_name")
@@ -215,21 +217,47 @@ class EntityDiscoveryEngine:
         return entities
 
     def _parse_funds(self, payload: dict, firm_id: int) -> list[DiscoveredEntity]:
-        """Parse the fund/SPV navigation list API response."""
+        """Parse the fund/SPV navigation list API response.
+        
+        Handles two response shapes:
+        1. Flat list: [{id, name, ...}, ...]
+        2. Grouped list: [{header: "Funds", items: [{id, legal_name, ...}]}, ...]
+        """
         entities: list[DiscoveredEntity] = []
-        candidates = self._find_entity_lists(payload)
 
-        for item in candidates:
-            if not isinstance(item, dict):
+        # Flatten grouped {header, items} structure if present
+        flat_items: list[dict] = []
+        items_to_scan = payload if isinstance(payload, list) else self._find_entity_lists(payload)
+        
+        for entry in items_to_scan:
+            if not isinstance(entry, dict):
                 continue
+            # Grouped structure: {header: "Funds", items: [...]}
+            if "items" in entry and isinstance(entry["items"], list):
+                group_header = str(entry.get("header", "")).lower()
+                for sub_item in entry["items"]:
+                    if isinstance(sub_item, dict):
+                        sub_item["_group_header"] = group_header
+                        flat_items.append(sub_item)
+            else:
+                flat_items.append(entry)
 
+        for item in flat_items:
             entity_id = self._extract_id(item, prefix="fund")
-            name = item.get("name") or item.get("fund_name") or item.get("fundName") or "unknown"
+            name = (
+                item.get("legal_name")
+                or item.get("dba")
+                or item.get("name")
+                or item.get("fund_name")
+                or item.get("fundName")
+                or "unknown"
+            )
 
             # Determine if it's a fund or SPV
             entity_type = "fund"
-            type_hint = str(item.get("type", "") or item.get("vehicle_type", "")).lower()
-            if "spv" in type_hint or "special purpose" in type_hint:
+            type_hint = str(item.get("type", "") or item.get("vehicle_type", "") or item.get("true_purpose", "")).lower()
+            group_header = item.pop("_group_header", "")
+            if "spv" in type_hint or "special purpose" in type_hint or "spv" in group_header:
                 entity_type = "spv"
 
             entities.append(DiscoveredEntity(
@@ -254,7 +282,13 @@ class EntityDiscoveryEngine:
                 for item in items:
                     if isinstance(item, dict):
                         entity_id = self._extract_id(item, prefix=key.rstrip("s"))
-                        name = item.get("name") or item.get("company_name") or "unknown"
+                        name = (
+                            item.get("legal_name")
+                            or item.get("dba")
+                            or item.get("name")
+                            or item.get("company_name")
+                            or "unknown"
+                        )
                         entities.append(DiscoveredEntity(
                             entity_id=entity_id,
                             entity_type=key.rstrip("s"),
@@ -317,7 +351,7 @@ class EntityDiscoveryEngine:
     @staticmethod
     def _extract_id(item: dict, prefix: str = "entity") -> str:
         """Extract a stable ID from an entity dict, or generate one from the name."""
-        for key in ("id", "pk", "investment_id", "fund_id", "entity_id",
+        for key in ("id", "pk", "corporation_id", "investment_id", "fund_id", "entity_id",
                      "company_id", "corporation_pk", "organization_pk"):
             val = item.get(key)
             if val is not None:

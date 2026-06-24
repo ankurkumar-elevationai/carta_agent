@@ -1,0 +1,398 @@
+[
+  {
+    "source": "61da58428025dc18",
+    "target": "a455002fbd0fb097",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "689547ac8131bdf4",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "589027037c77ec12",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "056743efe61f0f4b",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "fe19f585873f64de",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "49f8a4729cde271d",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "0db60af5ba75b954",
+    "type": "managed_by",
+    "evidence": {
+      "relationship_type": "managed_by",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 0.5
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "6861de47cbb08e39",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "d84f97e1d3bc60e8",
+    "type": "managed_by",
+    "evidence": {
+      "relationship_type": "managed_by",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 0.5
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "ed97146966c35ac1",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "a7d5ff2bbdeb9504",
+    "type": "managed_by",
+    "evidence": {
+      "relationship_type": "managed_by",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 0.5
+    },
+    "metadata": {}
+  },
+  {
+    "source": "61da58428025dc18",
+    "target": "cd8f0a71f6940eab",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "entity_manifest",
+      "source_endpoint": "discovery",
+      "evidence_sources": [
+        "entity_manifest"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {}
+  },
+  {
+    "source": "org_1",
+    "target": "a455002fbd0fb097",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "33a531af7bd6a05e.json",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/1193/firm_entity_tabs",
+      "evidence_sources": [
+        "33a531af7bd6a05e.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/1193/firm_entity_tabs"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "689547ac8131bdf4",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "29308cf3a086c8fd.json",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/83/post-money-latest/",
+      "evidence_sources": [
+        "29308cf3a086c8fd.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/83/post-money-latest/"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "589027037c77ec12",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "83ea459910326e94.json",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/71/firm_entity_tabs",
+      "evidence_sources": [
+        "83ea459910326e94.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/71/firm_entity_tabs"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "056743efe61f0f4b",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "1002e268e8e9af5e.json",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/75/firm_entity_tabs",
+      "evidence_sources": [
+        "1002e268e8e9af5e.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/75/firm_entity_tabs"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "fe19f585873f64de",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "aaaa0ac25de51b3a.json",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/1196/post-money-latest/",
+      "evidence_sources": [
+        "aaaa0ac25de51b3a.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/1196/post-money-latest/"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "49f8a4729cde271d",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "6ee8f3e7867f25bf.json",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/79/post-money-latest/",
+      "evidence_sources": [
+        "6ee8f3e7867f25bf.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/79/post-money-latest/"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "0db60af5ba75b954",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "0c39cadd6b529006.json",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/40/firm_entity_tabs",
+      "evidence_sources": [
+        "0c39cadd6b529006.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/firm/1/company/40/firm_entity_tabs"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "6861de47cbb08e39",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "345dd49f21bed668.json",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/1195/post-money-latest/",
+      "evidence_sources": [
+        "345dd49f21bed668.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/1195/post-money-latest/"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "d84f97e1d3bc60e8",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "052bd3b05440da0a.json",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/holdings/firm/1/corporation/74/equity-grants/",
+      "evidence_sources": [
+        "052bd3b05440da0a.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/holdings/firm/1/corporation/74/equity-grants/"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "ed97146966c35ac1",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "1f90705724e717f2.json",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/1194/post-money-latest/",
+      "evidence_sources": [
+        "1f90705724e717f2.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "cap_table",
+      "source_endpoint": "https://app.playground.carta.team/api/corporations/1194/post-money-latest/"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "a7d5ff2bbdeb9504",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "1bf0d6dc7f08077e.json",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/1/init",
+      "evidence_sources": [
+        "1bf0d6dc7f08077e.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "portfolio",
+      "source_endpoint": "https://app.playground.carta.team/api/investors/portfolio/1/init"
+    }
+  },
+  {
+    "source": "org_1",
+    "target": "cd8f0a71f6940eab",
+    "type": "manages",
+    "evidence": {
+      "relationship_type": "manages",
+      "source_artifact": "4933063eb75e6b05.json",
+      "source_endpoint": "https://fund-admin.playground.carta.team/firm/186fb573-a22d-4c82-8ad3-3186f9095a41/data-explorer/reporting/templates/",
+      "evidence_sources": [
+        "4933063eb75e6b05.json"
+      ],
+      "confidence": 1.0
+    },
+    "metadata": {
+      "inferred_from": "valuations",
+      "source_endpoint": "https://fund-admin.playground.carta.team/firm/186fb573-a22d-4c82-8ad3-3186f9095a41/data-explorer/reporting/templates/"
+    }
+  }
+]

@@ -133,6 +133,17 @@ class CartaProvider(ProviderAgent):
         network_monitor = None
         api_collector = None
 
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+        export_dir = os.path.join(project_root, "output", "exports")
+        safe_name = normalize_company_name(company_name).replace(" ", "_")
+        company_out_dir = os.path.join(export_dir, f"{task_id}_{safe_name}")
+
+        from .utils.profiler import PerformanceProfiler
+        profiler = PerformanceProfiler(company_name, task_id, company_out_dir)
+
+        def log_phase(name: str):
+            profiler.log_phase(name)
+
         try:
             # 1: Connect to Persistent Context
             log.info("[Carta] Checking for persistent Chrome on port 9222...")
@@ -153,11 +164,6 @@ class CartaProvider(ProviderAgent):
             from .browser.cdp_pool import CDPPageRegistry
             from .discovery.passive_collector import PassiveNetworkCollector
             from .browser.traversal import CartaEntityTraversalEngine
-            
-            project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-            export_dir = os.path.join(project_root, "output", "exports")
-            safe_name = normalize_company_name(company_name).replace(" ", "_")
-            company_out_dir = os.path.join(export_dir, f"{task_id}_{safe_name}")
             
             api_collector = PassiveNetworkCollector(output_dir=os.path.join(company_out_dir, "network"))
             api_collector.start()
@@ -188,6 +194,7 @@ class CartaProvider(ProviderAgent):
             auth_ctx, runtime_ctx = await self._extract_auth_context(page)
             log.info("[Carta] runtime initialized")
             log.info(f"[Carta] firm_id extracted: {runtime_ctx.firm_id}")
+            log_phase("setup_and_auth")
             
             # 4.1: Replay-Only Mode Short-Circuit
             if replay_only:
@@ -208,6 +215,7 @@ class CartaProvider(ProviderAgent):
                 
                 # Replay all investments as a default action for replay-only
                 replay_res = await orchestrator.replay_category("investment")
+                log_phase("replay_extraction")
                 
                 return {
                     "status": "success",
@@ -247,6 +255,20 @@ class CartaProvider(ProviderAgent):
             except (OrgDiscoveryError, OrgMatchError) as e:
                 log.warning(f"[Carta] Org discovery failed ({e}), falling back to DOM navigation...")
                 target_org = None
+            log_phase("organization_discovery")
+            
+            # 4.75: Business Domain Discovery (Phase 1.5)
+            log.info(f"[Carta] Phase 1.5: Business Domain Discovery...")
+            from .discovery.domain_discovery import BusinessDomainDiscoveryEngine
+            domain_engine = BusinessDomainDiscoveryEngine(
+                page=page, 
+                api_collector=api_collector, 
+                app_base_url=runtime_ctx.app_base_url
+            )
+            domain_inventory_data = await domain_engine.discover()
+            
+            log.info("[Carta] Phase 1.5 complete, artifacts will be exported in finalization phase.")
+            log_phase("business_domain_discovery")
             
             # 5: Entity Discovery (Phase 2 — API-driven enumeration)
             entity_manifest = []
@@ -267,12 +289,14 @@ class CartaProvider(ProviderAgent):
                 except Exception as e:
                     log.warning(f"[Carta] Entity discovery failed: {e}")
                     entity_manifest = []
+            log_phase("entity_discovery")
             
             # 5.5: Navigate to target company
             log.info(f"[Carta] Navigating to target company: {company_name}")
             company_page = await self._navigate_to_company(
                 page, company_name, runtime_ctx, target_org=target_org
             )
+            log_phase("company_navigation")
             
             # 6: Investment Drilldown (Phase 3) & SPA Traversal
             log.info(f"[Carta] Phase 3: Stimulating network traffic for {company_name}...")
@@ -284,8 +308,8 @@ class CartaProvider(ProviderAgent):
                     page=company_page,
                     api_collector=api_collector,
                     app_base_url=runtime_ctx.app_base_url,
-                    max_entities=50,
-                    max_depth=2,
+                    max_entities=10000,
+                    max_depth=3,
                 )
                 drilldown_results = await drilldown_engine.drilldown(entity_manifest)
                 
@@ -316,6 +340,7 @@ class CartaProvider(ProviderAgent):
             if hasattr(api_collector, "dependency_tracker"):
                 deps = api_collector.dependency_tracker.dependencies
                 log.info(f"[Carta] Recorded {len(deps)} API dependencies.")
+            log_phase("investment_drilldown")
             
             # 7: Export Capture (Phase 4 — API Replay)
             log.info(f"[Carta] Phase 4: Replaying discovered APIs for {company_name}...")
@@ -332,9 +357,57 @@ class CartaProvider(ProviderAgent):
                 replay_client=replay_client,
                 output_dir=Path(company_out_dir) / "extracted",
                 entity_manifest=entity_manifest,
+                api_collector=api_collector,
             )
-            extraction_manifest = await extractor.extract()
-            log.info(f"[Carta] API extraction complete: {extraction_manifest.get('summary', {})}")
+            try:
+                extraction_manifest = await extractor.extract()
+                log.info(f"[Carta] API extraction complete: {extraction_manifest.get('summary', {})}")
+                
+                # Feed extraction metrics and ROI to the profiler
+                metrics = extraction_manifest.get("_metrics", {})
+                profiler.record_replay_metrics(
+                    discovered=metrics.get("endpoints_discovered", 0),
+                    replayed=metrics.get("endpoints_replayed", 0),
+                    skipped=metrics.get("endpoints_skipped", 0),
+                    successful=metrics.get("successful_replays", 0),
+                    failed=metrics.get("failed_replays", 0),
+                    new_entities=metrics.get("new_entities_found", 0)
+                )
+                for family, data in metrics.get("roi_metrics", {}).items():
+                    attempts = data.get("attempts", 0) if isinstance(data, dict) else 0
+                    entities = data.get("entities", 0) if isinstance(data, dict) else data
+                    profiler.record_roi(family, attempts, entities)
+            finally:
+                log_phase("api_extraction")
+                
+            # 7.5: Export Intelligence (Phase 4.5)
+            log.info(f"[Carta] Phase 4.5: Executing Export Intelligence...")
+            from .export.export_engine import ExportReplayEngine
+            export_engine = ExportReplayEngine(auth_ctx, company_out_dir)
+            exports_manifest = []
+            
+            if hasattr(api_collector, "discovered_exports"):
+                for exp in api_collector.discovered_exports:
+                    try:
+                        artifact = await export_engine.download_export(
+                            path=exp["url"],
+                            params=None,
+                            entity_id=exp["entity_id"] or "unknown",
+                            organization_id=exp["organization_id"] or "unknown"
+                        )
+                        if artifact:
+                            exports_manifest.append(artifact)
+                    except Exception as e:
+                        log.error(f"[Carta] Export download failed: {e}")
+                        
+            # Save inventory
+            if exports_manifest:
+                import msgspec
+                inventory_path = os.path.join(company_out_dir, "export_inventory.json")
+                with open(inventory_path, "w") as f:
+                    f.write(msgspec.json.encode(exports_manifest).decode("utf-8"))
+                log.info(f"[Carta] Export Intelligence complete. Captured {len(exports_manifest)} exports.")
+            log_phase("export_intelligence")
             
             # 8: Semantic Clustering (Phase 5)
             log.info(f"[Carta] Phase 5: Building semantic schema clusters...")
@@ -345,6 +418,7 @@ class CartaProvider(ProviderAgent):
             )
             clusters = clusterer.cluster()
             log.info(f"[Carta] Phase 5 complete: {len(clusters)} clusters built.")
+            log_phase("semantic_clustering")
             
             # 9: Entity Graph Construction (Phase 6)
             log.info(f"[Carta] Phase 6: Constructing Canonical Entity Graph...")
@@ -358,10 +432,45 @@ class CartaProvider(ProviderAgent):
             )
             entity_graph = graph_builder.build()
             log.info(f"[Carta] Phase 6 complete: Graph built with {len(entity_graph.nodes)} nodes and {len(entity_graph.edges)} edges.")
+            log_phase("entity_graph_construction")
+            
+            # 9.5: Finalization Phase (Coverage & Artifacts)
+            log.info(f"[Carta] Phase 6.5: Generating Final Intelligence Artifacts...")
+            if 'domain_engine' in locals():
+                final_inventory = domain_engine.build_inventory()
+                
+                coverage_data = final_inventory.get("coverage_report", {})
+                coverage_data["entities_discovered"] = len(entity_manifest)
+                coverage_data["entities_registered"] = len(entity_manifest)
+                
+                linked_entities = set()
+                for edge in entity_graph.edges:
+                    linked_entities.add(edge.source_id)
+                    linked_entities.add(edge.target_id)
+                coverage_data["entities_linked"] = len([n for n in entity_graph.nodes.values() if n.node_id in linked_entities])
+                
+                coverage_data["entities_with_payloads"] = len(extraction_manifest.get("files", [])) if 'extraction_manifest' in locals() else 0
+                coverage_data["graph_nodes"] = len(entity_graph.nodes)
+                coverage_data["graph_edges"] = len(entity_graph.edges)
+                if entity_manifest:
+                    coverage_data["business_entity_yield"] = round((len(entity_graph.nodes) / max(len(entity_manifest), 1)) * 100, 2)
+                    
+                with open(os.path.join(company_out_dir, "domain_inventory.json"), "w") as f:
+                    json.dump(final_inventory["domain_inventory"], f, indent=2)
+                with open(os.path.join(company_out_dir, "workflow_inventory.json"), "w") as f:
+                    json.dump(final_inventory["workflow_inventory"], f, indent=2)
+                with open(os.path.join(company_out_dir, "api_family_inventory.json"), "w") as f:
+                    json.dump(final_inventory["api_family_inventory"], f, indent=2)
+                with open(os.path.join(company_out_dir, "domain_api_map.json"), "w") as f:
+                    json.dump(final_inventory["domain_api_map"], f, indent=2)
+                with open(os.path.join(company_out_dir, "coverage_report.json"), "w") as f:
+                    json.dump(coverage_data, f, indent=2)
+            log_phase("artifact_generation")
             
             # 10: Export CSVs and Docs
             log.info(f"[Carta] Exporting CSVs and Docs for {company_name}...")
             exports = await self._export_company_data(context, company_page, company_name, task_id)
+            log_phase("data_export")
 
             extraction_result = {
                 "status": "success",
@@ -396,6 +505,13 @@ class CartaProvider(ProviderAgent):
             raise RetryableBrowserError(str(e))
 
         finally:
+            # Write performance profile report
+            if 'profiler' in locals() and profiler:
+                try:
+                    profiler.write_report()
+                except Exception as pe:
+                    log.warning(f"[Carta] Failed to write performance profile: {pe}")
+
             # Flush API intelligence before teardown
             if api_collector:
                 await api_collector.shutdown()
@@ -590,11 +706,14 @@ class CartaProvider(ProviderAgent):
         log.info(f"[Carta] Looking for holdings Export button...")
         export_btn_selector = "button:has-text('Export'), button[aria-label*='Export' i], button[aria-label*='Download' i], [data-testid='export-button'], [data-testid='download-button']"
         tab_selector = "button:has-text('Holdings'), a:has-text('Holdings'), button:has-text('Cap Table'), a:has-text('Cap Table'), [role='tab']:has-text('Holdings')"
-        tab_count = await page.locator(tab_selector).count()
-        if tab_count > 0:
-            log.info("[Carta] Clicking Holdings/Cap Table tab...")
-            await page.locator(tab_selector).first.click()
-            await asyncio.sleep(3.0)  # Let holdings tab initialize
+        try:
+            tab_locator = page.locator(tab_selector).first
+            if await tab_locator.is_visible(timeout=3000):
+                log.info("[Carta] Clicking Holdings/Cap Table tab...")
+                await tab_locator.click(timeout=5000)
+                await asyncio.sleep(3.0)  # Let holdings tab initialize
+        except Exception as e:
+            log.warning(f"[Carta] Failed to interact with Holdings tab: {e}")
 
         export_count = await page.locator(export_btn_selector).count()
         if export_count == 0:
@@ -607,12 +726,12 @@ class CartaProvider(ProviderAgent):
 
         try:
             async with page.expect_download(timeout=60_000) as dl_info:
-                await page.locator(export_btn_selector).first.click()
+                await page.locator(export_btn_selector).first.click(timeout=5000)
                 await asyncio.sleep(1.5)
-                csv_option = page.locator("button:has-text('CSV'), a:has-text('CSV'), [role='menuitem']:has-text('CSV'), button:has-text('.csv')")
-                if await csv_option.count() > 0:
+                csv_option = page.locator("button:has-text('CSV'), a:has-text('CSV'), [role='menuitem']:has-text('CSV'), button:has-text('.csv')").first
+                if await csv_option.is_visible(timeout=3000):
                     log.info("[Carta] Selecting CSV format...")
-                    await csv_option.first.click()
+                    await csv_option.click(timeout=5000)
 
             download = await dl_info.value
             suggested = download.suggested_filename or f"{task_id}_holdings.csv"
@@ -629,14 +748,18 @@ class CartaProvider(ProviderAgent):
         MAX_DOCS = 5
         exports = []
         doc_tab_selector = "button:has-text('Documents'), a:has-text('Documents'), [role='tab']:has-text('Documents'), [data-testid*='documents']"
-        doc_tab_count = await page.locator(doc_tab_selector).count()
-        if doc_tab_count == 0:
-            log.info("[Carta] No Documents tab found.")
-            return exports
+        try:
+            doc_tab_locator = page.locator(doc_tab_selector).first
+            if not await doc_tab_locator.is_visible(timeout=3000):
+                log.info("[Carta] No Documents tab found.")
+                return exports
 
-        log.info("[Carta] Navigating to Documents section...")
-        await page.locator(doc_tab_selector).first.click()
-        await asyncio.sleep(3.0)  # Let documents initialize
+            log.info("[Carta] Navigating to Documents section...")
+            await doc_tab_locator.click(timeout=5000)
+            await asyncio.sleep(3.0)  # Let documents initialize
+        except Exception as e:
+            log.warning(f"[Carta] Failed to interact with Documents tab: {e}")
+            return exports
 
         doc_link_selector = "a[download], a[href*='.pdf'], a[href*='/documents/'], button[aria-label*='Download' i]"
         doc_links = page.locator(doc_link_selector)

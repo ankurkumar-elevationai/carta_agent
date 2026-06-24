@@ -1,0 +1,44 @@
+2026-06-03 18:06:13,741 [WARNING] [Carta] Failed to click Holdings tab: Locator.click: Element is not visible
+Call log:
+- waiting for locator("button:has-text('Holdings'), a:has-text('Holdings'), button:has-text('Cap Table'), a:has-text('Cap Table'), [role='tab']:has-text('Holdings')").first
+- locator resolved to <a data-testid="" class="sc-AxjAm gkHizE" href="/investors/firm/1/information-access/">�</a>
+- attempting click action
+- scrolling into view if needed
+
+2026-06-03 18:06:16,785 [WARNING] [Carta] No Export button found on company page.
+2026-06-03 18:06:16,806 [INFO] [Carta] Navigating to Documents section...
+2026-06-03 18:06:46,832 [ERROR] [Carta] Unexpected error for 'krakatoa ventures': Locator.click: Timeout 30000ms exceeded.
+----------
+Replay                    1957.031s
+Persistence               2.375s
+----------------------------------------
+Total Runtime             3077.844s
+========================================
+
+2026-06-03 18:06:46,845 [INFO] [Collector] Shutting down...
+2026-06-03 18:06:47,995 [INFO] [Carta][krakatoa ventures] Browser teardown complete.
+2026-06-03 18:06:47,995 [INFO] [Carta][krakatoa ventures] Releasing browser lock (held 3079.0s)
+2026-06-03 18:06:47,996 [ERROR] Discovery run failed: Locator.click: Timeout 30000ms exceeded.
+----------
+return await self._frame._click(self._selector, strict=True, **params)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\iaman\Vscode Pycharm\openclaw_carta\.conda\Lib\site-packages\playwright\_impl\_frame.py", line 566, in _click
+await self._channel.send("click", self._timeout, locals_to_params(locals()))
+File "C:\Users\iaman\Vscode Pycharm\openclaw_carta\.conda\Lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+return await self._connection.wrap_api_call(
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\iaman\Vscode Pycharm\openclaw_carta\.conda\Lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.
+----------
+Traceback (most recent call last):
+File "C:\Users\iaman\Vscode Pycharm\openclaw_carta\scripts\carta_discovery.py", line 45, in run_discovery
+result = await provider.run(company_name=company_name, task_id="discovery_task_001")
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\iaman\Vscode Pycharm\openclaw_carta\services\providers\carta\provider.py", line 125, in run
+return await asyncio.shield(self._run_internal(company_name, task_id, replay_only))
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\iaman\Vscode Pycharm\openclaw_carta\services\providers\carta\provider.py", line 455, in _run_internal
+raise RetryableBrowserError(str(e))
+services.entity_resolver.RetryableBrowserError: Locator.click: Timeout 30000ms exceeded.
+----------

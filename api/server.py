@@ -58,6 +58,12 @@ class InterceptHandler(logging.Handler):
 
 logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
 
+# Also ensure uvicorn loggers use our InterceptHandler
+for logger_name in ("uvicorn", "uvicorn.error", "uvicorn.access", "fastapi"):
+    logger_inst = logging.getLogger(logger_name)
+    logger_inst.handlers = [InterceptHandler()]
+    logger_inst.propagate = False
+
 # Ensure we can import modules from the project root
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 

@@ -1,0 +1,807 @@
+{
+  "inv_investment": {
+    "properties": {
+      "asset_id": {
+        "title": "Asset Id",
+        "type": "string"
+      },
+      "asset_name": {
+        "title": "Asset Name",
+        "type": "string"
+      },
+      "investment_amount": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Investment Amount"
+      },
+      "valuation": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Valuation"
+      },
+      "irr": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Irr"
+      },
+      "investment_date": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Investment Date"
+      },
+      "ownership_percentage": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Ownership Percentage"
+      },
+      "asset_category": {
+        "default": "Venture",
+        "title": "Asset Category",
+        "type": "string"
+      },
+      "vin": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Vin"
+      },
+      "tail_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Tail Id"
+      },
+      "carat_weight": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Carat Weight"
+      },
+      "movement_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Movement Type"
+      }
+    },
+    "required": [
+      "asset_id",
+      "asset_name"
+    ],
+    "title": "InvInvestment",
+    "type": "object"
+  },
+  "inv_asset_extra_info": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "industry_overview": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Industry Overview"
+      },
+      "investment_thesis": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Investment Thesis"
+      },
+      "industry_tailwinds": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Industry Tailwinds"
+      },
+      "customer_segment": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Customer Segment"
+      },
+      "financials": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Financials"
+      }
+    },
+    "required": [
+      "investment_id"
+    ],
+    "title": "InvAssetExtraInfo",
+    "type": "object"
+  },
+  "inv_asset_team": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "first_name": {
+        "title": "First Name",
+        "type": "string"
+      },
+      "last_name": {
+        "title": "Last Name",
+        "type": "string"
+      },
+      "email": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Email"
+      },
+      "designation": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Designation"
+      }
+    },
+    "required": [
+      "investment_id",
+      "first_name",
+      "last_name"
+    ],
+    "title": "InvAssetTeam",
+    "type": "object"
+  },
+  "inv_asset_valuation": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "amount": {
+        "title": "Amount",
+        "type": "number"
+      },
+      "year": {
+        "title": "Year",
+        "type": "string"
+      }
+    },
+    "required": [
+      "investment_id",
+      "amount",
+      "year"
+    ],
+    "title": "InvAssetValuation",
+    "type": "object"
+  },
+  "inv_cap_call": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "amount": {
+        "title": "Amount",
+        "type": "number"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Notes"
+      },
+      "date": {
+        "title": "Date",
+        "type": "string"
+      },
+      "fund_name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Fund Name"
+      }
+    },
+    "required": [
+      "investment_id",
+      "amount",
+      "date"
+    ],
+    "title": "InvCapCall",
+    "type": "object"
+  },
+  "investment_log": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "investment_amount": {
+        "title": "Investment Amount",
+        "type": "number"
+      },
+      "market_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Market Value"
+      },
+      "investment_date": {
+        "title": "Investment Date",
+        "type": "string"
+      }
+    },
+    "required": [
+      "investment_id",
+      "investment_amount",
+      "investment_date"
+    ],
+    "title": "InvestmentLog",
+    "type": "object"
+  },
+  "inv_investment_transaction": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "amount": {
+        "title": "Amount",
+        "type": "number"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "tr_date": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Tr Date"
+      },
+      "tr_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Tr Type"
+      },
+      "tr_direction": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Tr Direction"
+      }
+    },
+    "required": [
+      "investment_id",
+      "amount",
+      "name"
+    ],
+    "title": "InvInvestmentTransaction",
+    "type": "object"
+  },
+  "inv_investment_firm": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "company_name": {
+        "title": "Company Name",
+        "type": "string"
+      },
+      "fund_count": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Fund Count"
+      },
+      "aum_value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Aum Value"
+      }
+    },
+    "required": [
+      "investment_id",
+      "company_name"
+    ],
+    "title": "InvInvestmentFirm",
+    "type": "object"
+  },
+  "inv_investment_focus": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "cost": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Cost"
+      },
+      "current_year_valuation": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Current Year Valuation"
+      },
+      "moic": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Moic"
+      }
+    },
+    "required": [
+      "investment_id",
+      "name"
+    ],
+    "title": "InvInvestmentFocus",
+    "type": "object"
+  },
+  "inv_investment_sector": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "stage_name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Stage Name"
+      }
+    },
+    "required": [
+      "investment_id",
+      "name"
+    ],
+    "title": "InvInvestmentSector",
+    "type": "object"
+  },
+  "inv_investment_certificate": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "cert_number": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Cert Number"
+      },
+      "issue_date": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Issue Date"
+      },
+      "cert_status": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Cert Status"
+      }
+    },
+    "required": [
+      "investment_id"
+    ],
+    "title": "InvInvestmentCertificate",
+    "type": "object"
+  },
+  "inv_investment_distribution_history": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "total_amount": {
+        "title": "Total Amount",
+        "type": "number"
+      },
+      "lp_name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Lp Name"
+      }
+    },
+    "required": [
+      "investment_id",
+      "total_amount"
+    ],
+    "title": "InvInvestmentDistributionHistory",
+    "type": "object"
+  },
+  "inv_liquidity_distribution": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "amount": {
+        "title": "Amount",
+        "type": "number"
+      },
+      "source": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Source"
+      }
+    },
+    "required": [
+      "investment_id",
+      "amount"
+    ],
+    "title": "InvLiquidityDistribution",
+    "type": "object"
+  },
+  "inv_investment_expense": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "expense_category": {
+        "title": "Expense Category",
+        "type": "string"
+      },
+      "vendor": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Vendor"
+      },
+      "cost": {
+        "title": "Cost",
+        "type": "number"
+      },
+      "expense_date": {
+        "title": "Expense Date",
+        "type": "string"
+      }
+    },
+    "required": [
+      "investment_id",
+      "expense_category",
+      "cost",
+      "expense_date"
+    ],
+    "title": "InvInvestmentExpense",
+    "type": "object"
+  },
+  "inv_investment_interest": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "month_year": {
+        "title": "Month Year",
+        "type": "string"
+      },
+      "interest_earned": {
+        "title": "Interest Earned",
+        "type": "number"
+      }
+    },
+    "required": [
+      "investment_id",
+      "month_year",
+      "interest_earned"
+    ],
+    "title": "InvInvestmentInterest",
+    "type": "object"
+  },
+  "inv_investment_service": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "service_type": {
+        "title": "Service Type",
+        "type": "string"
+      },
+      "cost": {
+        "title": "Cost",
+        "type": "number"
+      },
+      "service_date": {
+        "title": "Service Date",
+        "type": "string"
+      }
+    },
+    "required": [
+      "investment_id",
+      "service_type",
+      "cost",
+      "service_date"
+    ],
+    "title": "InvInvestmentService",
+    "type": "object"
+  },
+  "inv_asset_usage_log": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "usage_date": {
+        "title": "Usage Date",
+        "type": "string"
+      },
+      "usage_hours": {
+        "title": "Usage Hours",
+        "type": "number"
+      }
+    },
+    "required": [
+      "investment_id",
+      "usage_date",
+      "usage_hours"
+    ],
+    "title": "InvAssetUsageLog",
+    "type": "object"
+  },
+  "extra_info_recent_development": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "description": {
+        "title": "Description",
+        "type": "string"
+      },
+      "development_date": {
+        "title": "Development Date",
+        "type": "string"
+      }
+    },
+    "required": [
+      "investment_id",
+      "description",
+      "development_date"
+    ],
+    "title": "ExtraInfoRecentDevelopment",
+    "type": "object"
+  },
+  "research_growing_traction": {
+    "properties": {
+      "investment_id": {
+        "title": "Investment Id",
+        "type": "string"
+      },
+      "description": {
+        "title": "Description",
+        "type": "string"
+      }
+    },
+    "required": [
+      "investment_id",
+      "description"
+    ],
+    "title": "ResearchGrowingTraction",
+    "type": "object"
+  }
+}

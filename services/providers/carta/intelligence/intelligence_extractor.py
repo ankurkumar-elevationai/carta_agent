@@ -26,6 +26,7 @@ from ..models.extraction import (
     EndpointCategory,
     CapabilityTag,
     DiscoveredEntity,
+    InteractionProvenance,
 )
 from ..api.replay_client import (
     CartaReplayClient,
@@ -44,6 +45,7 @@ _EXTRACTABLE_CATEGORIES = frozenset({
     EndpointCategory.INVESTORS,
     EndpointCategory.CAP_TABLE,
     EndpointCategory.SECURITIES,
+    EndpointCategory.HOLDINGS,
     EndpointCategory.REPORTING,
     EndpointCategory.GRAPHQL,
 })
@@ -153,6 +155,8 @@ class IntelligenceExtractor:
         output_dir: Path,
         rate_limit_delay: float = 1.0,
         entity_manifest: list[DiscoveredEntity] = None,
+        api_collector = None,
+        min_replay_score: float = 50.0,
     ):
         self.classifier = classifier
         self.replay_client = replay_client
@@ -160,19 +164,159 @@ class IntelligenceExtractor:
         self.rate_limit_delay = rate_limit_delay
         self.entity_manifest = entity_manifest or []
         self.manifest = ExtractionManifest()
+        self.api_collector = api_collector
+        self.min_replay_score = min_replay_score
+        self.roi_yield: dict[str, int] = {}
+        self.roi_attempts: dict[str, int] = {}
 
     def _find_entity_for_url(self, url: str) -> Optional[DiscoveredEntity]:
-        """Attempt to map a URL back to an entity from the manifest."""
+        """Attempt to map a URL back to an entity from the manifest using interaction provenance."""
+        # 1. High-confidence match: resolve via interaction provenance context
+        prov = self._find_provenance_for_url(url)
+        if prov and prov.entity_context:
+            for entity in self.entity_manifest:
+                if entity.entity_id == prov.entity_context:
+                    return entity
+
+        # 2. Low-confidence fallback: string matching on URL
         url_lower = url.lower()
         for entity in self.entity_manifest:
-            # 1. Match by detail_url
             if entity.detail_url and entity.detail_url.lower() in url_lower:
                 return entity
-            # 2. Match by raw Carta ID (if the entity_id was generated like 'investment_123')
             raw_id = entity.entity_id.split("_")[-1]
             if raw_id.isdigit() and f"/{raw_id}/" in url_lower:
                 return entity
         return None
+
+    def _find_provenance_for_url(self, url: str) -> Optional[InteractionProvenance]:
+        clean_url = url.split("?")[0]
+        if not self.api_collector or not hasattr(self.api_collector, "interaction_tracker"):
+            return None
+        # Reverse search to find the latest context triggering this endpoint
+        for prov in reversed(self.api_collector.interaction_tracker.history):
+            if clean_url in prov.triggered_endpoints:
+                return prov
+        return None
+
+    def score_endpoint(
+        self,
+        url: str,
+        classification: ClassificationResult,
+        response_metadata: dict,
+        traversal_context: Optional[InteractionProvenance]
+    ) -> float:
+        clean_path = url.lower().split("?")[0]
+        
+        # 1. ALWAYS_REPLAY bypass
+        ALWAYS_REPLAY = {"portfolio", "investors", "valuations", "cap_table", "securities", "holdings", "export", "post-money"}
+        if any(family in clean_path for family in ALWAYS_REPLAY) or classification.category.value in ALWAYS_REPLAY:
+            return 100.0
+
+        # 2. Export Promotion
+        EXPORT_KEYWORDS = {"export", "download", "csv", "xlsx", "report"}
+        if any(kw in clean_path for kw in EXPORT_KEYWORDS):
+            return 100.0
+
+        # 3. Hard Skips / Noise
+        if classification.traffic_class in (TrafficClass.TELEMETRY, TrafficClass.ANALYTICS, TrafficClass.CONFIG, TrafficClass.STATIC_ASSET, TrafficClass.CDN):
+            return 0.0
+
+        NOISE_KEYWORDS = {
+            "feature-flag", "permission", "role", "access", "telemetry", "datadog", 
+            "sentry", "pendo", "amplitude", "segment", "config", "health", 
+            "ping", "heartbeat", "django-messages", "preference", "setting", 
+            "tracking", "metrics", "analytics", "launch-app-shell-config", 
+            "account-switcher", "global-nav-config", "mf-manifest.json"
+        }
+        if any(kw in clean_path for kw in NOISE_KEYWORDS):
+            return 0.0
+
+        # Base score by category
+        score = 0.0
+        category_scores = {
+            EndpointCategory.PORTFOLIO: 90.0,
+            EndpointCategory.VALUATIONS: 90.0,
+            EndpointCategory.INVESTORS: 90.0,
+            EndpointCategory.CAP_TABLE: 90.0,
+            EndpointCategory.SECURITIES: 90.0,
+            EndpointCategory.HOLDINGS: 90.0,
+            EndpointCategory.REPORTING: 80.0,
+            EndpointCategory.GRAPHQL: 70.0,
+        }
+        score = category_scores.get(classification.category, 30.0)
+
+        # 4. Context Adjustments
+        if traversal_context:
+            valuable_ui = {"portfolio", "investor", "valuation", "cap table", "equity", "security"}
+            ui_path_str = " ".join(traversal_context.ui_path).lower()
+            if any(kw in ui_path_str for kw in valuable_ui):
+                score += 15.0
+            
+            if traversal_context.entity_context:
+                score += 15.0
+
+        # 5. Metadata Adjustments
+        if response_metadata:
+            keys = [k.lower() for k in response_metadata.get("top_level_keys", [])]
+            valuable_keys = {
+                "share_class", "fmv", "fair_market_value", "valuation", "ownership", 
+                "authorized", "issued", "legal_name", "investor", "securities",
+                "holdings", "transactions"
+            }
+            if any(k in valuable_keys for k in keys):
+                score += 20.0
+            
+            if response_metadata.get("item_count", 0) > 0:
+                score += 10.0
+
+        return min(100.0, score)
+
+    def _count_entities(self, payload) -> int:
+        if not payload:
+            return 0
+        
+        def is_business_entity(d) -> bool:
+            if not isinstance(d, dict):
+                return False
+            # Strong keys — any one of these confirms business entity
+            strong_keys = {
+                "share_class", "fmv", "fair_market_value", "valuation", "ownership_pct",
+                "authorized", "issued", "legal_name", "investor", "securities",
+                "holdings", "investment_id", "canonical_investment_id", "canonical_captable_id",
+                "fmv_date", "fmv_status",
+                # Holdings-specific keys
+                "rows", "totals", "equity_grants", "shares", "options", "warrants",
+                "convertibles", "grant_type", "rsu", "rsa", "sar", "piu",
+                "exercise_price", "vesting_schedule", "grant_date",
+                # Valuation-specific keys (strong)
+                "post_money", "funds_raised", "share_price", "price_per_share",
+                "round_name", "round_type", "financing", "financing_round",
+            }
+            return any(k in d for k in strong_keys)
+
+        if isinstance(payload, list):
+            if all(isinstance(x, dict) for x in payload):
+                return sum(1 for x in payload if is_business_entity(x))
+            return len(payload)
+            
+        if isinstance(payload, dict):
+            if is_business_entity(payload):
+                return 1
+            for k in ["results", "items", "data", "investments", "valuations", "securities", "share_classes", "holdings"]:
+                if k in payload and isinstance(payload[k], list):
+                    lst = payload[k]
+                    if all(isinstance(x, dict) for x in lst):
+                        return sum(1 for x in lst if is_business_entity(x))
+                    return len(lst)
+                    
+        return 0
+
+    def _get_endpoint_family(self, url: str, category: EndpointCategory) -> str:
+        path = url.lower()
+        for family in ["holdings", "investors", "valuations", "cap_table", "portfolio", "securities", "reporting"]:
+            if family in path:
+                return family
+        return category.value
 
     def _discover_replay_targets(self) -> list[tuple[str, ClassificationResult]]:
         """
@@ -183,17 +327,28 @@ class IntelligenceExtractor:
         targets: list[tuple[str, ClassificationResult]] = []
 
         for url, classification in self.classifier._history.items():
-            # 1. Only extract business API or GraphQL traffic
-            if classification.category not in _EXTRACTABLE_CATEGORIES:
-                self.manifest.record_skip(url, f"category={classification.category.value}")
+            clean_path = url.split("?")[0].split("#")[0]
+            
+            # Fetch cached response metadata
+            metadata = getattr(self.classifier, "response_metadata", {}).get(clean_path, {})
+            
+            # Fetch traversal context
+            prov = self._find_provenance_for_url(url)
+            
+            # Compute capability score
+            score = self.score_endpoint(url, classification, metadata, prov)
+            
+            # Skip if score is below configurable threshold
+            if score < self.min_replay_score:
+                self.manifest.record_skip(url, f"low_value_score={score:.1f} (threshold={self.min_replay_score})")
                 continue
 
-            # 2. Skip platform noise
+            # Skip platform noise (fallback check)
             if _is_platform_noise(url):
                 self.manifest.record_skip(url, "platform_noise")
                 continue
 
-            # 3. Deduplicate
+            # Deduplicate
             normalized = _normalize_url_for_dedup(url)
             if normalized in seen_normalized:
                 self.manifest.record_skip(url, "duplicate")
@@ -215,7 +370,17 @@ class IntelligenceExtractor:
 
         if not targets:
             log.warning("[IntelligenceExtractor] No high-value endpoints discovered. Extraction skipped.")
-            return self.manifest.to_dict()
+            manifest_data = self.manifest.to_dict()
+            manifest_data["_metrics"] = {
+                "endpoints_discovered": len(self.classifier._history),
+                "endpoints_replayed": 0,
+                "endpoints_skipped": len(self.manifest.skipped),
+                "successful_replays": 0,
+                "failed_replays": 0,
+                "new_entities_found": len(self.entity_manifest),
+                "roi_metrics": {}
+            }
+            return manifest_data
 
         log.info(f"[IntelligenceExtractor] Discovered {len(targets)} high-value endpoints to replay.")
 
@@ -251,6 +416,7 @@ class IntelligenceExtractor:
                             "x_carta_trace_id": result.x_carta_trace_id,
                             "entity_id": entity.entity_id if entity else None,
                             "entity_name": entity.name if entity else None,
+                            "entity_type": entity.entity_type if entity else None,
                             "org_pk": entity.parent_org_pk if entity else None,
                         },
                         "data": result.payload,
@@ -265,6 +431,13 @@ class IntelligenceExtractor:
                     if isinstance(result.payload, dict):
                         top_keys = list(result.payload.keys())[:20]
 
+                    # Count entities for ROI yield
+                    entity_count = self._count_entities(result.payload)
+                    family = self._get_endpoint_family(url, classification.category)
+                    self.roi_attempts[family] = self.roi_attempts.get(family, 0) + 1
+                    if entity_count > 0:
+                        self.roi_yield[family] = self.roi_yield.get(family, 0) + entity_count
+
                     self.manifest.record_success(
                         url=url,
                         category=classification.category.value,
@@ -276,9 +449,11 @@ class IntelligenceExtractor:
                     log.info(
                         f"[IntelligenceExtractor] ✓ {classification.category.value}: "
                         f"{url.split('?')[0]} → {output_path.name} "
-                        f"({result.latency_ms}ms, keys={top_keys[:5]})"
+                        f"({result.latency_ms}ms, entities={entity_count}, keys={top_keys[:5]})"
                     )
                 else:
+                    family = self._get_endpoint_family(url, classification.category)
+                    self.roi_attempts[family] = self.roi_attempts.get(family, 0) + 1
                     self.manifest.record_failure(
                         url=url,
                         category=classification.category.value,
@@ -286,6 +461,8 @@ class IntelligenceExtractor:
                     )
 
             except Exception as e:
+                family = self._get_endpoint_family(url, classification.category)
+                self.roi_attempts[family] = self.roi_attempts.get(family, 0) + 1
                 log.warning(f"[IntelligenceExtractor] ✗ Failed to replay {url}: {e}")
                 self.manifest.record_failure(
                     url=url,
@@ -298,6 +475,27 @@ class IntelligenceExtractor:
 
         # Save manifest
         manifest_data = self.manifest.to_dict()
+        
+        # Merge attempts and entities into combined metrics structure
+        roi_combined = {}
+        all_families = set(self.roi_attempts.keys()) | set(self.roi_yield.keys())
+        for fam in all_families:
+            roi_combined[fam] = {
+                "attempts": self.roi_attempts.get(fam, 0),
+                "entities": self.roi_yield.get(fam, 0)
+            }
+
+        # Add rich metrics block for the PerformanceProfiler
+        manifest_data["_metrics"] = {
+            "endpoints_discovered": len(self.classifier._history),
+            "endpoints_replayed": len(self.manifest.extracted) + len(self.manifest.failed),
+            "endpoints_skipped": len(self.manifest.skipped),
+            "successful_replays": len(self.manifest.extracted),
+            "failed_replays": len(self.manifest.failed),
+            "new_entities_found": len(self.entity_manifest),
+            "roi_metrics": roi_combined
+        }
+        
         manifest_path = self.output_dir / "_extraction_manifest.json"
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
         manifest_path.write_text(
@@ -311,6 +509,37 @@ class IntelligenceExtractor:
             f"{manifest_data['summary']['total_failed']} failed, "
             f"{manifest_data['summary']['total_skipped']} skipped "
             f"in {manifest_data['summary']['duration_seconds']}s"
+        )
+
+        # Extraction coverage report
+        total_artifacts = len(self.manifest.extracted)
+        attributed_count = 0
+        named_count = 0
+        unknown_names = 0
+        for entry in self.manifest.extracted:
+            output_path = entry.get("output_path")
+            if output_path:
+                try:
+                    import pathlib
+                    artifact = json.loads(pathlib.Path(output_path).read_text(encoding="utf-8"))
+                    meta = artifact.get("_meta", {})
+                    if meta.get("entity_id") is not None:
+                        attributed_count += 1
+                    ename = meta.get("entity_name")
+                    if ename and ename != "unknown":
+                        named_count += 1
+                    else:
+                        unknown_names += 1
+                except Exception:
+                    unknown_names += 1
+
+        coverage_pct = (named_count / total_artifacts * 100) if total_artifacts > 0 else 0.0
+        log.info(
+            f"[IntelligenceExtractor] Entity Naming Coverage: "
+            f"Attributed={attributed_count}/{total_artifacts}, "
+            f"Named={named_count}/{total_artifacts}, "
+            f"Unknown={unknown_names}, "
+            f"Coverage={coverage_pct:.1f}%"
         )
 
         return manifest_data

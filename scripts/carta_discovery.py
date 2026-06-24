@@ -12,9 +12,16 @@ os.environ["CARTA_MODE"] = "discovery"
 os.environ["CARTA_ENABLE_HAR"] = "true"
 os.environ["CARTA_ENABLE_NETWORK_DISCOVERY"] = "true"
 
+from datetime import datetime
+
+log_filename = f"log.{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(log_filename),
+        logging.StreamHandler(sys.stdout)
+    ]
 )
 log = logging.getLogger(__name__)
 

@@ -1,0 +1,699 @@
+[
+  {
+    "id": "61da58428025dc18",
+    "type": "organization",
+    "name": "Krakatoa Ventures",
+    "properties": {},
+    "provenance": {
+      "source_artifacts": [
+        "base_manifest"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "a455002fbd0fb097",
+    "type": "fund",
+    "name": "Test Fund I LP",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "33a531af7bd6a05e.json",
+        "4811b97708888a81.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "689547ac8131bdf4",
+    "type": "fund",
+    "name": "Krakatoa Growth Fund I, L.P.",
+    "properties": {
+      "status": "unknown",
+      "vehicle_type": "Share class"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "29308cf3a086c8fd.json",
+        "eb256fd9663fa2cc.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "589027037c77ec12",
+    "type": "fund",
+    "name": "Seed Britannia",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "83ea459910326e94.json",
+        "489e3b8937f1379d.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "056743efe61f0f4b",
+    "type": "fund",
+    "name": "Krakatoa Fund Family",
+    "properties": {
+      "status": "unknown",
+      "vehicle_type": "Share class"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "1002e268e8e9af5e.json",
+        "f17630f509a6d1bd.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "fe19f585873f64de",
+    "type": "fund",
+    "name": "Krakatoa Ventures Fund III, L.P.",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "aaaa0ac25de51b3a.json",
+        "07e172c5c6ca492d.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "49f8a4729cde271d",
+    "type": "fund",
+    "name": "Krakatoa Ventures Fund IV, L.P.",
+    "properties": {
+      "status": "unknown",
+      "vehicle_type": "Share class"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "6ee8f3e7867f25bf.json",
+        "e239387e1065cde8.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "0db60af5ba75b954",
+    "type": "spv",
+    "name": "Krakatoa Meetly SPV, LLC",
+    "properties": {
+      "status": "unknown",
+      "vehicle_type": "Stakeholder"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "0c39cadd6b529006.json",
+        "8c8991191c2ff811.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "6861de47cbb08e39",
+    "type": "fund",
+    "name": "Krakatoa Ventures Fund II, L.P.",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "345dd49f21bed668.json",
+        "c1d2d584880beb24.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "d84f97e1d3bc60e8",
+    "type": "spv",
+    "name": "Krakatoa Arcanerover SPV LLC",
+    "properties": {
+      "status": "unknown",
+      "vehicle_type": "Share class"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "052bd3b05440da0a.json",
+        "0bf85e14b8984113.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "ed97146966c35ac1",
+    "type": "fund",
+    "name": "Star Space Fund Family",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "1f90705724e717f2.json",
+        "4678ebd71dd02f33.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "03df919384930452",
+    "type": "investment",
+    "name": "Silver Spurs",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.9992682204281567
+    },
+    "provenance": {
+      "source_artifacts": [
+        "c1b8d1addb573389.json",
+        "8673052889ea3e19.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "1ad2cff8ddf75f85",
+    "type": "investment",
+    "name": "GenerateReport - TC1",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.001
+    },
+    "provenance": {
+      "source_artifacts": [
+        "1f90705724e717f2.json",
+        "4678ebd71dd02f33.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "91ec4ebe0af30d0e",
+    "type": "investment",
+    "name": "GenerateReport - TC2",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0
+    },
+    "provenance": {
+      "source_artifacts": [
+        "345dd49f21bed668.json",
+        "dae62693935b9292.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "a3c8f4150da1c2ad",
+    "type": "investment",
+    "name": "GenerateReport - TC3",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0
+    },
+    "provenance": {
+      "source_artifacts": [
+        "aaaa0ac25de51b3a.json",
+        "07e172c5c6ca492d.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "d634197290dcad10",
+    "type": "investment",
+    "name": "GenerateReport - TC4",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 1.0
+    },
+    "provenance": {
+      "source_artifacts": [
+        "6ee8f3e7867f25bf.json",
+        "e239387e1065cde8.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "1551dc35d39e391a",
+    "type": "investment",
+    "name": "ZenPaper Ltd",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 7.51256516095707
+    },
+    "provenance": {
+      "source_artifacts": [
+        "25eddeb75ec7a404.json",
+        "9d4921a6ec889548.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "0894e1529dacc820",
+    "type": "investment",
+    "name": "Bridgette Apparel",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 8.905263157894737
+    },
+    "provenance": {
+      "source_artifacts": [
+        "1d1515a53bd500fd.json",
+        "489e3b8937f1379d.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "26ed8f9ad6e09ef6",
+    "type": "investment",
+    "name": "facefriend, Inc.",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "6d823602c007c8e0.json",
+        "86b8f5a3e9b230f5.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "0ef1ff3940dfcc69",
+    "type": "investment",
+    "name": "Arcanerover",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 12.903225806451612
+    },
+    "provenance": {
+      "source_artifacts": [
+        "26df076ddb5352cf.json",
+        "93861fd8ccaa76d0.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "cf53b4a890695f69",
+    "type": "investment",
+    "name": "ThemeBuilder",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "0ba063f4b7887abc.json",
+        "f15a70e2ead16693.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "1015389f42707654",
+    "type": "investment",
+    "name": "Unicorn Biotechnologies Inc.",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "83533873a1b02ba9.json",
+        "6150f2d8b6c07a05.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "bdf19a7a2e02e5f1",
+    "type": "investment",
+    "name": "BetaHex",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "e32c2d6c8b9b1350.json",
+        "f1e758b36ea6f9f9.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "e73d52ce9b4ffb8e",
+    "type": "investment",
+    "name": "Better Than Sorry",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0
+    },
+    "provenance": {
+      "source_artifacts": [
+        "00dd0d80759e16da.json",
+        "d5acb092aa1da545.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "d8718d4ff2651912",
+    "type": "investment",
+    "name": "MangoCart, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 70.04230976912804
+    },
+    "provenance": {
+      "source_artifacts": [
+        "85aa5965b20192d2.json",
+        "17acb83364aaa8c3.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "e3f6cf29616033bb",
+    "type": "investment",
+    "name": "Speedster, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.11786632828669796
+    },
+    "provenance": {
+      "source_artifacts": [
+        "1fd166b4ec00ddb6.json",
+        "02786b7336a7e1a4.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "e87b9ad0459525e9",
+    "type": "investment",
+    "name": "Wallet Guard, Inc.",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "0d2cb2deaf0dbe8b.json",
+        "77328fad2ab8b336.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "8673cb15f8d0e83b",
+    "type": "investment",
+    "name": "Meetly",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 39.98400639744102
+    },
+    "provenance": {
+      "source_artifacts": [
+        "893c329221ec4f0b.json",
+        "02a1091c9502adfa.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "1b59e0488bbbba19",
+    "type": "investment",
+    "name": "Emerald Seas, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.22050082821787
+    },
+    "provenance": {
+      "source_artifacts": [
+        "1002e268e8e9af5e.json",
+        "f17630f509a6d1bd.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "c17118ecc4b69cc2",
+    "type": "investment",
+    "name": "Wing Span, LLC",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.0014033178408909164
+    },
+    "provenance": {
+      "source_artifacts": [
+        "5868937c05a2ad8a.json",
+        "973b58f4c54bc37f.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "c112137f211a3161",
+    "type": "investment",
+    "name": "[SG] ChilliCrab Pte. Ltd.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.7502902882550481
+    },
+    "provenance": {
+      "source_artifacts": [
+        "22bf5af62c3c0b35.json",
+        "db239557a7354068.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "3e6ee61d329aadec",
+    "type": "investment",
+    "name": "Last Word, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 34.0243356956731
+    },
+    "provenance": {
+      "source_artifacts": [
+        "07bb7c9411e23e46.json",
+        "341e401dd55a152f.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "37258a40defed285",
+    "type": "investment",
+    "name": "EverChat",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.001
+    },
+    "provenance": {
+      "source_artifacts": [
+        "33a531af7bd6a05e.json",
+        "4811b97708888a81.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "94b80671fe5cc49b",
+    "type": "investment",
+    "name": "Stars In Space, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 22.573363431151243
+    },
+    "provenance": {
+      "source_artifacts": [
+        "9c8d45da86f57ea4.json",
+        "c70997c70f7a3fcd.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "edba8bfa382c2f7f",
+    "type": "investment",
+    "name": "Harmony Circle, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 1.0
+    },
+    "provenance": {
+      "source_artifacts": [
+        "29308cf3a086c8fd.json",
+        "eb256fd9663fa2cc.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "b03b9f31bc7f5900",
+    "type": "investment",
+    "name": "Berry Cloud, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.017300547181706264
+    },
+    "provenance": {
+      "source_artifacts": [
+        "52e69414a5928a2a.json",
+        "d4854da62b77ed3f.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "aaa1a86c13aaf359",
+    "type": "investment",
+    "name": "Heart Round 2, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 10.692333046582462
+    },
+    "provenance": {
+      "source_artifacts": [
+        "0c39cadd6b529006.json",
+        "7403ef262f0eb4f3.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "6ac07a6483b1a0fa",
+    "type": "investment",
+    "name": "Red Suns, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 98.36065573770492
+    },
+    "provenance": {
+      "source_artifacts": [
+        "23f7d237e579c0ae.json",
+        "f09cb75bdfbbfb25.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "2f805af28a7a4662",
+    "type": "investment",
+    "name": "QA003 Prismo LLC",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 0.9890689564223544
+    },
+    "provenance": {
+      "source_artifacts": [
+        "0d9c69cbd63a8862.json",
+        "3a4389b390cf49c7.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "4a7507f765d7f4c0",
+    "type": "investment",
+    "name": "Dawiva, Inc.",
+    "properties": {
+      "status": "unknown",
+      "ownership_percentage": 8.905263157894737
+    },
+    "provenance": {
+      "source_artifacts": [
+        "43ec191d17bff43a.json",
+        "489e3b8937f1379d.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "a7d5ff2bbdeb9504",
+    "type": "spv",
+    "name": "ThemeBuilder Opp, LLC",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "1bf0d6dc7f08077e.json",
+        "86b8f5a3e9b230f5.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  },
+  {
+    "id": "cd8f0a71f6940eab",
+    "type": "fund",
+    "name": "Krakatoa Ventures Fund V, L.P.",
+    "properties": {
+      "status": "unknown"
+    },
+    "provenance": {
+      "source_artifacts": [
+        "4933063eb75e6b05.json"
+      ],
+      "source_endpoints": [],
+      "confidence": 1.0
+    }
+  }
+]

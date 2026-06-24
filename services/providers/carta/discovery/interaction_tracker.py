@@ -24,6 +24,10 @@ class InteractionProvenanceTracker:
         self._current_interaction_type: str = "PAGE_LOAD"
         self._current_ui_path: List[str] = []
         self._current_entity_context: Optional[str] = None
+        self._current_entity_id: Optional[str] = None
+        self._current_entity_type: Optional[str] = None
+        self._current_organization_id: Optional[str] = None
+        self._current_drilldown_session: Optional[str] = None
         self._history: List[InteractionProvenance] = []
 
         # Transient state for the current interaction
@@ -35,6 +39,10 @@ class InteractionProvenanceTracker:
         interaction_type: str,
         ui_path: List[str],
         entity_context: Optional[str] = None,
+        entity_id: Optional[str] = None,
+        entity_type: Optional[str] = None,
+        organization_id: Optional[str] = None,
+        drilldown_session: Optional[str] = None,
     ):
         """Mark the start of a new UI interaction."""
         # Commit previous interaction if it had endpoints
@@ -43,12 +51,18 @@ class InteractionProvenanceTracker:
         self._current_interaction_type = interaction_type
         self._current_ui_path = ui_path
         self._current_entity_context = entity_context
+        
+        self._current_entity_id = entity_id
+        self._current_entity_type = entity_type
+        self._current_organization_id = organization_id
+        self._current_drilldown_session = drilldown_session
+        
         self._current_endpoints = set()
         self._interaction_start_time = time.time()
 
         log.info(
             f"[InteractionTracker] Started {interaction_type} at {ui_path} "
-            f"(Entity: {entity_context})"
+            f"(Entity: {entity_context}, ID: {entity_id})"
         )
 
     def record_endpoint_triggered(self, url: str):
@@ -65,6 +79,10 @@ class InteractionProvenanceTracker:
                 ui_path=tuple(self._current_ui_path),
                 triggered_endpoints=tuple(sorted(self._current_endpoints)),
                 entity_context=self._current_entity_context,
+                entity_id=self._current_entity_id,
+                entity_type=self._current_entity_type,
+                organization_id=self._current_organization_id,
+                drilldown_session=self._current_drilldown_session,
                 timestamp=self._interaction_start_time,
             )
             self._history.append(prov)

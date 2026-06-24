@@ -20,8 +20,9 @@ _CAPABILITY_RULES: list[tuple[str, EndpointCategory, list[CapabilityTag]]] = [
     (r"/graphql", EndpointCategory.GRAPHQL, [CapabilityTag.GRAPHQL]),
     (r"/portfolio|/fund|/investment", EndpointCategory.PORTFOLIO, [CapabilityTag.PORTFOLIO_DATA, CapabilityTag.ENTITY_LIST]),
     (r"/cap.?table|/equity", EndpointCategory.CAP_TABLE, [CapabilityTag.CAP_TABLE]),
-    (r"/valuation|/409a|/fmv", EndpointCategory.VALUATIONS, [CapabilityTag.VALUATION_DATA]),
+    (r"/valuation|/409a|/fmv|/post-money", EndpointCategory.VALUATIONS, [CapabilityTag.VALUATION_DATA, CapabilityTag.CAP_TABLE]),
     (r"/securit|/share.?class|/option|/warrant", EndpointCategory.SECURITIES, [CapabilityTag.CAP_TABLE]),
+    (r"/holdings/", EndpointCategory.HOLDINGS, [CapabilityTag.CAP_TABLE, CapabilityTag.ENTITY_DETAIL]),
     (r"/investor|/entity|/company", EndpointCategory.INVESTORS, [CapabilityTag.ENTITY_DETAIL]),
     (r"/report|/export|/download", EndpointCategory.REPORTING, [CapabilityTag.REPORTING]),
     (r"/task|/job|/queue", EndpointCategory.TASKS, [CapabilityTag.BATCHABLE]),
@@ -29,7 +30,16 @@ _CAPABILITY_RULES: list[tuple[str, EndpointCategory, list[CapabilityTag]]] = [
     (r"/static|/asset|/chunk|/webpack|/__", EndpointCategory.INTERNAL, []),
 ]
 
+# URLs matching these patterns are reclassified to their true category
+# regardless of what the capability rules say. This prevents false positives.
+_FALSE_POSITIVE_OVERRIDES = {
+    r"/get-products": EndpointCategory.INTERNAL,
+    r"/investor-search": EndpointCategory.INVESTORS,
+    r"/fe-platform/": EndpointCategory.INTERNAL,
+}
+
 _COMPILED_RULES = [(re.compile(pat, re.IGNORECASE), cat, tags) for pat, cat, tags in _CAPABILITY_RULES]
+_COMPILED_FP_OVERRIDES = [(re.compile(pat, re.IGNORECASE), cat) for pat, cat in _FALSE_POSITIVE_OVERRIDES.items()]
 
 
 class ClassificationResult(BaseModel):
@@ -40,8 +50,22 @@ class ClassificationResult(BaseModel):
     matched_rule: Optional[str] = None
 
 
+FIRST_PARTY_DOMAINS = ["carta.team", "carta.com", "eshares.com"]
+
+def is_first_party(url: str) -> bool:
+    from urllib.parse import urlparse
+    netloc = urlparse(url).netloc.lower()
+    return any(d in netloc for d in FIRST_PARTY_DOMAINS)
+
 def classify_traffic(url: str) -> TrafficClass:
     path = url.lower()
+    if not is_first_party(url):
+        if "datadoghq.com" in path or "sentry.io" in path:
+            return TrafficClass.TELEMETRY
+        if "segment.com" in path or "amplitude.com" in path or "pendo.io" in path:
+            return TrafficClass.ANALYTICS
+        return TrafficClass.EXTERNAL_SERVICE
+
     if "datadoghq.com" in path or "sentry.io" in path or "/api/v2/rum" in path or "/api/v2/logs" in path:
         return TrafficClass.TELEMETRY
     if "segment.com" in path or "amplitude.com" in path or "pendo.io" in path:
@@ -58,6 +82,8 @@ def classify_traffic(url: str) -> TrafficClass:
         return TrafficClass.AUTH
     if "/config" in path or "/feature-flags" in path or "/django-messages" in path:
         return TrafficClass.CONFIG
+    if "/export" in path or "/download" in path or "format=csv" in path or ".csv" in path or ".xlsx" in path:
+        return TrafficClass.EXPORT
     if "/api/" in path or "/valuate/" in path or "/firm/" in path or "/list_cached/" in path:
         return TrafficClass.BUSINESS_API
     return TrafficClass.UNKNOWN
@@ -78,6 +104,18 @@ def classify_endpoint(url: str, response_text: str = "") -> ClassificationResult
             category = rule_cat
             capabilities.update(tags)
             matched_rule = compiled_re.pattern
+            break
+
+    if traffic_class == TrafficClass.EXPORT:
+        category = EndpointCategory.EXPORT if hasattr(EndpointCategory, "EXPORT") else EndpointCategory.UNKNOWN
+        capabilities.add(CapabilityTag.REPORTING)
+        matched_rule = "traffic_class:export"
+
+    # 1b. False positive overrides — reclassify mismatched URLs
+    for fp_re, fp_cat in _COMPILED_FP_OVERRIDES:
+        if fp_re.search(path):
+            category = fp_cat
+            matched_rule = f"fp_override:{fp_re.pattern}"
             break
 
     # 2. Query Params
@@ -119,6 +157,11 @@ class EndpointClassifier:
 
     def __init__(self):
         self._history: dict[str, ClassificationResult] = {}
+        self.response_metadata: dict[str, dict] = {}
+
+    @property
+    def total_classified(self) -> int:
+        return len(self._history)
 
     def classify(self, url: str, response_text: str = "") -> ClassificationResult:
         path = url.split("?")[0].split("#")[0]
@@ -132,6 +175,27 @@ class EndpointClassifier:
             self._history[path] = result
             log.debug(f"[EndpointClassifier] {path} → {result.traffic_class.value} | {result.category.value} | caps={len(result.capability_tags)}")
             
+        if response_text:
+            try:
+                import json
+                payload = json.loads(response_text)
+                keys = list(payload.keys()) if isinstance(payload, dict) else []
+                item_count = 0
+                if isinstance(payload, list):
+                    item_count = len(payload)
+                elif isinstance(payload, dict):
+                    for k in ["results", "items", "data", "investments", "valuations", "securities", "share_classes", "holdings"]:
+                        if k in payload and isinstance(payload[k], list):
+                            item_count = len(payload[k])
+                            break
+                self.response_metadata[path] = {
+                    "top_level_keys": keys,
+                    "item_count": item_count,
+                    "content_length": len(response_text)
+                }
+            except Exception:
+                pass
+
         return self._history[path]
 
     def get_by_category(self, category: EndpointCategory) -> list[str]:

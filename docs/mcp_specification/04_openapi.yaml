@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: Carta Extraction Internal API
+  version: 1.0.0
+  description: Internal REST API wrapping the Carta extraction pipeline and database layer. Exposed to the MCP server.
+servers:
+  - url: https://api.internal.carta-pipeline.local/v1
+    description: Internal Cluster
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Security:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+          format: uuid
+        company_id:
+          type: string
+          format: uuid
+        label:
+          type: string
+        issuable_type:
+          type: string
+        quantity:
+          type: number
+        value:
+          type: number
+        currency:
+          type: string
+    ExtractionJob:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [PENDING, RUNNING, COMPLETED, FAILED]
+        target_entity_id:
+          type: string
+          
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /companies/{company_id}/cap-table:
+    get:
+      summary: Retrieve Cap Table
+      description: Returns a list of all securities and holdings for a specific portfolio company.
+      parameters:
+        - name: company_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Cap table retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Security"
+                  
+  /funds/{fund_id}/metrics:
+    get:
+      summary: Get Fund Metrics
+      description: Returns IRR, total value, and performance metrics for a specific fund.
+      parameters:
+        - name: fund_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Metrics retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                
+  /extraction/jobs:
+    post:
+      summary: Trigger Extraction
+      description: Enqueues a new Carta background extraction job.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [target_type, target_id]
+              properties:
+                target_type:
+                  type: string
+                  enum: [firm, fund, company]
+                target_id:
+                  type: string
+      responses:
+        "202":
+          description: Job Accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExtractionJob"

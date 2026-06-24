@@ -230,7 +230,7 @@ openclaw_carta/
 
 ## Contact
 
-- **Nikhil Kumar** — project lead
+- **Ankur Kumar** — project lead
 - **Saumya Garg** — stakeholder
 - **Hanzel Corella** — provides company lists
 - **Alan Abraham** — stakeholder

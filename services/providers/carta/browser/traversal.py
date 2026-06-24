@@ -26,7 +26,11 @@ class TraversalState(msgspec.Struct):
     drilldown_depth: int = 0
 
 class TraversalMetrics(msgspec.Struct):
-    tabs_explored: int = 0
+    tabs_detected: int = 0
+    tabs_relevant: int = 0
+    tabs_clicked: int = 0
+    new_endpoints: int = 0
+    tabs_explored: int = 0 # kept for compatibility
     entities_discovered: int = 0
     failures: int = 0
     retries: int = 0
@@ -36,7 +40,17 @@ TAB_PATTERNS = [
     re.compile(r"overview", re.I),
     re.compile(r"investment", re.I),
     re.compile(r"valuation", re.I),
+    re.compile(r"ownership", re.I),
+    re.compile(r"holding", re.I),
     re.compile(r"cap[\s-]?table", re.I),
+    re.compile(r"security", re.I),
+    re.compile(r"document", re.I),
+    re.compile(r"performance", re.I),
+    re.compile(r"metric", re.I),
+    re.compile(r"tax", re.I),
+    re.compile(r"partner", re.I),
+    re.compile(r"cashflow", re.I),
+    re.compile(r"forecast", re.I),
 ]
 
 class CartaEntityTraversalEngine:
@@ -44,7 +58,7 @@ class CartaEntityTraversalEngine:
     Robust active traversal engine for Carta SPAs.
     Handles DOM virtualization, network synchronization, and dynamic navigation state.
     """
-    def __init__(self, page: Page, collector, max_depth: int = 1, tab_timeout: int = 10_000):
+    def __init__(self, page: Page, collector, max_depth: int = 1, tab_timeout: int = 3000):
         self.page = page
         self.collector = collector
         self.max_depth = max_depth
@@ -59,45 +73,75 @@ class CartaEntityTraversalEngine:
 
     async def _cycle_semantic_tabs(self):
         """Click tabs matching expected regex patterns."""
-        tab_locators = self.page.locator("[role='tab'], .tab, button[id*='tab' i]")
-        count = await tab_locators.count()
+        import hashlib
         
+        # Stage 1: Find candidates
+        tab_locators = self.page.locator("a, button, [role='tab'], li, .nav-link, .nav-item")
+        count = await tab_locators.count()
+        self.metrics.tabs_detected += count
+        
+        visited_hashes = set()
+        
+        # Stage 2: Filter by intelligence keywords
         for i in range(count):
             tab = tab_locators.nth(i)
-            if not await tab.is_visible():
+            try:
+                if not await tab.is_visible(timeout=500):
+                    continue
+            except Exception:
                 continue
                 
             text = (await tab.inner_text()).strip()
             
             # Check semantic match
-            matched = False
+            matched_pattern = None
             for pattern in TAB_PATTERNS:
                 if pattern.search(text):
-                    matched = True
+                    matched_pattern = pattern
                     break
                     
-            if matched and text not in self.state.visited_tabs:
-                log.info(f"[TraversalEngine] Clicking semantic tab: '{text}'")
+            if matched_pattern:
+                self.metrics.tabs_relevant += 1
                 
-                # Interaction Provenance Hook
-                if hasattr(self.collector, "interaction_tracker"):
-                    self.collector.interaction_tracker.begin_interaction(
-                        interaction_type="TAB_CLICK",
-                        ui_path=["Tab", text]
-                    )
+                # Anti-looping: Prevent clicking the same semantic element multiple times
+                tab_signature = hashlib.sha256(text.encode()).hexdigest()
+                if tab_signature in visited_hashes:
+                    continue
+                visited_hashes.add(tab_signature)
                 
-                await tab.click()
-                if self.collector and hasattr(self.collector, "wait_for_network_quiet"):
-                    await self.collector.wait_for_network_quiet(silence_ms=1200, timeout_ms=self.tab_timeout)
-                else:
-                    await asyncio.sleep(2.0)
-                
-                self.state.visited_tabs.add(text)
-                self.metrics.tabs_explored += 1
-                
-                # Check for table rows in this tab for drilldown
-                if pattern.search("investment") or pattern.search("cap"):
-                    await self._drilldown_virtualized_table()
+                if text not in self.state.visited_tabs:
+                    log.info(f"[TraversalEngine] Clicking semantic tab: '{text}'")
+                    
+                    try:
+                        # Interaction Provenance Hook
+                        if hasattr(self.collector, "interaction_tracker"):
+                            self.collector.interaction_tracker.begin_interaction(
+                                interaction_type="TAB_CLICK",
+                                ui_path=["Tab", text]
+                            )
+                        
+                        initial_endpoints = len(self.collector.discovered_endpoints) if hasattr(self.collector, "discovered_endpoints") else 0
+                        
+                        await tab.click(timeout=3000)
+                        if self.collector and hasattr(self.collector, "wait_for_network_quiet"):
+                            await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=self.tab_timeout)
+                        else:
+                            await asyncio.sleep(2.0)
+                            
+                        # Update endpoints metric
+                        if hasattr(self.collector, "discovered_endpoints"):
+                            self.metrics.new_endpoints += len(self.collector.discovered_endpoints) - initial_endpoints
+                        
+                        self.state.visited_tabs.add(text)
+                        self.metrics.tabs_clicked += 1
+                        self.metrics.tabs_explored += 1
+                        
+                        # Check for table rows in this tab for drilldown
+                        if matched_pattern.search("investment") or matched_pattern.search("cap"):
+                            await self._drilldown_virtualized_table()
+                    except Exception as e:
+                        log.warning(f"[TraversalEngine] Failed to explore tab '{text}': {e}")
+                        continue
 
     async def get_row_identity(self, row: Locator) -> str:
         """Fallback hierarchy for row identity."""
@@ -116,7 +160,7 @@ class CartaEntityTraversalEngine:
         rows = self.page.locator("table tbody tr")
         seen = set()
         
-        max_scrolls = 20
+        max_scrolls = 200
         scrolls = 0
         
         while scrolls < max_scrolls:
@@ -151,7 +195,7 @@ class CartaEntityTraversalEngine:
             await self.page.mouse.wheel(0, 4000)
             
             if self.collector and hasattr(self.collector, "wait_for_network_quiet"):
-                await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=3000)
+                await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=10000)
             else:
                 await asyncio.sleep(1.5)
                 
@@ -176,7 +220,7 @@ class CartaEntityTraversalEngine:
                 await row.click(timeout=3000)
                 
             if self.collector and hasattr(self.collector, "wait_for_network_quiet"):
-                await self.collector.wait_for_network_quiet(silence_ms=1200, timeout_ms=8000)
+                await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=10000)
             else:
                 await asyncio.sleep(3.0)
                 
@@ -227,6 +271,6 @@ class CartaEntityTraversalEngine:
             await self.page.go_back()
             
         if self.collector and hasattr(self.collector, "wait_for_network_quiet"):
-            await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=3000)
+            await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=10000)
         else:
             await asyncio.sleep(1.0)

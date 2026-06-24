@@ -26,7 +26,7 @@ def start_persistent_browser():
     os.makedirs(user_data_dir, exist_ok=True)
 
     print(f"Using profile: {user_data_dir}")
-    print("Launching Chrome on port 9222 → playground.carta.team ...")
+    print("Launching Chrome on port 9222 -> playground.carta.team ...")
 
     proc = subprocess.Popen(
         [
@@ -56,17 +56,17 @@ def start_persistent_browser():
     for i in range(30):
         try:
             urllib.request.urlopen("http://127.0.0.1:9222/json/version", timeout=2)
-            print("✅ Chrome ready with CDP on port 9222")
+            print("[OK] Chrome ready with CDP on port 9222")
             break
         except Exception:
             time.sleep(1)
     else:
-        print("❌ CDP not available after 30s")
+        print("[ERR] CDP not available after 30s")
         proc.terminate()
         return
 
     print()
-    print("👉 Log in to Carta manually in the opened browser window.")
+    print("Log in to Carta manually in the opened browser window.")
     print("   Once authenticated, keep this window open.")
     print("   The CartaProvider will reuse the session automatically.")
     print()
