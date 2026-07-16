@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import re
-from typing import Set, Tuple
+from typing import Set, Tuple, List, Optional
 from enum import Enum
 import msgspec
 from playwright.async_api import Page, Locator
@@ -58,13 +58,55 @@ class CartaEntityTraversalEngine:
     Robust active traversal engine for Carta SPAs.
     Handles DOM virtualization, network synchronization, and dynamic navigation state.
     """
-    def __init__(self, page: Page, collector, max_depth: int = 1, tab_timeout: int = 3000):
+    def __init__(self, page: Page, collector, max_depth: int = 1, tab_timeout: int = 3000, targets: Optional[List[str]] = None):
         self.page = page
         self.collector = collector
         self.max_depth = max_depth
         self.tab_timeout = tab_timeout
         self.state = TraversalState(visited_tabs=set(), visited_entities=set(), visited_routes=set(), drilldown_depth=0)
         self.metrics = TraversalMetrics()
+        
+        TARGET_TAB_MAPPING = {
+            "get_investments": [r"overview", r"investment", r"holding", r"valuation", r"ownership", r"portfolio"],
+            "get_investment_extra_info": [r"overview", r"profile", r"investment", r"holding", r"portfolio"],
+            "get_investment_team": [r"overview", r"people", r"contact", r"investment", r"holding", r"portfolio"],
+            "get_investment_valuations": [r"valuation", r"investment", r"holding", r"portfolio"],
+            "get_capital_calls": [r"transaction", r"performance", r"cashflow", r"activity", r"investment", r"holding", r"portfolio"],
+            "get_investment_log": [r"overview", r"investment", r"holding", r"portfolio"],
+            "get_investment_transactions": [r"transaction", r"performance", r"cashflow", r"investment", r"holding", r"portfolio"],
+            "get_investment_firm": [r"overview", r"investment", r"holding", r"portfolio"],
+            "get_investment_focus": [r"overview", r"investment", r"holding", r"valuation", r"ownership", r"portfolio"],
+            "get_investment_sectors": [r"overview", r"profile", r"investment", r"holding", r"portfolio"],
+            "get_investment_certificates": [r"cap[\s-]?table", r"security", r"ownership", r"holding", r"investment", r"portfolio"],
+            "get_distribution_history": [r"transaction", r"performance", r"cashflow", r"investment", r"holding", r"portfolio"],
+            "get_liquidity_distributions": [r"transaction", r"performance", r"cashflow", r"investment", r"holding", r"portfolio"],
+            
+            "inv_investment": [r"overview", r"investment", r"holding", r"valuation", r"ownership", r"portfolio"],
+            "inv_asset_extra_info": [r"overview", r"profile", r"investment", r"holding", r"portfolio"],
+            "inv_asset_team": [r"overview", r"people", r"contact", r"investment", r"holding", r"portfolio"],
+            "inv_asset_valuation": [r"valuation", r"investment", r"holding", r"portfolio"],
+            "inv_cap_call": [r"transaction", r"performance", r"cashflow", r"activity", r"investment", r"holding", r"portfolio"],
+            "investment_log": [r"overview", r"investment", r"holding", r"portfolio"],
+            "inv_investment_transaction": [r"transaction", r"performance", r"cashflow", r"investment", r"holding", r"portfolio"],
+            "inv_investment_firm": [r"overview", r"investment", r"holding", r"portfolio"],
+            "inv_investment_focus": [r"overview", r"investment", r"holding", r"valuation", r"ownership", r"portfolio"],
+            "inv_investment_sector": [r"overview", r"profile", r"investment", r"holding", r"portfolio"],
+            "inv_investment_certificate": [r"cap[\s-]?table", r"security", r"ownership", r"holding", r"investment", r"portfolio"],
+            "inv_investment_distribution_history": [r"transaction", r"performance", r"cashflow", r"investment", r"holding", r"portfolio"],
+            "inv_liquidity_distribution": [r"transaction", r"performance", r"cashflow", r"investment", r"holding", r"portfolio"],
+        }
+        
+        if targets:
+            patterns = set()
+            for t in targets:
+                if t in TARGET_TAB_MAPPING:
+                    patterns.update(TARGET_TAB_MAPPING[t])
+                else:
+                    patterns.add(t.lower())
+            self.tab_patterns = [re.compile(p, re.I) for p in patterns]
+            log.info(f"[TraversalEngine] Selective traversal targets specified. Custom tab patterns: {patterns}")
+        else:
+            self.tab_patterns = TAB_PATTERNS
 
     async def traverse(self):
         log.info("[TraversalEngine] Starting deep entity traversal.")
@@ -80,68 +122,82 @@ class CartaEntityTraversalEngine:
         count = await tab_locators.count()
         self.metrics.tabs_detected += count
         
-        visited_hashes = set()
-        
-        # Stage 2: Filter by intelligence keywords
+        candidates = []
         for i in range(count):
-            tab = tab_locators.nth(i)
             try:
+                tab = tab_locators.nth(i)
                 if not await tab.is_visible(timeout=500):
                     continue
+                text = (await tab.inner_text()).strip()
+                if not text:
+                    continue
+                
+                text_lower = text.lower()
+                exclude_keywords = ["all ", "back", "return", "go to", "exit", "list of", "list "]
+                if any(ew in text_lower for ew in exclude_keywords):
+                    continue
+                
+                matched_pattern = None
+                for pattern in self.tab_patterns:
+                    if pattern.search(text):
+                        matched_pattern = pattern
+                        break
+                
+                if matched_pattern:
+                    candidates.append((text, matched_pattern))
             except Exception:
                 continue
-                
-            text = (await tab.inner_text()).strip()
+
+        visited_hashes = set()
+        
+        # Stage 2: Click candidates
+        for text, matched_pattern in candidates:
+            self.metrics.tabs_relevant += 1
             
-            # Check semantic match
-            matched_pattern = None
-            for pattern in TAB_PATTERNS:
-                if pattern.search(text):
-                    matched_pattern = pattern
-                    break
-                    
-            if matched_pattern:
-                self.metrics.tabs_relevant += 1
+            # Anti-looping: Prevent clicking the same semantic element multiple times
+            tab_signature = hashlib.sha256(text.encode()).hexdigest()
+            if tab_signature in visited_hashes:
+                continue
+            visited_hashes.add(tab_signature)
+            
+            if text not in self.state.visited_tabs:
+                log.info(f"[TraversalEngine] Clicking semantic tab: '{text}'")
                 
-                # Anti-looping: Prevent clicking the same semantic element multiple times
-                tab_signature = hashlib.sha256(text.encode()).hexdigest()
-                if tab_signature in visited_hashes:
-                    continue
-                visited_hashes.add(tab_signature)
-                
-                if text not in self.state.visited_tabs:
-                    log.info(f"[TraversalEngine] Clicking semantic tab: '{text}'")
-                    
-                    try:
-                        # Interaction Provenance Hook
-                        if hasattr(self.collector, "interaction_tracker"):
-                            self.collector.interaction_tracker.begin_interaction(
-                                interaction_type="TAB_CLICK",
-                                ui_path=["Tab", text]
-                            )
-                        
-                        initial_endpoints = len(self.collector.discovered_endpoints) if hasattr(self.collector, "discovered_endpoints") else 0
-                        
-                        await tab.click(timeout=3000)
-                        if self.collector and hasattr(self.collector, "wait_for_network_quiet"):
-                            await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=self.tab_timeout)
-                        else:
-                            await asyncio.sleep(2.0)
-                            
-                        # Update endpoints metric
-                        if hasattr(self.collector, "discovered_endpoints"):
-                            self.metrics.new_endpoints += len(self.collector.discovered_endpoints) - initial_endpoints
-                        
-                        self.state.visited_tabs.add(text)
-                        self.metrics.tabs_clicked += 1
-                        self.metrics.tabs_explored += 1
-                        
-                        # Check for table rows in this tab for drilldown
-                        if matched_pattern.search("investment") or matched_pattern.search("cap"):
-                            await self._drilldown_virtualized_table()
-                    except Exception as e:
-                        log.warning(f"[TraversalEngine] Failed to explore tab '{text}': {e}")
+                try:
+                    # Dynamically locate tab element using text to prevent stale element reference
+                    tab_locator = self.page.locator("a, button, [role='tab'], li, .nav-link, .nav-item").filter(has_text=text).first
+                    if not await tab_locator.is_visible(timeout=1000):
                         continue
+                        
+                    # Interaction Provenance Hook
+                    if hasattr(self.collector, "interaction_tracker"):
+                        self.collector.interaction_tracker.begin_interaction(
+                            interaction_type="TAB_CLICK",
+                            ui_path=["Tab", text]
+                        )
+                    
+                    initial_endpoints = len(self.collector.discovered_endpoints) if hasattr(self.collector, "discovered_endpoints") else 0
+                    
+                    await tab_locator.click(timeout=3000)
+                    if self.collector and hasattr(self.collector, "wait_for_network_quiet"):
+                        await self.collector.wait_for_network_quiet(silence_ms=500, timeout_ms=self.tab_timeout)
+                    else:
+                        await asyncio.sleep(2.0)
+                        
+                    # Update endpoints metric
+                    if hasattr(self.collector, "discovered_endpoints"):
+                        self.metrics.new_endpoints += len(self.collector.discovered_endpoints) - initial_endpoints
+                    
+                    self.state.visited_tabs.add(text)
+                    self.metrics.tabs_clicked += 1
+                    self.metrics.tabs_explored += 1
+                    
+                    # Check for table rows in this tab for drilldown
+                    if matched_pattern.search("investment") or matched_pattern.search("cap"):
+                        await self._drilldown_virtualized_table()
+                except Exception as e:
+                    log.warning(f"[TraversalEngine] Failed to explore tab '{text}': {e}")
+                    continue
 
     async def get_row_identity(self, row: Locator) -> str:
         """Fallback hierarchy for row identity."""

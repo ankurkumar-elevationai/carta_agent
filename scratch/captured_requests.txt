@@ -1,0 +1,611 @@
+Monitored URL: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+Total Carta requests captured: 145
+
+[1] GET https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+Headers:
+--------------------------------------------------------------------------------
+[2] GET https://app.carta.com/static/bundles/b67fc02f-manifest.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[3] GET https://app.carta.com/static/bundles/37f08b21-fep-dev-client-tools.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[4] GET https://app.carta.com/static/bundles/a500168c-nav-primary.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[5] GET https://app.carta.com/static/bundles/5cad0223-side-local-nav.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[6] GET https://app.carta.com/static/bundles/495078cc-nav-banners.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[7] GET https://app.carta.com/static/bundles/d1735737-new-investor-portfolio.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[8] GET https://app.carta.com/static/js/app_base-e7aacdc378ae5cefa7df5a4f53c674dd86ada066.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[9] GET https://app.carta.com/static/bundles/2ae46f5b-fep-cookie-consent.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[10] GET https://app.carta.com/static/bundles/9cfebae7-fep-keyboard-shortcuts.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[11] GET https://app.carta.com/static/bundles/c47076b3-pendo.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[12] GET https://app.carta.com/static/bundles/1338a07e-virtual-tour.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[13] GET https://app.carta.com/static/bundles/b590083b-delighted.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[14] GET https://app.carta.com/static/bundles/103a7f0c-support-hub.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[15] GET https://app.carta.com/static/bundles/60df8083-fep-dead-code-tracker.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[16] GET https://app.carta.com/static/bundles/styles-b28acf1b.css
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[17] GET https://app.carta.com/static/bundles/0e44c491-6556.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[18] GET https://app.carta.com/static/bundles/c42c04d2-23311.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[19] GET https://app.carta.com/static/bundles/a77e2398-28470.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[20] GET https://app.carta.com/static/bundles/3a975262-91127.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[21] GET https://app.carta.com/static/bundles/f229df9f-34121.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[22] GET https://app.carta.com/static/bundles/2307f874-86966.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[23] GET https://app.carta.com/static/bundles/7d62af52-65625.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[24] GET https://app.carta.com/static/bundles/95ca4c8d-88236.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[25] GET https://app.carta.com/static/bundles/c70463a6-7296.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[26] GET https://app.carta.com/static/bundles/5cfc8365-73399.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[27] GET https://app.carta.com/static/bundles/8124a44f-71172.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[28] GET https://app.carta.com/static/bundles/1aead477-53245.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[29] GET https://app.carta.com/static/bundles/d2e25a02-76352.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[30] GET https://app.carta.com/static/bundles/4a1ebb3f-91096.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[31] GET https://app.carta.com/static/bundles/ecd7732b-60179.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[32] GET https://app.carta.com/static/bundles/e78fe830-62254.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[33] GET https://app.carta.com/static/bundles/9f3678dc-23304.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[34] GET https://app.carta.com/static/bundles/98beefb5-38325.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[35] GET https://app.carta.com/static/bundles/16396826-85311.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[36] GET https://app.carta.com/static/bundles/bc701e9a-29341.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[37] GET https://app.carta.com/static/bundles/6898904c-15138.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[38] GET https://app.carta.com/static/bundles/9ba5a8bc-54052.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[39] GET https://app.carta.com/static/bundles/bcf9fcfa-53080.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[40] GET https://app.carta.com/static/bundles/ed85a249-20432.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[41] GET https://app.carta.com/static/bundles/d84317a4-58983.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[42] GET https://app.carta.com/static/bundles/199c6820-95671.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[43] GET https://app.carta.com/static/bundles/216dc109-5282.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[44] GET https://app.carta.com/static/bundles/61880be5-7850.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[45] GET https://app.carta.com/static/bundles/00039bf9-33250.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[46] GET https://app.carta.com/static/bundles/eed2a41d-68715.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[47] GET https://app.carta.com/static/bundles/acc23a28-71498.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[48] GET https://app.carta.com/static/bundles/1efae8a9-5051.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[49] GET https://app.carta.com/static/bundles/19d3cb71-74987.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[50] GET https://app.carta.com/static/bundles/9a6e50ef-41817.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[51] GET https://app.carta.com/static/bundles/514883da-37893.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[52] GET https://app.carta.com/static/bundles/cdda9f6f-48417.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[53] GET https://app.carta.com/static/bundles/817dec56-618.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[54] GET https://app.carta.com/static/bundles/e7b921c3-56002.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[55] GET https://app.carta.com/static/bundles/0aa8b023-24161.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[56] GET https://app.carta.com/static/bundles/e906a449-88555.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[57] GET https://app.carta.com/static/bundles/0fc4fefa-23892.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[58] GET https://app.carta.com/static/bundles/27d57dbe-23172.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[59] GET https://app.carta.com/static/bundles/142f71e1-20583.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[60] GET https://app.carta.com/static/bundles/d068af82-1759.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[61] GET https://app.carta.com/static/bundles/ae4ab2b7-41980.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[62] GET https://app.carta.com/static/bundles/fb751d0b-25090.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[63] GET https://app.carta.com/static/bundles/460ae522-15865.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[64] GET https://app.carta.com/static/bundles/9b269dcb-19271.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[65] GET https://app.carta.com/static/bundles/a00ee3f0-30810.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[66] GET https://app.carta.com/static/bundles/7753b512-41677.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[67] GET https://app.carta.com/static/bundles/46c41e13-83710.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[68] GET https://app.carta.com/static/bundles/8ae32bdf-70418.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[69] GET https://app.carta.com/static/bundles/6b5f39d2-74560.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[70] GET https://app.carta.com/static/bundles/c5e11d1c-68185.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[71] GET https://app.carta.com/static/bundles/b8eae154-3452.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[72] GET https://app.carta.com/static/bundles/8ecac39d-72792.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[73] GET https://app.carta.com/static/bundles/ca820eb7-42018.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[74] GET https://app.carta.com/static/bundles/e173a173-35264.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[75] GET https://app.carta.com/static/bundles/e1a2d67a-85253.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[76] GET https://app.carta.com/static/bundles/a25ba254-92283.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[77] GET https://app.carta.com/static/bundles/b30dfd80-63205.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[78] GET https://app.carta.com/static/bundles/8d0a7af8-19096.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[79] GET https://app.carta.com/static/bundles/a0597eb3-34583.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[80] GET https://app.carta.com/static/bundles/70590269-27022.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[81] GET https://app.carta.com/static/bundles/1f73b5c6-55861.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[82] GET https://app.carta.com/static/bundles/462cf42a-93405.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[83] GET https://app.carta.com/static/bundles/4fe8171c-58070.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[84] GET https://app.carta.com/static/bundles/8d02166a-68787.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[85] GET https://app.carta.com/static/bundles/8858ed73-86946.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[86] GET https://app.carta.com/static/bundles/f0b2f268-45902.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[87] GET https://app.carta.com/static/bundles/f41806bc-6135.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[88] GET https://app.carta.com/static/bundles/d5837766-83865.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[89] GET https://app.carta.com/static/bundles/d0900a9c-42946.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[90] GET https://app.carta.com/static/bundles/792d038b-8221.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[91] GET https://app.carta.com/static/bundles/cefe0ba0-67486.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[92] GET https://app.carta.com/static/bundles/185d4fa6-1772.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[93] GET https://app.carta.com/static/bundles/4f4b1cde-99524.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[94] GET https://app.carta.com/static/bundles/3eb63e6c-58401.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[95] GET https://app.carta.com/static/bundles/ef8330b3-55962.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[96] GET https://app.carta.com/static/bundles/8eed6003-59412.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[97] GET https://app.carta.com/static/bundles/127e5c33-8258.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[98] GET https://app.carta.com/static/bundles/dda81fdf-60974.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[99] GET https://app.carta.com/static/bundles/1cd56954-90901.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[100] GET https://app.carta.com/static/bundles/4a970666-77020.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[101] GET https://app.carta.com/static/bundles/2c5a6f8b-41454.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[102] GET https://app.carta.com/static/bundles/30b6947d-74529.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[103] GET https://app.carta.com/static/bundles/362afc89-91845.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[104] GET https://app.carta.com/static/bundles/b34eed9f-57162.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[105] GET https://app.carta.com/static/bundles/bee3839f-8737.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[106] GET https://app.carta.com/static/bundles/fb023366-91297.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[107] GET https://app.carta.com/static/bundles/5726ace1-24009.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[108] GET https://app.carta.com/static/bundles/d1a57122-37415.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[109] GET https://app.carta.com/static/bundles/6bca60da-70914.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[110] GET https://app.carta.com/static/bundles/f2227755-3503.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[111] GET https://app.carta.com/static/bundles/7cd186e7-82116.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[112] GET https://app.carta.com/static/bundles/97631.css
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[113] GET https://app.carta.com/static/bundles/35a344d6-97631.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[114] GET https://app.carta.com/static/bundles/0519cc42-61622.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[115] GET https://app.carta.com/static/bundles/1f3e170c-61080.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[116] GET https://app.carta.com/api/fe-platform/account-switcher/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[117] GET https://app.carta.com/api/tasks/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[118] GET https://app.carta.com/list_cached/?only_xlsx=true
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[119] GET https://app.carta.com/api/fe-platform/global-nav-config/?url=/investors/individual/2115793/portfolio/1967488/capital-account-statements&version=4
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[120] GET https://app.carta.com/api/fe-platform/local-nav-config/?url=/investors/individual/2115793/portfolio/1967488/capital-account-statements&version=1
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+  x-requested-with: XMLHttpRequest
+--------------------------------------------------------------------------------
+[121] GET https://app.carta.com/static/bundles/11636188-79175.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[122] GET https://app.carta.com/api/investors/portfolio/firm/1881616/list_individual_portfolio_investments/2115793/list/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+  x-requested-with: XMLHttpRequest
+  accept: application/json, text/plain, */*
+--------------------------------------------------------------------------------
+[123] GET https://app.carta.com/api/investors/portfolio/2115793/list/individual_reports_and_documents_menu_items/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+  x-requested-with: XMLHttpRequest
+  accept: application/json, text/plain, */*
+--------------------------------------------------------------------------------
+[124] GET https://app.carta.com/api/investors/portfolio/2115793/list/individual_account_settings_menu_items/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+  x-requested-with: XMLHttpRequest
+  accept: application/json, text/plain, */*
+--------------------------------------------------------------------------------
+[125] GET https://app.carta.com/api/investors/portfolio/firm/1881616/list/requests_menu_items/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+  x-requested-with: XMLHttpRequest
+  accept: application/json, text/plain, */*
+--------------------------------------------------------------------------------
+[126] GET https://app.carta.com/api/investors/portfolio/2115793/list/individual_transactions_menu_items/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+  x-requested-with: XMLHttpRequest
+  accept: application/json, text/plain, */*
+--------------------------------------------------------------------------------
+[127] GET https://app.carta.com/static/bundles/6c661f87-140.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[128] GET https://app.carta.com/static/bundles/c620ddb4-90189.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[129] GET https://app.carta.com/static/bundles/f50fcb34-26742.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[130] GET https://app.carta.com/static/bundles/22f44e72-25262.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[131] GET https://app.carta.com/static/bundles/1c189f2e-36765.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[132] GET https://app.carta.com/static/bundles/58017530-26294.js
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[133] GET https://app.carta.com/static/bundles/Inter-roman.var.cc328844.woff2
+Headers:
+  referer: 
+--------------------------------------------------------------------------------
+[134] GET https://app.carta.com/api/fe-platform/pendo-config/?url=/investors/individual/2115793/portfolio/1967488/capital-account-statements
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[135] GET https://app.carta.com/api/fe-platform/global-delighted-config/?url=/investors/individual/2115793/portfolio/1967488/capital-account-statements
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[136] GET https://app.carta.com/api/support-hub/config/?url=/investors/individual/2115793/portfolio/1967488/capital-account-statements
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[137] GET https://app.carta.com/api/fe-platform/get-products
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[138] GET https://app.carta.com/api/fe-platform/get-products/
+Headers:
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+--------------------------------------------------------------------------------
+[139] GET https://fund-admin.app.carta.com/component-config?component_name=EntitySwitcher&scope=57d7aa77-506c-4941-af9a-7e3414043e37
+Headers:
+  referer: https://app.carta.com/
+--------------------------------------------------------------------------------
+[140] GET https://app.carta.com/api/investors/portfolio/fund/2115793/entity/1967488/tabs/
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/investors/individual/2115793/portfolio/1967488/capital-account-statements
+  x-requested-with: XMLHttpRequest
+  accept: application/json, text/plain, */*
+--------------------------------------------------------------------------------
+[141] GET https://support-hub.app.carta.com/v1/configurations/?corporationId=2115793&userId=25689197&url=%2Finvestors%2Findividual%2F2115793%2Fportfolio%2F1967488%2Fcapital-account-statements&requestFullPath=https%3A%2F%2Fapp.carta.com%2Finvestors%2Findividual%2F2115793%2Fportfolio%2F1967488%2Fcapital-account-statements
+Headers:
+  x-csrftoken: 7zNBkXaQVVf4AZ8D22dzG80ImIwY7SJ6
+  referer: https://app.carta.com/
+--------------------------------------------------------------------------------
+[142] GET https://fund-admin.app.carta.com/v2/partners/organization/57d7aa77-506c-4941-af9a-7e3414043e37/fund/db2be2c9-f1a9-4d82-aa74-945f32712a7b/
+Headers:
+  referer: https://app.carta.com/
+--------------------------------------------------------------------------------
+[143] GET https://fund-admin.app.carta.com/fund/db2be2c9-f1a9-4d82-aa74-945f32712a7b/get-partner-capital-account-summary-v2-lp?fund_uuid=db2be2c9-f1a9-4d82-aa74-945f32712a7b&start_date=10%2F01%2F2025&end_date=12%2F31%2F2025&partner_id=211270
+Headers:
+  referer: https://app.carta.com/
+--------------------------------------------------------------------------------
+[144] GET https://fund-admin.app.carta.com/fund/db2be2c9-f1a9-4d82-aa74-945f32712a7b/currency/
+Headers:
+  referer: https://app.carta.com/
+--------------------------------------------------------------------------------
+[145] GET https://api.stonly.com/api/v2/widget/integration?widgetId=bd2a2086-cb4b-11ee-bc11-06cb0cb2a85e&stonlyAnonymousId=8f10d24d-3fc3-4f3c-a33c-8c69d4ead67d&url=https%3A%2F%2Fapp.carta.com%2Finvestors%2Findividual%2F2115793%2Fportfolio%2F1967488%2Fcapital-account-statements
+Headers:
+  referer: https://app.carta.com/
+--------------------------------------------------------------------------------

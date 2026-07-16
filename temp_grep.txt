@@ -1,3 +1,0 @@
-2026-06-03 15:25:45,576 [INFO] [Carta] firm_id extracted: 455
-2026-06-03 15:25:46,715 [INFO] [Carta] Phase 1 complete: 'Krakatoa Ventures' (org_pk=1, type=investment firm) � 6 total orgs visible
-2026-06-03 15:27:58,562 [INFO] [EntityDiscovery] Enumerating entities for org_pk=1 (Krakatoa Ventures)...

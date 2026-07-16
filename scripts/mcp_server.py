@@ -42,7 +42,7 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-FASTAPI_URL = "http://127.0.0.1:8082"
+FASTAPI_URL = "http://127.0.0.1:8088"
 API_KEY = os.environ.get("MCP_API_KEY", "openclaw-dev-key")
 MCP_POLL_TIMEOUT_SEC = 600  # 10 minutes max polling time
 DEFAULT_TENANT_ID = "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d"
@@ -78,7 +78,7 @@ class BusinessDataStore:
 
     def load_data(self):
         project_root = Path(__file__).parent.parent.resolve()
-        data_dir = project_root / "frontend" / "data"
+        data_dir = project_root / "output"
         
         biz_path = data_dir / "business_data.json"
         nodes_path = data_dir / "nodes.json"
@@ -248,9 +248,11 @@ class BusinessDataStore:
 # Resolve path
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 project_root = Path(__file__).parent.parent.resolve()
 sys.path.append(str(project_root))
+load_dotenv(project_root / ".env")
 
 store = BusinessDataStore()
 
@@ -258,10 +260,11 @@ store = BusinessDataStore()
 from services.canonical_store import CanonicalEntityStore
 from services.adapters.carta_adapter import CartaAdapter
 from services.platform_mapper import PlatformSchemaMapper
+from services.platform_payload_mapper import PlatformPayloadMapper
 from services.coverage_analyzer import CoverageAnalyzer
 
 canonical_store = CanonicalEntityStore()
-data_dir = project_root / "frontend" / "data"
+data_dir = project_root / "output"
 biz_path = data_dir / "business_data.json"
 
 if biz_path.exists():
@@ -285,6 +288,128 @@ def versioned_response(data, table_name: str) -> dict:
         "record_count": len(data) if isinstance(data, list) else 1,
         "data": [d.model_dump() for d in data] if isinstance(data, list) else (data.model_dump() if hasattr(data, 'model_dump') else data)
     }
+
+def sync_to_platform(company_name: Optional[str] = None):
+    """Phase 1: Proof-of-integration sync to platform."""
+    log.info(f"[Sync] Starting platform sync for company_name: {company_name}...")
+    try:
+        # Load environment values
+        platform_url = os.environ.get("PLATFORM_MCP_URL", "https://devapi-v2.agentic.elevationai.com/mcp")
+        org_id = os.environ.get("ORG_ID", "__ORG_ID__").strip()
+        user_id = os.environ.get("USER_ID", "__USER_ID__").strip()
+        investment_id = os.environ.get("INVESTMENT_ID", "__INVESTMENT_ID__").strip()
+        x_api_key = os.environ.get("X_API_KEY", "").strip()
+        x_api_secret = os.environ.get("X_API_SECRET", "").strip()
+        target_company = company_name or os.environ.get("TARGET_COMPANY", "MangoCart, Inc.")
+
+        if not biz_path.exists():
+            log.warning("[Sync] business_data.json not found, cannot sync to platform.")
+            return
+
+        with open(biz_path, "r", encoding="utf-8") as f:
+            raw_biz_data = json.load(f)
+
+        # 1. Reload canonical store
+        temp_canonical = CanonicalEntityStore()
+        adapter = CartaAdapter(raw_biz_data)
+        adapter.populate(temp_canonical)
+
+        # 2. Run Schema Mapper
+        schema_mapper = PlatformSchemaMapper(temp_canonical)
+        valuations = schema_mapper.map_inv_asset_valuation()
+
+        # 3. Run Payload Mapper
+        payload_mapper = PlatformPayloadMapper()
+        payloads = payload_mapper.map_portfolio_investment_update(valuations)
+
+        if not payloads:
+            log.info("[Sync] No valuations to sync.")
+            return
+
+        # 4. Find the target company
+        matched_id = None
+        for comp in temp_canonical.companies.values():
+            if comp.name and comp.name.lower() == target_company.lower():
+                matched_id = comp.id
+                break
+
+        if not matched_id:
+            log.warning(f"[Sync] Target company '{target_company}' not found in local data.")
+            # fallback to first payload if target company not found
+            payload = payloads[0]
+            log.info(f"[Sync] Falling back to first available payload: {payload.investment_id}")
+        else:
+            payload = None
+            for p in payloads:
+                if p.investment_id == matched_id:
+                    payload = p
+                    break
+            if not payload:
+                log.warning(f"[Sync] No valuation payload found for target company '{target_company}'.")
+                return
+
+        # 5. Inject real/configured platform IDs
+        payload.org_id = org_id
+        payload.user_id = user_id
+        payload.investment_id = investment_id
+
+        # 6. Initialize handshake
+        init_payload = {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "initialize",
+            "params": {
+                "protocolVersion": "2024-11-05",
+                "capabilities": {},
+                "clientInfo": {
+                    "name": "Carta Test",
+                    "version": "1.0.0"
+                }
+            }
+        }
+
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "User-Agent": "PostmanRuntime/7.39.0",
+            "x-api-key": x_api_key,
+            "x-api-secret": x_api_secret
+        }
+
+        log.info(f"[Sync] Initializing handshake with platform at {platform_url}...")
+        session = requests.Session()
+        try:
+            init_resp = session.post(platform_url, json=init_payload, headers=headers, timeout=10)
+            log.info(f"[Sync] Handshake status: {init_resp.status_code}")
+            mcp_session_id = init_resp.headers.get("mcp-session-id")
+            if mcp_session_id:
+                headers["mcp-session-id"] = mcp_session_id
+                log.info(f"[Sync] Session ID established: {mcp_session_id}")
+        except Exception as e:
+            log.error(f"[Sync] Initialize Handshake Failed: {e}")
+            # we can still try to send the request without it, or return
+            return
+
+        # 7. Send tools/call payload
+        json_rpc_payload = {
+            "jsonrpc": "2.0",
+            "id": 3,
+            "method": "tools/call",
+            "params": {
+                "name": "portfolio.investment.update",
+                "arguments": payload.model_dump()
+            }
+        }
+
+        log.info(f"[Sync] Calling platform endpoint {platform_url} with payload:\n{json.dumps(json_rpc_payload, indent=2)}")
+        try:
+            resp = session.post(platform_url, json=json_rpc_payload, headers=headers, timeout=10)
+            log.info(f"[Sync] Platform Response (Status {resp.status_code}): {resp.text}")
+        except Exception as http_err:
+            log.error(f"[Sync] HTTP request failed: {http_err}")
+
+    except Exception as e:
+        log.error(f"[Sync] Failed to sync to platform: {e}")
 
 # ─── MCP Server Definition ─────────────────────────────────────────────
 
@@ -397,7 +522,12 @@ async def handle_list_tools() -> List[Tool]:
         inputSchema={
             "type": "object",
             "properties": {
-                "company_name": {"type": "string", "description": "Name of the company to export"}
+                "company_name": {"type": "string", "description": "Name of the company to export"},
+                "targets": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Optional list of specific platform targets/tables to extract (e.g. ['inv_asset_valuation'])"
+                }
             },
             "required": ["company_name"]
         }
@@ -412,6 +542,11 @@ async def handle_list_tools() -> List[Tool]:
                     "type": "array",
                     "items": {"type": "string"},
                     "description": "List of company names to export"
+                },
+                "targets": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Optional list of specific platform targets/tables to extract for the batch"
                 }
             },
             "required": ["companies"]
@@ -761,6 +896,18 @@ async def handle_list_tools() -> List[Tool]:
             description=f"[Platform Schema] {pt_desc}",
             inputSchema={"type": "object", "properties": {}}
         ))
+        
+    tools.append(Tool(
+        name="get_platform_update_payload",
+        description="[Testing] Generate the exact JSON payload for portfolio.investment.update without sending it. Uses snapshot data.",
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "company_name": {"type": "string", "description": "The exact name of the company/investment to generate the payload for (e.g. 'Stripe')"}
+            },
+            "required": ["company_name"]
+        }
+    ))
 
     return tools
 
@@ -840,17 +987,74 @@ async def handle_call_tool(name: str, arguments: Dict[str, Any]) -> List[TextCon
                 "documents": len(store.documents),
                 "relationships": len(store.relationships)
             }))]
+            
+        elif name == "get_platform_update_payload":
+            company_name = arguments.get("company_name")
+            if not company_name:
+                raise ValueError("company_name is required")
+                
+            # 1. We use the existing loaded CanonicalEntityStore (from snapshot)
+            # 2. Run Schema Mapper
+            schema_mapper = PlatformSchemaMapper(canonical_store)
+            valuations = schema_mapper.map_inv_asset_valuation()
+            
+            # Filter valuations by company name
+            # The schema mapper puts the company UUID in investment_id, but the user gives the string name.
+            # We need to resolve the name to the UUID first.
+            matched_id = None
+            for comp in canonical_store.companies.values():
+                if comp.name and comp.name.lower() == company_name.lower():
+                    matched_id = comp.id
+                    break
+            
+            if not matched_id:
+                return [TextContent(type="text", text=json.dumps({"error": f"Company '{company_name}' not found in canonical store."}))]
+                
+            # Run Payload Mapper
+            payload_mapper = PlatformPayloadMapper()
+            all_payloads = payload_mapper.map_portfolio_investment_update(valuations)
+            
+            # Find the payload for this investment
+            target_payload = None
+            for p in all_payloads:
+                if p.investment_id == matched_id:
+                    target_payload = p
+                    break
+                    
+            if not target_payload:
+                return [TextContent(type="text", text=json.dumps({"error": f"No valuation data found for company '{company_name}'."}))]
+                
+            # Inject temporary IDs
+            target_payload.org_id = "__ORG_ID__"
+            target_payload.user_id = "__USER_ID__"
+            target_payload.investment_id = "__INVESTMENT_ID__"
+            
+            # Return exact JSON-RPC structure for manual Postman POST
+            return [TextContent(type="text", text=json.dumps({
+                "jsonrpc": "2.0",
+                "id": "manual-test",
+                "method": "tools/call",
+                "params": {
+                    "name": "portfolio.investment.update",
+                    "arguments": target_payload.model_dump()
+                }
+            }, indent=2))]
 
         # ── 4.2 Extraction ──
         elif name == "download_report":
             company_name = arguments.get("company_name")
+            targets = arguments.get("targets")
             if not company_name:
                 raise ValueError("company_name is required")
+
+            payload = {"company_name": company_name}
+            if targets:
+                payload["targets"] = targets
 
             resp = await asyncio.to_thread(
                 requests.post,
                 f"{FASTAPI_URL}/api/download-report",
-                json={"company_name": company_name},
+                json=payload,
                 timeout=30,
             )
             resp_data = resp.json()
@@ -875,22 +1079,30 @@ async def handle_call_tool(name: str, arguments: Dict[str, Any]) -> List[TextCon
                 if status_data.get("status") in ("completed", "failed", "timeout"):
                     # Reload store data to pick up new files immediately
                     store.load_data()
+                    
+                    if status_data.get("status") == "completed":
+                        await asyncio.to_thread(sync_to_platform, company_name)
+                        
                     return [TextContent(type="text", text=json.dumps(status_data))]
 
                 await asyncio.sleep(5)
 
         elif name == "download_batch":
             companies = arguments.get("companies", [])
+            targets = arguments.get("targets")
             if not companies:
                 raise ValueError("companies list is required")
 
             task_ids = {}
             for company in companies:
                 try:
+                    payload = {"company_name": company}
+                    if targets:
+                        payload["targets"] = targets
                     resp = await asyncio.to_thread(
                         requests.post,
                         f"{FASTAPI_URL}/api/download-report",
-                        json={"company_name": company},
+                        json=payload,
                         timeout=30,
                     )
                     resp_data = resp.json()
@@ -934,6 +1146,12 @@ async def handle_call_tool(name: str, arguments: Dict[str, Any]) -> List[TextCon
 
             store.load_data()
             passed = sum(1 for r in completed_results.values() if r.get("status") == "completed")
+            
+            if passed > 0:
+                for company in completed_results:
+                    if completed_results[company].get("status") == "completed":
+                        await asyncio.to_thread(sync_to_platform, company)
+                        
             return [TextContent(type="text", text=json.dumps({
                 "total": len(companies),
                 "success": passed,
@@ -1494,7 +1712,7 @@ async def handle_call_tool(name: str, arguments: Dict[str, Any]) -> List[TextCon
             
             # Return static file download link
             doc = res["data"]
-            PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "http://34.122.215.240:8082")
+            PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "http://34.122.215.240:8088")
             filename = doc.get("name", "document.pdf").replace(" ", "_")
             if not filename.endswith(".pdf"):
                 filename += ".pdf"

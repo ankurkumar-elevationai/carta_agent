@@ -3,17 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krakatoa Ventures — Intelligence Dashboard</title>
-    <meta name="description" content="Carta enterprise intelligence dashboard for Krakatoa Ventures — Funds, SPVs, Investments, Cap Tables, and Investors.">
+    <title>Carta Demo Dashboard</title>
+    <meta name="description" content="Carta enterprise intelligence dashboard — Funds, SPVs, Investments, Cap Tables, and Investors.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .platform-endpoint-item {
+            padding: 0.75rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.01);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .platform-endpoint-item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: var(--accent-violet);
+        }
+        .platform-endpoint-item.active {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--accent-violet);
+        }
+        .platform-endpoint-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--fg);
+        }
+        .platform-endpoint-table {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+        .sync-active-indicator {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--accent-cyan);
+            border-radius: var(--radius);
+            padding: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 1000;
+            cursor: pointer;
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0% { border-color: rgba(6, 182, 212, 0.4); }
+            50% { border-color: rgba(6, 182, 212, 1); }
+            100% { border-color: rgba(6, 182, 212, 0.4); }
+        }
+    </style>
 </head>
 <body>
     <!-- ─── Sidebar ─── -->
     <nav id="sidebar">
         <div class="sidebar-brand">
-            <div class="brand-icon">K</div>
+            <div class="brand-icon">C</div>
             <div>
                 <div class="brand-name" id="firmName">Loading…</div>
                 <div class="brand-sub" id="firmAdmin"></div>
@@ -30,6 +85,7 @@
             <li><a href="#" class="nav-link" data-section="graph"><span class="nav-icon">🕸️</span> Entity Graph</a></li>
             <li><a href="#" class="nav-link" data-section="pipeline"><span class="nav-icon">⚙️</span> Pipeline Health</a></li>
             <li><a href="#" class="nav-link" data-section="relationships"><span class="nav-icon">🔗</span> Relationships</a></li>
+            <li><a href="#" class="nav-link" data-section="testing"><span class="nav-icon">🧪</span> Agent Testing</a></li>
         </ul>
         <div class="sidebar-footer">
             <div class="extraction-badge">
@@ -167,6 +223,218 @@
             </div>
             <p id="noRelsMsg" class="empty-state" style="display:none">No cross-entity relationships were captured.</p>
         </section>
+
+        <!-- Agent Testing -->
+        <section id="sec-testing" class="section">
+            <h1 class="page-title">Agent Testing & Observability</h1>
+            
+            <div class="tab-header" style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                <button class="tab-btn active" data-subtab="runs">Validation Runs</button>
+                <button class="tab-btn" data-subtab="latency">Latency & Performance</button>
+                <button class="tab-btn" data-subtab="gaps">Data Coverage Audit</button>
+                <button class="tab-btn" data-subtab="platform-api">Platform API Explorer</button>
+            </div>
+
+            <!-- Validation Runs Sub-View -->
+            <div id="subtab-runs" class="subtab-content active">
+                <div class="grid-2col" style="margin-bottom: 1.5rem;">
+                    <!-- Latest Run Summary Card -->
+                    <div class="card" id="latestRunCard">
+                        <h2 class="card-title">Latest Run Status</h2>
+                        <div id="latestRunDetails"></div>
+                    </div>
+                    <!-- Milestones Checklist Card -->
+                    <div class="card" id="milestonesCard">
+                        <h2 class="card-title">Milestones Verification</h2>
+                        <div id="milestonesChecklist" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+                    </div>
+                </div>
+                <!-- Runs History Table -->
+                <div class="card">
+                    <h2 class="card-title">Validation Runs History Log</h2>
+                    <div class="table-wrap">
+                        <table class="data-table" id="runsTable">
+                            <thead>
+                                <tr>
+                                    <th>Run ID</th>
+                                    <th>Completed At</th>
+                                    <th>Milestones Status</th>
+                                    <th>Failures</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latency & Performance Sub-View -->
+            <div id="subtab-latency" class="subtab-content">
+                <div class="kpi-row" id="latencyKpiRow"></div>
+                <div class="grid-2col">
+                    <div class="card">
+                        <h2 class="card-title">Historical Replay Telemetry</h2>
+                        <div id="crawlRunsHistory" style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem;"></div>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title">Latency Breakdown (Last Replay)</h2>
+                        <div id="apiLatencyBreakdown"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Coverage Audit Sub-View -->
+            <div id="subtab-gaps" class="subtab-content">
+                <div class="card">
+                    <h2 class="card-title">Target Platform Schema Mapping & Data Gaps</h2>
+                    <p class="cell-muted" style="margin-bottom: 1rem; line-height: 1.4;">This audit maps the standard database schema tables required by the platform to the fields extracted by the agent from Carta. Items labeled <strong>STUB / GAP</strong> require external ingestion integration (e.g. PitchBook, Crunchbase, CRM or direct document parser stubs).</p>
+                    <div class="table-wrap">
+                        <table class="data-table" id="gapsTable">
+                            <thead>
+                                <tr>
+                                    <th>Target Schema Table</th>
+                                    <th>Platform UI Page</th>
+                                    <th>Mapped Carta Source Fields</th>
+                                    <th>Integration Status</th>
+                                    <th>Gaps & Resolution Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform API Explorer Sub-View -->
+            <div id="subtab-platform-api" class="subtab-content">
+                <div class="grid-2col" style="grid-template-columns: 1fr 2fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <!-- Left: API Request Builder -->
+                    <div class="card" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <h2 class="card-title" style="color: var(--accent-violet); display: flex; align-items: center; gap: 0.5rem; margin-top: 0; font-size: 1.25rem;">
+                            <span>⚡</span> API Request Builder
+                        </h2>
+                        <p class="cell-muted" style="font-size: 0.85rem; line-height: 1.4; margin: 0;">
+                            Configure query parameters and trigger live Carta sync endpoint.
+                        </p>
+
+                        <!-- Request parameters form -->
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Endpoint Selection -->
+                            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Endpoint Name:</label>
+                                <select id="apiEndpointSelect" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none; transition: border-color 0.2s;">
+                                    <option value="get_capital_calls">get_capital_calls</option>
+                                    <option value="get_investment_transactions">get_investment_transactions</option>
+                                    <option value="get_documents">get_documents</option>
+                                    <option value="get_partner_metrics">get_partner_metrics</option>
+                                    <option value="get_investment_valuations">get_investment_valuations</option>
+                                    <option value="get_capital_account_summary">get_capital_account_summary</option>
+                                    <option value="get_investments">get_investments</option>
+                                    <option value="get_investment_extra_info">get_investment_extra_info</option>
+                                    <option value="get_investment_team">get_investment_team</option>
+                                    <option value="get_investment_log">get_investment_log</option>
+                                    <option value="get_investment_firm">get_investment_firm</option>
+                                    <option value="get_investment_focus">get_investment_focus</option>
+                                    <option value="get_investment_sectors">get_investment_sectors</option>
+                                    <option value="get_investment_certificates">get_investment_certificates</option>
+                                    <option value="get_distribution_history">get_distribution_history</option>
+                                    <option value="get_liquidity_distributions">get_liquidity_distributions</option>
+                                    <option value="get_investment_expenses">get_investment_expenses</option>
+                                    <option value="get_investment_interest">get_investment_interest</option>
+                                    <option value="get_investment_services">get_investment_services</option>
+                                    <option value="get_usage_logs">get_usage_logs</option>
+                                    <option value="get_recent_developments">get_recent_developments</option>
+                                    <option value="get_growth_signals">get_growth_signals</option>
+                                    <option value="get_coverage">get_coverage</option>
+                                    <option value="custom">-- Custom Endpoint --</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Custom Endpoint Input -->
+                            <div id="customEndpointGroup" style="display: none; flex-direction: column; gap: 0.35rem;">
+                                <label style="font-size: 0.8rem; font-weight: 600; color: var(--accent-violet);">Custom Endpoint:</label>
+                                <input type="text" id="apiCustomEndpoint" placeholder="e.g. get_custom_endpoint" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                            </div>
+
+                            <!-- IDs Group -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Firm ID:</label>
+                                    <input type="number" id="apiFirmId" value="2160604" placeholder="e.g. 2160604" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Entity ID:</label>
+                                    <input type="number" id="apiEntityId" value="2422820" placeholder="e.g. 2422820" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                                </div>
+                            </div>
+
+                            <!-- Org ID (Optional) -->
+                            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Org ID (Optional):</label>
+                                <input type="number" id="apiOrgId" placeholder="e.g. 2925615" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                            </div>
+
+                            <!-- UUIDs / Params Group -->
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.25rem;">
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Org UUID (Optional):</label>
+                                    <input type="text" id="apiOrgUuid" placeholder="c468c5e3-..." style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Fund UUID (Optional):</label>
+                                    <input type="text" id="apiFundUuid" placeholder="7248bb0f-..." style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Partner ID (UUID, Optional):</label>
+                                    <input type="text" id="apiPartnerId" placeholder="e.g. 205428" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                                </div>
+                            </div>
+
+                            <!-- Dates Group -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.25rem;">
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">Start Date:</label>
+                                    <input type="text" id="apiStartDate" value="10/01/2025" placeholder="MM/DD/YYYY" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--fg);">End Date:</label>
+                                    <input type="text" id="apiEndDate" value="12/31/2025" placeholder="MM/DD/YYYY" style="padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: rgba(0,0,0,0.4); color: var(--fg); font-size: 0.85rem; outline: none;">
+                                </div>
+                            </div>
+
+                            <!-- Send button -->
+                            <button id="btnSendApiRequest" class="btn" style="background: linear-gradient(135deg, var(--accent-violet) 0%, #a855f7 100%); color: #fff; width: 100%; border: none; font-weight: 600; padding: 0.75rem; cursor: pointer; border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.5rem; transition: transform 0.1s, filter 0.2s; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);">
+                                <span>🚀</span> Send Request
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: JSON Payload Visualizer -->
+                    <div class="card" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                            <div>
+                                <h2 class="card-title" id="inspectorEndpointName" style="margin-bottom:0.2rem; font-size: 1.25rem;">Select Endpoint</h2>
+                                <span class="badge" id="inspectorTableName" style="background: var(--accent-violet); color: #fff; font-size:0.8rem;">–</span>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <button id="btnCopyToClipboard" class="btn btn-secondary" style="font-size:0.8rem; padding: 0.4rem 0.8rem; cursor: pointer;">Copy Payload</button>
+                            </div>
+                        </div>
+                        <div id="inspectorDescription" class="cell-muted" style="font-size: 0.9rem; line-height: 1.4;">Configure details on the left, then click Send Request to query.</div>
+
+                        <div class="explorer-tabs" style="display: flex; gap: 0.5rem; margin-top: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                            <button id="btnPlatformUiView" class="explorer-tab-btn active" style="font-size:0.8rem; padding: 0.4rem 0.8rem; cursor: pointer; border: none; border-radius: 4px; background: rgba(79,124,255,0.1); color: var(--accent-blue); font-weight: 600;">UI Preview</button>
+                            <button id="btnPlatformJsonView" class="explorer-tab-btn" style="font-size:0.8rem; padding: 0.4rem 0.8rem; cursor: pointer; border: none; border-radius: 4px; background: transparent; color: var(--text-secondary); font-weight: 500;">JSON Source</button>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.4); border-radius: var(--radius); border: 1px solid var(--border); padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; min-height: 400px; position: relative;">
+                            <div id="platformUiViewContainer" style="flex-grow: 1; overflow-y: auto; max-height: 500px; display: block;"></div>
+                            <pre id="platformJsonPre" style="margin: 0; font-family: 'Fira Code', monospace; font-size: 0.85rem; overflow: auto; flex-grow: 1; max-height: 500px; color: #a6e22e; white-space: pre-wrap; word-break: break-all; display: none;"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Investment Detail Modal -->
@@ -198,10 +466,48 @@
             </div>
 
             <div class="modal-section">
+                <h3>Capital Transactions</h3>
+                <div class="modal-table-wrap" id="modalTransactions"></div>
+            </div>
+
+            <div class="modal-section">
                 <h3>Contacts</h3>
                 <div id="modalContacts"></div>
             </div>
         </div>
+    </div>
+
+    <!-- Extraction Progress Tracking Modal -->
+    <div class="modal-overlay" id="extractionProgressModal">
+        <div class="modal" style="max-width: 600px;">
+            <h2 class="modal-title" style="color: var(--accent-cyan); display: flex; align-items: center; gap: 0.75rem; margin-top: 0;">
+                <span class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid var(--accent-cyan); border-radius: 50%; width: 24px; height: 24px; display: inline-block; animation: spin 1s linear infinite;"></span>
+                <span id="extractionProgressTitle">Carta Browser Automation in Progress...</span>
+            </h2>
+            <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: 600; font-size: 0.95rem;" id="extractionProgressCompany">EAI Space I LLC</div>
+                        <div style="font-size: 0.8rem;" class="cell-muted" id="extractionProgressTaskId">Task ID: -</div>
+                    </div>
+                    <span class="badge" id="extractionProgressStatus" style="background: var(--accent-amber); color: #000; font-weight: 600; font-size: 0.85rem;">PENDING</span>
+                </div>
+                
+                <div style="font-weight: 500; font-size: 0.9rem; margin-top: 0.5rem;">Agent Console Logs:</div>
+                <div style="background: #000; border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem; min-height: 200px; max-height: 300px; overflow-y: auto; font-family: 'Fira Code', monospace; font-size: 0.85rem; line-height: 1.4; color: #a8ffb2;" id="extractionLogsContainer">
+                    <div style="color: var(--border);">Waiting for worker to claim task...</div>
+                </div>
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.5rem;">
+                <button class="btn btn-secondary" id="btnMinimizeExtraction" style="cursor: pointer; padding: 0.5rem 1rem;">Close Overlay</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Mini Active Sync Badge -->
+    <div id="syncActiveIndicator" class="sync-active-indicator" style="display: none;">
+        <span class="spinner" style="border: 2px solid rgba(255,255,255,0.1); border-top: 2px solid var(--accent-cyan); border-radius: 50%; width: 16px; height: 16px; display: inline-block; animation: spin 1s linear infinite;"></span>
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent-cyan);">Sync Active - Click to View Logs</span>
     </div>
 
     <script src="app.js"></script>

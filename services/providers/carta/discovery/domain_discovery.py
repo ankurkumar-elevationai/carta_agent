@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from playwright.async_api import Page
 
 log = logging.getLogger(__name__)
@@ -10,10 +10,11 @@ class BusinessDomainDiscoveryEngine:
     Phase 1.5: Hybrid Business Domain Discovery Layer.
     Explores high-level navigation domains and workflow/task families.
     """
-    def __init__(self, page: Page, api_collector, app_base_url: str):
+    def __init__(self, page: Page, api_collector, app_base_url: str, targets: Optional[List[str]] = None):
         self.page = page
         self.api_collector = api_collector
         self.app_base_url = app_base_url
+        self.targets = targets
         self.domains = []
         self.workflows = {}
         self.domain_api_map = {}
@@ -61,7 +62,71 @@ class BusinessDomainDiscoveryEngine:
             except Exception:
                 pass
         
-        self.domains = domain_links
+        TARGET_TO_TAB_KEYWORDS = {
+            "get_investments": ["overview", "investment", "holding", "valuation", "ownership", "portfolio"],
+            "get_investment_extra_info": ["overview", "profile", "investment", "holding", "portfolio"],
+            "get_investment_team": ["overview", "people", "contact", "investment", "holding", "portfolio"],
+            "get_investment_valuations": ["valuation", "investment", "holding", "portfolio"],
+            "get_capital_calls": ["transaction", "performance", "cashflow", "activity", "investment", "holding", "portfolio"],
+            "get_investment_log": ["overview", "investment", "holding", "portfolio"],
+            "get_investment_transactions": ["transaction", "performance", "cashflow", "investment", "holding", "portfolio"],
+            "get_investment_firm": ["overview", "investment", "holding", "portfolio"],
+            "get_investment_focus": ["overview", "investment", "holding", "valuation", "ownership", "portfolio"],
+            "get_investment_sectors": ["overview", "profile", "investment", "holding", "portfolio"],
+            "get_investment_certificates": ["cap", "security", "ownership", "holding", "investment", "portfolio"],
+            "get_distribution_history": ["transaction", "performance", "cashflow", "investment", "holding", "portfolio"],
+            "get_liquidity_distributions": ["transaction", "performance", "cashflow", "investment", "holding", "portfolio"],
+            "get_investment_expenses": ["transaction", "performance", "cashflow", "expense", "investment", "portfolio"],
+            "get_investment_interest": ["transaction", "performance", "cashflow", "interest", "investment", "portfolio"],
+            "get_investment_services": ["service", "vendor", "cost", "investment", "portfolio"],
+            "get_usage_logs": ["usage", "log", "asset", "investment", "portfolio"],
+            "get_recent_developments": ["overview", "profile", "news", "development", "extra_info", "investment", "portfolio"],
+            "get_growth_signals": ["overview", "profile", "traction", "growth", "signal", "research", "investment", "portfolio"],
+            
+            "inv_investment": ["overview", "investment", "holding", "valuation", "ownership", "portfolio"],
+            "inv_asset_extra_info": ["overview", "profile", "investment", "holding", "portfolio"],
+            "inv_asset_team": ["overview", "people", "contact", "investment", "holding", "portfolio"],
+            "inv_asset_valuation": ["valuation", "investment", "holding", "portfolio"],
+            "inv_cap_call": ["transaction", "performance", "cashflow", "activity", "investment", "holding", "portfolio"],
+            "investment_log": ["overview", "investment", "holding", "portfolio"],
+            "inv_investment_transaction": ["transaction", "performance", "cashflow", "investment", "holding", "portfolio"],
+            "inv_investment_firm": ["overview", "investment", "holding", "portfolio"],
+            "inv_investment_focus": ["overview", "investment", "holding", "valuation", "ownership", "portfolio"],
+            "inv_investment_sector": ["overview", "profile", "investment", "holding", "portfolio"],
+            "inv_investment_certificate": ["cap", "security", "ownership", "holding", "investment", "portfolio"],
+            "inv_investment_distribution_history": ["transaction", "performance", "cashflow", "investment", "holding", "portfolio"],
+            "inv_liquidity_distribution": ["transaction", "performance", "cashflow", "investment", "holding", "portfolio"],
+            "inv_investment_expense": ["transaction", "performance", "cashflow", "expense", "investment", "portfolio"],
+            "inv_investment_interest": ["transaction", "performance", "cashflow", "interest", "investment", "portfolio"],
+            "inv_investment_service": ["service", "vendor", "cost", "investment", "portfolio"],
+            "inv_asset_usage_log": ["usage", "log", "asset", "investment", "portfolio"],
+            "extra_info_recent_development": ["overview", "profile", "news", "development", "extra_info", "investment", "portfolio"],
+            "research_growing_traction": ["overview", "profile", "traction", "growth", "signal", "research", "investment", "portfolio"],
+        }
+
+        if self.targets:
+            target_keywords = set()
+            for t in self.targets:
+                if t in TARGET_TO_TAB_KEYWORDS:
+                    target_keywords.update(TARGET_TO_TAB_KEYWORDS[t])
+                else:
+                    target_keywords.add(t.lower())
+            
+            filtered_domains = []
+            for d in domain_links:
+                name_lower = d["name"].lower()
+                if any(kw in name_lower for kw in target_keywords):
+                    filtered_domains.append(d)
+            
+            if filtered_domains:
+                log.info(f"[DomainDiscovery] Filtered domains based on targets: {[d['name'] for d in filtered_domains]}")
+                self.domains = filtered_domains
+            else:
+                log.warning(f"[DomainDiscovery] No domain matched target keywords {target_keywords}, falling back to all discovered domains")
+                self.domains = domain_links
+        else:
+            self.domains = domain_links
+
         log.info(f"[DomainDiscovery] Found {len(self.domains)} navigation domains.")
 
     async def discover_workflows(self, domain: Dict[str, str]):

@@ -76,7 +76,7 @@ class CartaAdapter:
             
         # 4. Investments -> PortfolioCompany, Holding, Valuation, Transaction, Person, Security
         for inv_data in self.raw.get("investments", []):
-            c_ext_id = inv_data.get("corporation_id")
+            c_ext_id = inv_data.get("corporation_id") or inv_data.get("company")
             if not c_ext_id:
                 continue
                 
@@ -114,6 +114,7 @@ class CartaAdapter:
                     currency=hs.get("currency", "$"),
                     irr_percentage=hs.get("irr_percentage"),
                     multiple=hs.get("multiple"),
+                    net_asset_value=hs.get("net_asset_value"),
                     source_provider=self.PROVIDER_NAME
                 )
                 store.register(holding)
@@ -121,10 +122,13 @@ class CartaAdapter:
             # 4.3 Valuation (current)
             val_data = inv_data.get("valuation", {})
             if val_data:
+                val_date = val_data.get("valuation_date") or val_data.get("date")
+                if not val_date:
+                    val_date = f"{hs.get('held_since')}-12-31" if hs.get('held_since') else "2025-12-31"
                 valuation = Valuation(
                     id=self._cid("Valuation", f"{c_ext_id}_current_val"),
                     company_id=c_id,
-                    valuation_date=None, # Not provided in top-level valuation
+                    valuation_date=val_date,
                     post_money=val_data.get("post_money"),
                     funds_raised=val_data.get("funds_raised"),
                     share_class=val_data.get("share_class"),

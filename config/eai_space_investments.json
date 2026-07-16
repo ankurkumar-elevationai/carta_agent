@@ -1,0 +1,14 @@
+[
+  {
+    "corporation_id": 3272607,
+    "legal_name": "Aliya Growth Fund LLC - Series II (SpaceX)",
+    "is_eshares_company": true,
+    "url": "/investors/individual/3288983/portfolio/3272607/",
+    "tabs_api_url": "/api/investors/portfolio/fund/3288983/entity/3272607/tabs/",
+    "entity_type": "investment",
+    "is_fund_investment": true,
+    "is_own_fund_investment": false,
+    "has_unaccepted": false,
+    "unaccepted_url": "/api/investors/firm/2925615/get-unaccepted/3272607/"
+  }
+]

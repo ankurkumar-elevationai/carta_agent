@@ -1,0 +1,971 @@
+<!DOCTYPE html><html lang="en" style="--app-shell-header-height: 96px;"><head>
+    <meta charset="utf-8">
+    <meta name="apple-itunes-app" content="app-id=1137735263, app-argument=/investors/individual/2115793/portfolio/1967488/capital-account-statements">
+    
+    <title>EC Space Tech I, LLC - Carta</title>
+
+
+    <!-- no crawl -->
+    
+
+    <!-- meta -->
+    
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- CW meta -->
+    <meta name="cw-version" content="v17.29.1.1">
+    <meta name="cw-server" content="carta-web-5879d689f7-92qnh">
+    
+
+    <!-- site favicon -->
+    <link rel="icon" href="/static/lib/eshares/img/carta-favicon-light.png">
+    <link rel="icon" href="/static/lib/eshares/img/carta-favicon-dark.png" media="(prefers-color-scheme: dark)">
+
+    <!-- PWA icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/lib/eshares/img/apple-touch-icon.png">
+
+    
+    
+<style>
+    html, body, div {
+        border: 0;
+        font: inherit;
+        font-size: 100%;
+        margin: 0;
+        padding: 0;
+        vertical-align: baseline;
+    }
+    body {
+        line-height: 1;
+    }
+    .wrapper {
+        visibility: hidden;
+        opacity: 0;
+    }
+    .wrapper__loaded {
+        visibility: visible;
+        opacity: 1;
+    }
+    .fake-wrapper {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: fixed;
+        z-index: 1;
+    }
+    
+    .fake-wrapper--header {
+        height: 60px;
+        background-color: #ffffff;
+        border-bottom: 1px solid #A7AAAA;
+        padding: 6px 18px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+    }
+    .fake-wrapper--header-logo {
+        display: flex;
+        padding-right: 8px;
+    }
+    .fake-wrapper--body {
+        height: calc(100vh - 60px);
+        background-color: white;
+    }
+    .fake-loader {
+        left: 50%;
+        top: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .fake-loader--shape {
+        width: 60px;
+        height: 60px;
+    }
+    .fake-loader--shape--path {
+        fill: transparent;
+        stroke: rgba(140, 140, 136, 0.15);
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-dasharray: 94.25;
+        stroke-dashoffset: 377;
+
+        animation-name: loading-follow;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.64, 0.25, 0.36, 0.75);
+    }
+    .fake-loader--shape--path:nth-child(2) {
+        animation-delay: -0.025s;
+    }
+    .fake-loader--shape--path:nth-child(3) {
+        animation-delay: -0.05s;
+    }
+    @keyframes loading-follow { to { stroke-dashoffset: 0; } }
+    
+    [data-theme="dark"] .fake-wrapper--header {
+        background-color: #121212;
+        border-bottom-color: #656B6B;
+    }
+    [data-theme="dark"] .fake-wrapper--body {
+        background-color: #121212;
+    }
+    [data-theme="dark"] .fake-loader--shape--path {
+        stroke: #2D2D2D;
+    }
+</style>
+
+
+    
+
+    <!-- This script will allow letting Cisco Umbrella services, which some organizations run, to identify *.cartastatic.com as a valid and trusted domain -->
+    <!-- https://support.umbrella.com/hc/en-us/articles/235911828-Newly-Seen-Domains-Security-Category -->
+    
+        <script async="" src="https://stonly.com/js/widget/v2/stonly-widget.js?v=v_1f7b7aba
+"></script><script src="https://frontend-app-registry-service.prod.cartastatic.com/cartastatic-enabler.js" async=""></script>
+    
+
+    <script>
+        // Define a global Magna object to attach useful things to.
+        window.eShares = { path: "/investors/individual/2115793/portfolio/1967488/capital-account-statements" };
+        window.Magna = window.eShares;
+        window.COMPANY_NAME = "Carta";
+        window.COMPANY_LEGAL_NAME = "eShares, Inc.";
+        window.COMPANY_LEGAL_NAME_AND_DBA = "eShares, Inc. DBA Carta, Inc.";
+        window.A_COMPANY_NAME = "a Carta";
+        window.A_COMPANY_NAME_BEGIN = "A Carta";
+        window.COMPANY_NAME_POSSESSIVE = "Carta\u2019s";
+        window.DOMAIN = "carta.com";
+        window.CARTA_DOT_COM = "";
+        window.SUPPORT_SITE = "https://support.carta.com";
+        window.BLOG_SITE = "https://carta.com/blog";
+        window.SUPPORT_EMAIL = "support@carta.com";
+        window.SERVICE_REQUEST_EMAIL = "servicerequest@carta.com"
+        window.SUPPORT_INVESTOR_SERVICES = "investorservices@carta.com";
+        window.SUPPORT_409A_EMAIL = "409a@carta.com";
+        window.SUPPORT_PARTNERSHIPS_EMAIL = "partnersupport@carta.com";
+        window.SUPPORT_PUMA_EMAIL = "publicsupport@carta.com";
+        window.STATIC_URL = "/static/";
+        window.VALUATIONS_LLC = "Carta Valuations LLC";
+        window.ENABLE_STALE_MARKET_DATA_WARNING = true;
+        window.AWS_CLOUDFRONT_FEDERATED_BUNDLES_BASE = "https://d3l5u1rvrlvm90.cloudfront.net";
+        window.FARS_URL_BASE = "https://frontend-app-registry-service.prod.cartastatic.com";
+        window.FRONTEND_DEV_TOOLS_HIDDEN = false;
+        window.CW_FEDERATED_BUNDLE_URL = "None";
+        window.BASE_CARTA_API_DOMAIN = "carta.com";
+        window.FUND_ADMIN_HTTP_HOST = "https://fund-admin.app.carta.com";
+        window.FUND_ADMIN_FE_PORT = "3002";
+        window.CW_FE_PORT = "3000";
+        window.KYC_SERVICE_API_URL = "https://kyc.app.carta.com";
+        window.BANKING_TRANSCODER_HOST = "https://banking.app.carta.com";
+        window.CURRENT_ENV = "production";
+        window.GIT_HASH = "e7aacdc378ae5cefa7df5a4f53c674dd86ada066";
+
+        
+        Magna.originalDocumentMode = document.documentMode;
+
+        Magna.loadingQueue = new (function(){
+            /*
+             A Queue to hold initialization and binding functions that
+             need to be synchronized across the DOM and page load sequences.
+             */
+            var self = this;
+
+            self.queue = [];
+
+            self.addToQueue = function(func) {
+                self.queue.push(func);
+            };
+
+            self.runQueue = function() {
+                _.each(self.queue, function(func){
+                    func();
+                });
+                self.queue = [];
+            };
+        })();
+
+        window.delayTillLoad = function(func) {
+            if (window.addEventListener) {
+                window.addEventListener("load", func, false);
+            } else if (window.attachEvent) {
+                window.attachEvent("onload", func);
+            }
+        };
+    </script>
+
+    
+
+<script>
+    window.analyticsJsEnabled = true;
+    window.analyticsIsRegularUser = true;
+    window.amplitudeApiKey = "1f6fdf94bc23c12b9da3aebcae891598";
+    
+        window.analyticsUUID = "5bfd4417-300c-44be-b77a-497b04b4b55a";
+    
+</script>
+
+    <!-- DEV tools -->
+    <script src="/static/bundles/b67fc02f-manifest.js"></script>
+<script src="/static/bundles/37f08b21-fep-dev-client-tools.js"></script>
+    
+
+    
+    
+    
+    
+
+
+    
+
+
+
+<link rel="stylesheet" type="text/css" href="/static/bundles/97631.css"><style data-styled="active" data-styled-version="5.1.1"></style><link href="https://d3l5u1rvrlvm90.cloudfront.net/supportHubApp/7.6.41/__federation_expose_App.1d013ff4.chunk.css" rel="stylesheet" type="text/css"><script src="https://cdn.pendo.io/agent/static/475607a5-9dcc-492c-574a-3823ba684f87/pendo.js" type="text/javascript" async="" id="remote-script-carta-pendo-client" data-load-count="1" class="script--loading script--loaded"></script><script src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/32xvbH37UblKPWjg/delighted.js" type="text/javascript" async="" id="remote-script-delighted-32xvbH37UblKPWjg" data-load-count="3" class="script--loading script--error"></script><script src="https://sierra.chat/agent/LAjUjokBnNC_aFcBnNC_aNy38Bpr_Edg10eI7TmG3MQ/embed" type="module"></script><script src="https://carta.ujet.co/web-sdk/v3/widget.js"></script><script>var STONLY_WID = "bd2a2086-cb4b-11ee-bc11-06cb0cb2a85e"</script><script>
+        !function (s, t, o, n, l, y, w, g) {
+            s.StonlyWidget || ((w = s.StonlyWidget = function () {
+                w._api ? w._api.apply(w, arguments) : w.queue.push(arguments)
+            }).queue = [], (y = t.createElement(o)).async = !0,
+                (g = new XMLHttpRequest).open("GET", n + "version?v=" + Date.now(), !0), g.onreadystatechange = function () {
+                    4 === g.readyState && (y.src = n + "stonly-widget.js?v=" + (200 === g.status ? g.responseText : Date.now()),
+                        (l = t.getElementsByTagName(o)[0]).parentNode.insertBefore(y, l))
+                }, g.send())
+        }(window, document, "script", "https://stonly.com/js/widget/v2/");
+    </script><script charset="utf-8" src="https://stonly.com/js/widget/v2/vendors~widget-95ca953ce94d709bea6d.stonly.js"></script><script charset="utf-8" src="https://stonly.com/js/widget/v2/widget-bee7377d5efd18740eeb.stonly.js"></script><style data-emotion="stonly-widget-global" data-s=""></style><link rel="preload" as="style" crossorigin="anonymous" href="https://sierra.chat/agent/LAjUjokBnNC_aFcBnNC_aNy38Bpr_Edg10eI7TmG3MQ/embed-css"><style data-emotion="stonly-widget" data-s=""></style></head>
+<body class="page-investor_services 
+   responsive
+  " data-rel="kSYQbaqYo78T55zhTwVHyaNGVwc8OCH9hhBhlXqE9SdNvUxKLoY648De74yWLkg5">
+    
+    
+
+
+
+
+
+
+<script defer="" type="text/javascript">
+    window.delayTillLoad(function() {
+        var wrapper = document.getElementById('carta-web-main-content');
+        if (wrapper) {
+            wrapper.classList.add('wrapper__loaded');
+        }
+        var shimmerFakeElements = document.getElementsByClassName('fake-wrapper')[0];
+        if (shimmerFakeElements) {
+            shimmerFakeElements.parentNode.removeChild(shimmerFakeElements);
+        }
+    });
+</script>
+
+
+    <div class="circle-menu">
+        
+    </div>
+
+    
+
+    
+
+    
+        <div id="message-container">
+            <div class="alert-container alert-container__responsive">
+                
+            </div>
+        </div>
+    
+
+    
+    <div class="app-shell">
+        
+    
+
+
+<div class="app-shell--header">
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+
+<script id="nav-primary-data" type="application/json">{"environment": "production", "last_updated_date": "July\u00a014,\u00a02026", "tooltip_title": "Version: \u003Cu style=\"word-break: break-all;\"\u003Ev17.29.1.1\u003C/u\u003E\u003Cbr\u003EServer: \u003Cu\u003Ecarta-web-5879d689f7-92qnh\u003C/u\u003E", "is_sandbox": false, "user_id": 25689197, "user_first_name": "EAI", "user_last_name": "Investments", "user_email": "operations@eaiinvestments.com", "user_profile_image_url": "/static/lib/eshares/img/nopic_360.png", "user_created_date": "2026-04-01", "user_is_staff": false, "user_is_board_member": "true", "user_is_law_firm": false, "recent_accounts_url": "/api/profiles/entity-switcher/", "search_accounts_url": "/api/search/query/", "add_favorite_account_url": "/api/fe-platform/add-favorite-account/", "remove_favorite_account_url": "/api/fe-platform/remove-favorite-account/", "tasks_url": "/tasks/", "tasks_count_url": "/api/tasks/", "update_profile_url": "/user/settings/", "logout_url": "/carta-login/logout", "legal_terms_url": "/terms-of-service", "marketing_pricing_url": "https://carta.com/pricing/?utm_source=product\u0026amp;utm_medium=product-nav\u0026amp;utm_campaign=plans-and-pricing#plans-and-pricing", "changelog_url": "https://releasenotes.carta.com/", "community_url": "https://community.carta.com", "community_is_enabled": null, "account-name": "EC Space Tech I, LLC", "service_cloud_url": "https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8", "service_cloud_org_id": "00Df4000000nrKS", "user_help_email": "servicerequest@carta.com", "user_help_calendar_link": "", "support_pin": "508324", "access_pin": null, "corporation_pk": 2115793, "corporation_action_profile": "can_hold", "launch_upgrade_url": "/corporations/2115793/upgrade/", "referral_url": "/launch/refer-a-friend/"}</script>
+
+
+<script id="appshell-config" type="application/json">{"mobileIOSAppId": "1137735263", "autoLogoutDelaySeconds": 21600, "frontendDevToolsEnabled": false, "frontendDevToolsHidden": false, "environment": "production", "showLocalNav": false, "showSideLocalNav": true, "entityMatch": {"type": "corporation", "id": 2115793}, "accountName": "EC Space Tech I, LLC", "entityGroupName": null, "isDelightedEnabled": true, "isPendoEnabled": true, "navBannersData": {}, "virtualTourStepId": null, "featureFlags": {"REMOVE-AXIOS-FROM-CW": false, "USER_CONTEXT_BEACON": false, "CARTA_AGENT_ENABLED": false, "VISUAL_ACCOUNTING_AS_HOMEPAGE": false, "PEX_748_DEAL_GROUP_ID_COMMANDBAR_NAV": false}, "userIsAuthenticated": true, "userIsStaff": false, "userId": 25689197, "impersonateData": {"isImpersonate": false, "supportPin": null, "impersonatingFullName": ""}, "showCommandBar": true, "omniSearchConfig": {"isPrivateCorporation": true, "isInvestorOrg": false, "prioritySource": null}, "serverRouteDefinition": "/investors/individual/:corporationPk/portfolio/:entityPk/:tab"}</script>
+
+<div id="nav-primary"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div><div class="HiddenPrint-iziZmV czkBze"><style>
+                #app-switcher {
+                    --app-switcher-gap: 32px;
+                    --ink-color-global-brand-black: #000000;
+                    --ink-color-global-brand-gray-100: #1C2222;
+                    --ink-color-global-brand-gray-70: #656b6b;
+                    --ink-color-global-brand-gray-60: #7B8080;
+                    --ink-color-global-brand-sand: #FBFAF9;
+                    --ink-color-global-brand-white: #ffffff;
+                    --ink-color-global-divider: #DEDFDF;
+
+                    align-items: center;
+                    background-color: var(--ink-color-global-brand-white);
+                    box-sizing: border-box;
+                    color: var(--ink-color-global-brand-gray-100);
+                    font-family: "Inter", "Inter var", system-ui, sans-serif;
+                    font-size: 14px;
+                    height: 36px;
+                    line-height: 36px;
+                    position: relative;
+                    z-index: 2;
+
+                    .app-switcher-header {
+                        background-color: var(--ink-color-global-brand-sand);
+                        height: inherit;
+                        position: relative;
+
+                        & > .app-switcher-label > .app-switcher-close-overlay {
+                            align-items: start;
+                            background-image: linear-gradient(to bottom, transparent 37px, rgb(21 22 26 / 0.8) 37px);
+                            display: grid;
+                            font-size: 24px;
+                            font-weight: 200;
+                            inset: 0;
+                            justify-content: end;
+                            margin-top: -1px;
+                            opacity: 0;
+                            padding-inline-end: 12px;
+                            pointer-events: none;
+                            position: fixed;
+                            transition: opacity 200ms ease;
+                        }
+
+                        &:has(.app-switcher-toggle:checked) {
+                            background-color: var(--ink-color-global-brand-black);
+                            color: var(--ink-color-global-brand-white);
+
+                            & > .app-switcher-label > .app-switcher-close-overlay {
+                                opacity: 1;
+                                pointer-events: auto;
+                            }
+                        }
+
+                        &:has(.app-switcher-toggle:checked) + .app-switcher-main {
+                            grid-template-rows: 1fr;
+
+                            & > * {
+                                visibility: visible;
+                            }
+                        }
+
+                        > .app-switcher-toggle {
+                            display: none;
+                        }
+
+                        > .app-switcher-label {
+                            align-items: center;
+                            cursor: pointer;
+                            display: block;
+                            display: grid;
+                            height: inherit;
+                            padding-inline: 1rem;
+                        }
+                    }
+
+                    .app-switcher-main {
+                        background-color: var(--ink-color-global-brand-white);
+                        border-bottom: 1px solid var(--ink-color-global-divider);
+                        gap: var(--app-switcher-gap);
+                        position: relative;
+
+                        display: grid;
+                        grid-template-rows: 0fr;
+                        overflow: hidden;
+                        transition: grid-template-rows 200ms;
+
+                        > * {
+                            min-height: 0;
+                            transition: visibility 200ms;
+                            visibility: hidden;
+                        }
+
+                        > .app-switcher-content {
+                            /* Max width: 4 cards (296px each) + 3 gaps (24px each) + padding (32px each side) = 1324px */
+                            margin-inline: auto;
+                            max-width: 1324px;
+
+                            .app-switcher-section-title {
+                                font-size: 16px;
+                                font-weight: 600;
+                                margin-block: 48px 0;
+                                width: 100%;
+                            }
+
+                            .app-switcher-section {
+                                display: flex;
+                                flex-wrap: wrap;
+                                gap: 24px;
+                                justify-content: flex-start;
+                                margin-inline: 24px;
+
+                                > .app-switcher-card {
+                                    width: 296px;
+                                }
+
+                                /* 2 cards (296px × 2) + 1 gap (20px) + padding (32px × 2) = 676px */
+                                @media (max-width: 675px) {
+                                    > .app-switcher-card {
+                                        width: 100%;
+                                    }
+                                }
+
+                                .app-switcher-card {
+                                    > .app-switcher-card-title {
+                                        align-items: center;
+                                        display: flex;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        gap: 8px;
+                                        line-height: 28px;
+                                        margin-block: 0;
+
+                                        [data-bubble] {
+                                            border-radius: 24px;
+                                            border: 1px solid;
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            line-height: 1;
+                                            padding-inline: 8px;
+                                            padding-block: 2px;
+                                            white-space: nowrap;
+                                        }
+
+                                        [data-bubble="current"] {
+                                            background-color: var(--ink-color-global-brand-black);
+                                            color: var(--ink-color-global-brand-white);
+                                        }
+                                    }
+
+                                    > .app-switcher-card-desc {
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        line-height: 24px;
+                                        margin-block: 0;
+                                    }
+                                }
+                            }
+
+                            > .app-switcher-section:first-child {
+                                padding-block-start: var(--app-switcher-gap);
+                            }
+
+                            > .app-switcher-section:last-child {
+                                padding-block-end: var(--app-switcher-gap);
+                            }
+
+                            > .app-switcher-section {
+                                > .app-switcher-card {
+                                    background-color: var(--ink-color-global-brand-sand);
+                                    color: inherit;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 8px;
+                                    outline: 1px solid transparent;
+                                    padding: 24px;
+                                    text-decoration: none;
+                                    transition: outline-color 0.2s ease;
+
+                                    &:hover {
+                                        outline-color: var(--ink-color-global-brand-black);
+                                        text-decoration: none;
+                                    }
+
+                                    > .app-switcher-card-title {
+                                        color: var(--ink-color-global-brand-gray-100);
+                                    }
+
+                                    > .app-switcher-card-desc {
+                                        color: var(--ink-color-global-brand-gray-70);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            </style><nav id="app-switcher"><header class="app-switcher-header" data-virtual-tour-step-id="app-switcher-trigger"><input class="app-switcher-toggle" type="checkbox" id="app-switcher-toggle"><label class="app-switcher-label" for="app-switcher-toggle">Switch products…<span class="app-switcher-close-overlay" data-virtual-tour-step-id="app-switcher-close">×</span></label></header><main class="app-switcher-main"><div class="app-switcher-content"><section class="app-switcher-section" data-virtual-tour-step-id="app-switcher-relevant-apps"><a class="app-switcher-card" href="https://app.carta.com/products/portfolios?entity_id=2115793"><h2 class="app-switcher-card-title">Portfolio<span data-bubble="current">Current</span></h2><p class="app-switcher-card-desc">See all your Carta holdings on Carta in one place</p></a><a class="app-switcher-card" href="https://amers.accelex.app/"><h2 class="app-switcher-card-title">LP Portfolio Analytics</h2><p class="app-switcher-card-desc">Extract data and aggregate portfolio insights</p></a></section><section class="app-switcher-section" data-virtual-tour-step-id="app-switcher-other-apps"><h1 class="app-switcher-section-title">More from Carta</h1><a class="app-switcher-card" href="https://app.carta.com/products/equity-management"><h2 class="app-switcher-card-title">Equity Management</h2><p class="app-switcher-card-desc">Manage and issue equity, 409A valuations, and more</p></a><a class="app-switcher-card" href="https://fund-forecasting.app.carta.com/home"><h2 class="app-switcher-card-title">Fund Forecasting</h2><p class="app-switcher-card-desc">Construct, forecast, and manage fund portfolios</p></a><a class="app-switcher-card" href="https://app.carta.com/products/fund-admin"><h2 class="app-switcher-card-title">Fund Administration</h2><p class="app-switcher-card-desc">Automate your back office from reporting to closings</p></a><a class="app-switcher-card" href="https://crm.app.carta.com/"><h2 class="app-switcher-card-title">CRM</h2><p class="app-switcher-card-desc">Manage relationships, deal flow and LP pipelines</p></a><a class="app-switcher-card" href="https://loan-operations.app.carta.com/"><h2 class="app-switcher-card-title">Loan Operations</h2><p class="app-switcher-card-desc">Manage loan invoicing and reporting</p></a><a class="app-switcher-card" href="https://comp.app.carta.com"><h2 class="app-switcher-card-title">Total Compensation</h2><p class="app-switcher-card-desc">Forecast, hire, and retain talent</p></a></section></div></main></nav><header data-ink="true" class="Header__StyledHeader-jYQBPd gTngbB"><div class="Header__StyledHeaderLogo-kqeSce dhjYWA"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" fill="none" viewBox="0 0 504 252"><title>Carta logo</title><path fill="#1a1a1a" d="M0 0v252h504V0zm493.92 241.92H10.08V10.08h483.84zM66.114 130.915c0-25.262 21.327-40.09 40.46-40.09 13.7 0 26.476 5.136 33.31 16.97l-12.796 7.419a23.9 23.9 0 0 0-8.754-7.927 24.3 24.3 0 0 0-11.506-2.811c-11.252 0-24.638 8.779-24.638 26.175s12.796 26.328 25.704 26.328c8.978 0 16.432-5.004 20.85-12.727l13.08 6.039c-7.403 13.316-20.636 20.41-36.002 20.41-19.326-.02-39.708-14.869-39.708-39.796zm122.405 39.786c10.633 0 20.677-4.689 25.857-11.499v9.368h15.802V92.784h-15.802v9.388c-4.926-6.871-15.203-11.347-25.857-11.347-23.276 0-39.556 16.939-39.556 39.938s16.432 39.938 39.556 39.938m1.524-65.504c14.603 0 24.627 10.89 24.627 25.566s-10.034 25.566-24.627 25.566c-14.594 0-24.953-11.042-24.953-25.87s10.349-25.262 24.953-25.262m125.056 2.628h-16.402V92.692h16.554v-19.75h16.279v19.75h16.544v15.133H331.53v60.714h-16.431zm78.36 62.876c10.653 0 20.697-4.689 25.877-11.499v9.368h15.822V92.784h-15.822v9.388c-4.926-6.871-15.203-11.347-25.877-11.347-23.256 0-39.536 16.939-39.536 39.938s16.422 39.938 39.536 39.938m1.544-65.504c14.583 0 24.637 10.89 24.637 25.566s-10.054 25.566-24.637 25.566-24.952-11.042-24.952-25.87 10.348-25.262 24.952-25.262m-129.047 63.271h-16.432V92.682h15.051v14.108c3.727-8.383 9.322-13.844 18.422-14.3 1.879-.03 3.747 0 5.626.203l-.252 15.163c-13.07 0-22.405 7.003-22.405 26.53v34.092z"></path></svg></div><div class="Header__StyledHeaderControls-gPRTNx epwHQq"><div class="StyledBox-kXZdic jYiloJ"><div class="StyledBox-kXZdic gaZMZK"><div class="StyledBox-kXZdic kbhvrH"><div class="StyledBox-kXZdic eWTiOG"><div data-private="true" title="Select account"><div class="StyledBox-kXZdic jEjKTQ"><div class="StyledBox-kXZdic mVaek"><div data-ink="true" class="DropdownWrapper-dIOOcu elhwuP"><button data-testid="global-account-switcher" aria-disabled="false" id="global-account-switcher" type="button" data-ink="true" aria-expanded="false" data-track-events="click" class="Button__StyledButton-bvTPUF dlmyqT">EC Space Tech I, LLC&nbsp;<span data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-label="open dropdown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="14" height="14"><title>open dropdown</title><path fill-rule="evenodd" clip-rule="evenodd" d="m10 16.1-9-8L3 6l8 7 8-7L21 8l-9 8c-.6.5-1.4.5-2 0Z"></path></svg></span></button></div></div></div></div></div></div></div><div class="StyledBox-kXZdic gaZMZK"><div class="StyledBox-kXZdic cMYjvw"><div class="StyledBox-kXZdic gaZMZK"><div class="StyledBox-kXZdic cyDkOv"><div class="StyledBox-kXZdic egeBYO"><div data-ink="true" class="DropdownWrapper-dIOOcu elhwuP"><button data-testid="task-manager-dropdown-trigger" aria-disabled="false" type="button" data-ink="true" aria-expanded="false" data-track-events="click" class="Button__StyledButton-bvTPUF dlmyqT"><div class="StyledBox-kXZdic cyDkOv"><div class="StyledBox-kXZdic egeBYO"><span>Tasks</span></div><div class="StyledBox-kXZdic egeBYO"><span data-ink="true" class="styles__StyledBubble-jbCSqD bmUzKx">10</span></div></div>&nbsp;<span data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-label="open dropdown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="14" height="14"><title>open dropdown</title><path fill-rule="evenodd" clip-rule="evenodd" d="m10 16.1-9-8L3 6l8 7 8-7L21 8l-9 8c-.6.5-1.4.5-2 0Z"></path></svg></span></button></div></div><div class="StyledBox-kXZdic egeBYO"><button data-testid="downloads-button" aria-disabled="false" type="button" data-ink="true" data-track-events="click" class="Button__StyledButton-bvTPUF dlmyqT"><div class="StyledBox-kXZdic cyDkOv"><div class="StyledBox-kXZdic egeBYO"><span>Downloads</span></div></div></button></div><div class="StyledBox-kXZdic egeBYO"><div class="StyledBox-kXZdic cyDkOv"><div class="StyledBox-kXZdic egeBYO"><a href="/launch/refer-a-friend/?source=top-nav" id="referAFriend" tabindex="0" aria-disabled="false" data-ink="true" class="Button__LegacyAnchor-eHEpAw jxeKQb">Refer a friend</a></div></div></div><div class="StyledBox-kXZdic egeBYO"><div data-ink="true" class="DropdownWrapper-dIOOcu elhwuP"><button data-testid="user-actions-trigger" aria-disabled="false" type="button" data-ink="true" aria-expanded="false" data-track-events="click" class="Button__StyledButton-bvTPUF dlmyqT"><span data-private="true">EAI Investments</span>&nbsp;<span data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-label="open dropdown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="14" height="14"><title>open dropdown</title><path fill-rule="evenodd" clip-rule="evenodd" d="m10 16.1-9-8L3 6l8 7 8-7L21 8l-9 8c-.6.5-1.4.5-2 0Z"></path></svg></span></button></div></div></div></div></div></div></div></div></header></div></div>
+<script src="/static/bundles/a500168c-nav-primary.js"></script>
+
+
+</div>
+
+
+
+        <div class="app-shell--body">
+            
+                
+<div id="side-local-nav" class="app-shell--sidenav" data-testid="side-local-nav"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div><div class="styles__StyledSideNavWrapper-bSGrQA cnEIBV"><nav data-testid="side-local-nav" data-ink="true" class="styles__StyledSideNav-iyBjWr daWvru"><div data-ink="true" class="styles__StyledSideNavStickyContainer-jABKFT idquaz"><button type="button" data-ink="true" data-testid="sidenav--toggle" class="styles__StyledSideNavToggle-bMQvpx kEKsFJ"><span data-ink="true" class="Icon__StyledIcon-bPuOUV gcsmCn"><svg aria-label="Close menu" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="16" height="16"><title>Close menu</title><path d="M21 18H8.6v-1.56H21zM6.42 7.76 3.19 11l3.23 3.23-1.1 1.1L1 11l4.32-4.34zM21 11.78H8.6v-1.56H21zm0-6.22H8.6V4H21z"></path></svg></span></button></div><dialog id="commandbar-modal" data-testid="commandbar-modal-dialog" data-private="true" class="styled__CommandBarBoxContainer-btEwLF biOlZf"><div class="styled__CommandBarBoxFlexContainer-KCeTW dTMTQo"><div class="styled__CommandBarInputWrapper-jfiHBi eIPppY"><input type="text" data-testid="commandbar-input-element" id="commandbar-input-element" placeholder="Navigate to..." class="styled__CommandBarInputElement-HrZMr evPWek" value=""><button data-testid="commandbar-close-icon" class="styled__CommandBarCloseIcon-cfUXda jgGGNX"><span data-ink="true" class="Icon__StyledIcon-bPuOUV gcsmCn"><svg aria-label="close icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="19" height="19"><path d="m17.73 2.75.1.1.86.86.1.1.04.04-.04.04-.1.1-6.78 6.78 6.78 6.78.1.1.04.04-.04.04-.1.1-.86.86-.1.1-.04.04-.03-.04-.1-.1-6.79-6.78L4 18.69l-.1.1-.04.04-.03-.04-.1-.1-.86-.86-.1-.1-.04-.04.03-.03.1-.1 6.79-6.79L2.86 4l-.1-.1-.04-.04.03-.03.1-.11.86-.85.1-.1.04-.04.04.03.1.1 6.78 6.79 6.78-6.78.1-.1.04-.04z"></path></svg></span></button></div><div id="commandbar-results" class="styled__CommandBarResults-dHtNEJ kjiISE"><div class="StyledBox-kXZdic jLTDIz"><div class="StyledBox-kXZdic ftGPTC"><div class="StyledBox-kXZdic mVaek"><div data-ink="true" role="progressbar" aria-live="polite" aria-label="loading" aria-valuetext="loading" aria-busy="true" aria-hidden="false" class="styles__WrapperLoader-dsTIys ffQrHQ"><div class="styles__StyledLoader-fGYBsA cxfRRJ"><div class="styles__LoaderBackdrop-iykPrF egeiTX"></div><div class="styles__LoaderBody-dmmEKb impiOu"><svg role="img" viewBox="-70 -70 140 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="styles__LoaderShape-jnIasM cDmdWl"><title>loading</title><path d="
+M -5 -61
+a 10 10 0 01 10 0
+l 45 26
+a 10 10 0 01 5 9
+l 0 52
+a 10 10 0 01 -5 9
+l -45 26
+a 10 10 0 01 -10 0
+l -45 -26
+a 10 10 0 01 -5 -9
+l 0 -52
+a 10 10 0 01 5 -9
+Z" class="styles__LoaderShapePath-hYOwjV ghGOWc"></path><path d="
+M -5 -61
+a 10 10 0 01 10 0
+l 45 26
+a 10 10 0 01 5 9
+l 0 52
+a 10 10 0 01 -5 9
+l -45 26
+a 10 10 0 01 -10 0
+l -45 -26
+a 10 10 0 01 -5 -9
+l 0 -52
+a 10 10 0 01 5 -9
+Z" class="styles__LoaderShapePath-hYOwjV ghGOWc"></path><path d="
+M -5 -61
+a 10 10 0 01 10 0
+l 45 26
+a 10 10 0 01 5 9
+l 0 52
+a 10 10 0 01 -5 9
+l -45 26
+a 10 10 0 01 -10 0
+l -45 -26
+a 10 10 0 01 -5 -9
+l 0 -52
+a 10 10 0 01 5 -9
+Z" class="styles__LoaderShapePath-hYOwjV ghGOWc"></path></svg></div></div></div></div><div class="StyledBox-kXZdic mVaek"><p data-ink="true" class="styles__CustomTextElement-hYlwXS fZCnU">Continue typing to see results</p></div></div></div></div><div class="styled__CommandBarTip-jQdOFq knoZYV"><div class="StyledBox-kXZdic ifUdhE"><div class="StyledBox-kXZdic ghqBoy"><span>Ctrl+K</span></div><div class="StyledBox-kXZdic ghqBoy"><span data-ink="true" class="styles__CustomTextElement-hYlwXS fjFAQv">Search for features, stakeholders or accounts</span></div></div></div></div></dialog><div data-ink="true" class="styles__StyledSideNavContentContainer-bEPMtt zYxOz"><ul data-ink="true" class="styles__StyledSideNavGroups-chCQpH gJGmLm"><li data-testid="sidenav-group-fund_investments" data-virtual-tour-step-id="sidenav-group-fund_investments" data-ink="true" class="styles__StyledSideNavGroup-hDquwg jZvbbr"><div class="StyledBox-kXZdic glalbm" data-ink="true" data-testid="side-nav-item-Dashboard"><div class="StyledBox-kXZdic bEprWS"><a data-testid="side-nav-item-Dashboard-anchor--active" href="/investors/individual/2115793/portfolio/" title="Dashboard" imageicon="quickaction" class="styles__StyledSideNavItemAnchor-ctlPpX cZUfXx"><span class="StyledBox-kXZdic gpuKZu"><span data-ink="true" class="styles__StyledSideNavIcon-deqIDg lbxnWP"><span aria-hidden="true" data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="16" height="16"><title>Dashboard</title><path fill-rule="evenodd" d="M13.02 9.23H18l-7.08 11.66-.06.11H9.1v-8.2H4l.23-.38 6.86-11.3.06-.12h1.87zm-6.38 2.04h3.91v7.36l4.8-7.9h-3.8V3.19z" clip-rule="evenodd"></path></svg></span><span data-testid="" aria-hidden="true" class="styles__StyledSideNavIconBadge-ecJPFt cLQnkY"></span></span><span data-testid="side-nav-item-Dashboard-content-label" class="styles__StyledSideNavItemLabel-dfKSOY gerkgA">Dashboard</span></span></a></div></div></li><li data-testid="sidenav-group-reports_and_documents" data-virtual-tour-step-id="sidenav-group-reports_and_documents" data-ink="true" class="styles__StyledSideNavGroup-hDquwg jZvbbr"><div data-ink="true" class="styles__TooltipWrapper-hEMDcE brhaQa"><div aria-describedby="tooltip-content" data-testid="tooltip-trigger" class="styles__TooltipTrigger-iHDEDz kZvPQK"><div class="StyledBox-kXZdic bEprWS"><button type="button" data-testid="" class="styles__StyledSideNavGroupToggle-mpZJG ZAhsa"><span class="StyledBox-kXZdic gpuKZu"><span data-ink="true" class="styles__StyledSideNavIcon-deqIDg eEzGce"><span aria-hidden="true" data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="16" height="16"><title>Reports &amp; Documents</title><path d="M13.84 16.9h-5.7v-1.52h5.7zm0-2.57h-5.7v-1.52h5.7zm0-2.56h-5.7v-1.53h5.7z"></path><path fill-rule="evenodd" d="M18 21.01H4V6.25l.12-.08 8.3-5.13.06-.04H18zm-5.2-18.4v5.05H5.54v11.82h10.92V2.53h-3.53zM7.08 6.12h4.18V3.55z" clip-rule="evenodd"></path></svg></span><span data-testid="" aria-hidden="true" class="styles__StyledSideNavIconBadge-ecJPFt cLQnkY"></span></span><span class="styles__StyledSideNavGroupToggleLabel-bSIfwI ffJCux">Reports &amp; Documents</span></span><span data-ink="true" class="styles__StyledSideNavTwiddle-kSIbmI jAOhmg"><span aria-hidden="true" data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="11" height="11"><path d="m18.2 11.14-9.67 9.67-1.06-1.06 8.6-8.61-8.6-8.61 1.06-1.06z"></path></svg></span></span></button></div></div></div><ul data-ink="true" class="styles__StyledSideNavGroupItems-hmGTai bBpSLw"><li data-ink="true"><a data-testid="" href="/investors/individual/2115793/portfolio/get_received_documents/" class="styles__StyledSideNavGroupItemAnchor-iIwOuc cEZkvT"><span data-testid="" class="styles__StyledSideNavGroupItemLabel-enFUxH fiXUdS">Fund Documents</span></a></li></ul></li><li data-testid="sidenav-group-account" data-virtual-tour-step-id="sidenav-group-account" data-ink="true" class="styles__StyledSideNavGroup-hDquwg jZvbbr"><div data-ink="true" class="styles__TooltipWrapper-hEMDcE brhaQa"><div aria-describedby="tooltip-content" data-testid="tooltip-trigger" class="styles__TooltipTrigger-iHDEDz kZvPQK"><div class="StyledBox-kXZdic bEprWS"><button type="button" data-testid="" class="styles__StyledSideNavGroupToggle-mpZJG ZAhsa"><span class="StyledBox-kXZdic gpuKZu"><span data-ink="true" class="styles__StyledSideNavIcon-deqIDg eEzGce"><span aria-hidden="true" data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="16" height="16"><title>Account Settings</title><path d="M5.5 12.3h3v4.4h-3V21H4v-4.3H1v-4.4h3V1h1.5v11.3Zm-3 1.4v1.6H7v-1.6H2.5Z"></path><path d="M10.3 5.3h-3v4.5h3V21h1.4V9.7h3V5.3h-3V1h-1.4v4.3Zm-1.6 3V6.7h4.6v1.5H8.7Z"></path><path d="M18 12.3h3v4.4h-3V21h-1.5v-4.3h-3v-4.4h3V1H18v11.3Zm-3 1.4v1.6h4.5v-1.6H15Z"></path></svg></span><span data-testid="" aria-hidden="true" class="styles__StyledSideNavIconBadge-ecJPFt cLQnkY"></span></span><span class="styles__StyledSideNavGroupToggleLabel-bSIfwI ffJCux">Account Settings</span></span><span data-ink="true" class="styles__StyledSideNavTwiddle-kSIbmI jAOhmg"><span aria-hidden="true" data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="11" height="11"><path d="m18.2 11.14-9.67 9.67-1.06-1.06 8.6-8.61-8.6-8.61 1.06-1.06z"></path></svg></span></span></button></div></div></div><ul data-ink="true" class="styles__StyledSideNavGroupItems-hmGTai bBpSLw"><li data-ink="true"><a data-testid="" href="/investors/organization/1881616/settings/" class="styles__StyledSideNavGroupItemAnchor-iIwOuc cEZkvT"><span data-testid="" class="styles__StyledSideNavGroupItemLabel-enFUxH fiXUdS">Settings</span></a></li></ul></li></ul></div></nav></div></div>
+<script src="/static/bundles/5cad0223-side-local-nav.js"></script>
+
+            
+
+            <main id="carta-web-main-content" class="app-shell--content wrapper wrapper__loaded">
+                
+<div id="nav-banners"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div></div>
+<script src="/static/bundles/495078cc-nav-banners.js"></script>
+
+                <div class="content p-t-0">
+                    
+                    
+    
+
+                    
+
+    <div id="new-investor-portfolio" data-root-url="NotImplemented" data-base-url="/investors/individual/2115793/portfolio/" data-tracker-url="/api/investors/skumaskot" data-user="{&quot;has_two_factor&quot;: true, &quot;is_staff_view&quot;: false, &quot;avatar&quot;: &quot;/static/lib/eshares/img/nopic_360.png&quot;, &quot;first_name&quot;: &quot;EAI&quot;, &quot;last_name&quot;: &quot;Investments&quot;, &quot;full_name&quot;: &quot;EAI Investments&quot;, &quot;role&quot;: null, &quot;email&quot;: &quot;operations@eaiinvestments.com&quot;, &quot;user_type&quot;: null}" data-list-attrs="{&quot;issuance-concern-reasons&quot;: &quot;[{\&quot;id\&quot;: 7, \&quot;text\&quot;: \&quot;Converted/expired securities still reflected as outstanding\&quot;, \&quot;category\&quot;: \&quot;Incorrect security information\&quot;}, {\&quot;id\&quot;: 4, \&quot;text\&quot;: \&quot;Dissolution\&quot;, \&quot;category\&quot;: \&quot;Exit (transaction)\&quot;}, {\&quot;id\&quot;: 9, \&quot;text\&quot;: \&quot;Follow on investment made but security issuance delayed\&quot;, \&quot;category\&quot;: \&quot;Missing securities\&quot;}, {\&quot;id\&quot;: 2, \&quot;text\&quot;: \&quot;IPO\&quot;, \&quot;category\&quot;: \&quot;Exit (transaction)\&quot;}, {\&quot;id\&quot;: 11, \&quot;text\&quot;: \&quot;Incorrect financing history\&quot;, \&quot;category\&quot;: \&quot;Incorrect captable details\&quot;}, {\&quot;id\&quot;: 5, \&quot;text\&quot;: \&quot;Incorrect name\&quot;, \&quot;category\&quot;: \&quot;Incorrect security information\&quot;}, {\&quot;id\&quot;: 12, \&quot;text\&quot;: \&quot;Incorrect ownership amount\&quot;, \&quot;category\&quot;: \&quot;Incorrect captable details\&quot;}, {\&quot;id\&quot;: 20, \&quot;text\&quot;: \&quot;Incorrect rights &amp; preferences\&quot;, \&quot;category\&quot;: \&quot;Incorrect captable details\&quot;}, {\&quot;id\&quot;: 6, \&quot;text\&quot;: \&quot;Incorrect security details (count, cost, amount)\&quot;, \&quot;category\&quot;: \&quot;Incorrect security information\&quot;}, {\&quot;id\&quot;: 1, \&quot;text\&quot;: \&quot;M&amp;A\&quot;, \&quot;category\&quot;: \&quot;Exit (transaction)\&quot;}, {\&quot;id\&quot;: 3, \&quot;text\&quot;: \&quot;Secondary transaction\&quot;, \&quot;category\&quot;: \&quot;Exit (transaction)\&quot;}, {\&quot;id\&quot;: 8, \&quot;text\&quot;: \&quot;Securities canceled due to partial transfer but not reissued\&quot;, \&quot;category\&quot;: \&quot;Missing securities\&quot;}, {\&quot;id\&quot;: 10, \&quot;text\&quot;: \&quot;Securities canceled without clarification\&quot;, \&quot;category\&quot;: \&quot;Missing securities\&quot;}, {\&quot;id\&quot;: 13, \&quot;text\&quot;: \&quot;Other\&quot;, \&quot;category\&quot;: \&quot;Other\&quot;}]&quot;, &quot;portfolio-upper-date&quot;: &quot;07/14/2026&quot;, &quot;should-show-paid-features&quot;: false, &quot;allow-actions&quot;: true, &quot;show-cards&quot;: false, &quot;show-merge-suggestion&quot;: false, &quot;tags-url&quot;: null, &quot;root-url&quot;: &quot;/api/investors/portfolio/fund/2115793/list/&quot;, &quot;investments-report-url&quot;: null, &quot;master-spreadsheet-report-url&quot;: &quot;/investors/fund/2115793/master/queue/&quot;, &quot;soi-report-url&quot;: &quot;/investors/1881616/fund/2115793/soi/queue/&quot;, &quot;irr-report-url&quot;: null, &quot;company-contact-report-url&quot;: &quot;/investors/1881616/fund/2115793/reports/portfolio_contacts/&quot;, &quot;captable-builder-create-url&quot;: null, &quot;firm-portfolio-list-url&quot;: null, &quot;manage-tags-url&quot;: &quot;/investors/firm/1881616/manage-tags/&quot;, &quot;portfolio-merge-url&quot;: &quot;/shareholders/tools/merge/portfolios&quot;}" data-is-investor-view="True" data-is-individual="True" data-product-type="[&quot;free&quot;]" data-hide-all-investments="False" data-show-new-portfolio="True" data-show-demographics-notification-modal="False" data-identity-modal-context-url="/user-identity/api/notifications/modal/2115793" data-corporation-permission-data="null" data-show-tax-advisory="False" data-show-tax-season-banner="False" data-organization-uuid="57d7aa77-506c-4941-af9a-7e3414043e37" data-firm-investments-url="/api/investors/portfolio/firm/1881616/list_individual_portfolio_investments/2115793/list/" data-all-fund-investments-url="/investors/individual/2115793/portfolio/" data-reports-and-documents-menu-items-url="/api/investors/portfolio/2115793/list/individual_reports_and_documents_menu_items/" data-account-settings-menu-items-url="/api/investors/portfolio/2115793/list/individual_account_settings_menu_items/" data-requests-menu-items-url="/api/investors/portfolio/firm/1881616/list/requests_menu_items/" data-transactions-menu-items-url="/api/investors/portfolio/2115793/list/individual_transactions_menu_items/" data-capital-account-aggregate-api-url="/api/investors/portfolio/2115793/list/individual_lp_capital_account_aggregate/" data-enable-entity-switcher="True" data-unaccepted-capital-account-api-url="/api/investors/firm/1881616/get-unaccepted/" data-active-capital-call-api-url="/api/investors/portfolio/2115793/list/individual_lp_active_cap_calls/" data-recent-lp-documents-api-url="/api/investors/portfolio/2115793/list/individual_lp_recent_documents/" data-show-merge-suggestion="False" data-portfolio-merge-url="/shareholders/tools/merge/portfolios" data-llc-api-hostname="https://app.carta.com" data-should-show-confirm-tax-data-banner="False" data-has-fund-commitments="True" data-lp-document-center="/investors/individual/2115793/portfolio/get_received_documents/" data-portfolio-id="2115793" data-portfolio-uuid="f2b35542-7b67-44a5-90e8-60d212b131e1" data-firm-uuid="57d7aa77-506c-4941-af9a-7e3414043e37" data-feature-flags="{}" data-address-api="/api/investors/organization/1881616/address_api/" data-address-options-api="/api/investors/organization/1881616/get_crm_options/" data-disregarded-entity-info-api="/api/investors/organization/1881616/crm/disregarded_entity_info/" data-signature-line="EAI Investments" data-company-investments-api-url="/api/investors/portfolio/fund/2115793/list/" data-organization-name="EC Space Tech I, LLC" data-nav-starting-position-open="True" data-title="None" data-enable-company-investments-page="False" data-has-bubble-title="False" data-bubble-label="" data-bubble-color=""><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="app-shell--body"><div class="app-shell--content" id="investor-tab-content"><div data-testid="investor-services-navigation-wrapper" class="investor-content--sticky-header"><div class="hidden-sm-down"><div class="investor-content--header"><div id="qa-entity-name-header" class="sc-Axmtr gvOcwq"><div class="StyledBox-kXZdic hlLYyZ"><div class="StyledBox-kXZdic iZVlAm"><div data-ink="true" class="Breadcrumb__StyledBreadcrumb-gaRDmh ifkOAg"><div class="StyledBox-kXZdic hxAWm"><a class="BreadcrumbItemElement-fNuqBO fUmXuN" href="/">EC Space Tech I, LLC</a><span class="BreadcrumbItemElement-fNuqBO fUmXuN">Investment</span></div></div><div class="display-flex align-items-center"><div style="flex: 1 1 auto;"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="StyledBox-kXZdic jYiloJ" width="100%"><div class="StyledBox-kXZdic gaZMZK"><div class="StyledBox-kXZdic hyqFyv"><div class="StyledBox-kXZdic ghqBoy"><div data-ink="true" class="DropdownWrapper-dIOOcu elhwuP"><div class="sc-fzoaKM hNuJKS"><button data-testid="entity-switcher-button" aria-disabled="false" type="button" data-ink="true" aria-expanded="false" data-track-events="click" class="Button__StyledButton-bvTPUF gBTsiq"><h3 data-ink="true" class="styles__CustomTextElement-hYlwXS fvpmpq"><span class="sc-fznLPX dtmoaU">Aliya Growth Fund LLC - Series G (SpaceX)</span></h3><div class="sc-fzqAui eoGDzK"><span data-ink="true" class="styles__CustomTextElement-hYlwXS eFQWes">Switch Investment</span><div class="sc-fzomuh gHzJiR"><span data-ink="true" class="styles__CustomTextElement-hYlwXS fIJJjO"><span data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-label="down-bold icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="12" height="12"><path fill-rule="evenodd" clip-rule="evenodd" d="m10 16.1-9-8L3 6l8 7 8-7L21 8l-9 8c-.6.5-1.4.5-2 0Z"></path></svg></span></span></div></div></button></div></div></div></div></div></div></div></div></div></div></div></div><nav role="navigation" data-testid="investor-services-navigation-tabs" data-ink="true" class="NavWrapper-laTkHQ jYBLml"><a theme="[object Object]" data-ink="true" id="overview" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/overview">Overview&nbsp;</a><a theme="[object Object]" data-ink="true" id="fund-documents" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/fund-documents">Documents&nbsp;</a><a theme="[object Object]" data-ink="true" id="investments" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/investments">Investments&nbsp;</a><a theme="[object Object]" data-ink="true" id="capital-account-statements" class="NavItemElement-gsNGXY gCaOVe" href="/investors/individual/2115793/portfolio/1967488/capital-account-statements">Capital accounts&nbsp;</a><a theme="[object Object]" data-ink="true" id="fund-transactions" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/fund-transactions">Fund transactions&nbsp;</a><a theme="[object Object]" data-ink="true" id="wire-instructions" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/wire-instructions">Wire instructions&nbsp;</a><a theme="[object Object]" data-ink="true" id="securities-account" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/securities-account">Securities transfer instructions&nbsp;</a></nav></div><div class="hidden-md-up"><nav role="navigation" data-testid="investor-services-navigation-tabs" data-ink="true" class="NavWrapper-laTkHQ jYBLml"><a theme="[object Object]" data-ink="true" id="overview" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/overview">Overview&nbsp;</a><a theme="[object Object]" data-ink="true" id="fund-documents" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/fund-documents">Documents&nbsp;</a><a theme="[object Object]" data-ink="true" id="investments" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/investments">Investments&nbsp;</a><a theme="[object Object]" data-ink="true" id="capital-account-statements" class="NavItemElement-gsNGXY gCaOVe" href="/investors/individual/2115793/portfolio/1967488/capital-account-statements">Capital accounts&nbsp;</a><a theme="[object Object]" data-ink="true" id="fund-transactions" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/fund-transactions">Fund transactions&nbsp;</a><a theme="[object Object]" data-ink="true" id="wire-instructions" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/wire-instructions">Wire instructions&nbsp;</a><a theme="[object Object]" data-ink="true" id="securities-account" class="NavItemElement-gsNGXY gtIHJY" href="/investors/individual/2115793/portfolio/1967488/securities-account">Securities transfer instructions&nbsp;</a></nav></div></div><div class="investor-content--main" id="investor-tab-content"><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div><div class="StyledBox-kXZdic jpoBEJ"><div class="StyledBox-kXZdic khtYUF"><div class="StyledBox-kXZdic fTpXYq"><div class="StyledBox-kXZdic eWTiOG"><h2 data-ink="true" class="styles__CustomTextElement-hYlwXS bBzbsI">Capital accounts</h2></div></div></div><div class="StyledBox-kXZdic kGewjF"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="StyledBox-kXZdic ezqDLU"><div class="StyledBox-kXZdic fTpXYq"><div class="StyledBox-kXZdic eWTiOG"><div class="StyledBox-kXZdic ezqDLU"><div class="StyledBox-kXZdic AUiKW"><div class="StyledBox-kXZdic bBYhrC"><div class="ControllerWrapper-kIrDQG coYrbB"><select id="capital-account-period-select" data-track-events="change" type="select" data-ink="true" placeholder=" " aria-invalid="false" class="CoreSelect__SelectElement-QbBIz cQcSio"><option aria-selected="true" value="" disabled="">Select period</option><option aria-selected="false" value="q1">Q2 '26</option><option aria-selected="false" value="q2">Q1 '26</option><option aria-selected="false" value="q3">Q4 '25</option><option aria-selected="false" value="q4">Q3 '25</option><option aria-selected="false" value="ytd">YTD</option><option aria-selected="false" value="priorYear">Prior year</option></select><div class="CoreSelect__SelectArrow-bRjmpQ biEWyC"><span data-ink="true" class="Icon__StyledIcon-bPuOUV bWRnHW"><svg aria-label="select option" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="16" height="16"><title>select option</title><path fill-rule="evenodd" clip-rule="evenodd" d="M10.502 15.5606L1.50195 7.56056L2.4985 6.43944L11.0002 13.9965L19.502 6.43944L20.4985 7.56056L11.4985 15.5606C11.2143 15.8131 10.7861 15.8131 10.502 15.5606Z"></path></svg></span></div></div></div><div class="StyledBox-kXZdic bBYhrC"><div id="datepicker-id-capital-account-start-date-picker" class="ControllerWrapper-kIrDQG coWgpo"><div class="ControllerWrapper-kIrDQG coWgpo"><input mask="_" align="left" id="capital-account-start-date-picker" name="capital-account-start-date-picker-HA0WR9Jg6" placeholder=" " data-track-events="blur" theme="[object Object]" data-ink="true" aria-invalid="false" type="text" class="CoreInput__StyledDateFormat-fTbBpH dWWRjL" prefix="" suffix="" value="10/01/2025"><button type="button" aria-label="Open the calendar" class="Affix-kintYm ClickableAffix-jlfelK styles__CalendarClickableAffix-jXoPXs jhfEho"><div class="CalendarButtonIcon__CalendarIconWrapper-ifiUPD bkwLGV"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 15" width="380" height="15"><path d="M2 2h12c1.105 0 2 .831 2 1.857v9.286C16 14.169 15.105 15 14 15H2c-1.105 0-2-.831-2-1.857V3.857C0 2.831.895 2 2 2z" fill="currentColor"></path><path d="M2 2.5c-.836 0-1.5.616-1.5 1.357v9.286c0 .741.664 1.357 1.5 1.357h12c.836 0 1.5-.616 1.5-1.357V3.857c0-.741-.664-1.357-1.5-1.357H2z" fill="#ffffff" stroke="currentColor"></path><path d="M.778 2.797h14.464V6H.778z" fill="currentColor"></path><path d="M3 .5h1c.133 0 .26.053.354.146C4.447.74 4.5.867 4.5 1v2c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146H3c-.133 0-.26-.053-.354-.146C2.553 3.26 2.5 3.133 2.5 3V1c0-.133.053-.26.146-.354C2.74.553 2.867.5 3 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v2c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C11.74.553 11.867.5 12 .5" fill="#ffffff" stroke="currentColor"></path><path d="M22 2h12c1.105 0 2 .831 2 1.857v9.286C36 14.169 35.105 15 34 15H22c-1.105 0-2-.831-2-1.857V3.857C20 2.831 20.895 2 22 2z" fill="currentColor"></path><path d="M22 2.5c-.836 0-1.498.614-1.497 1.352l.018 9.265c.001.739.667 1.354 1.504 1.354h12c.835 0 1.497-.614 1.496-1.351l-.017-9.266C35.502 3.115 34.837 2.5 34 2.5H22z" fill="#ffffff" stroke="currentColor"></path><path d="M20.78 2.795h14.464l.006 3.196H20.786z" fill="currentColor"></path><path d="M23 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.993c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C22.74.553 22.867.5 23 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.993c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C31.74.553 31.867.5 32 .5" fill="#ffffff" stroke="currentColor"></path><path d="M42 2h12c1.105 0 2 .831 2 1.857v9.286C56 14.169 55.105 15 54 15H42c-1.105 0-2-.831-2-1.857V3.857C40 2.831 40.895 2 42 2z" fill="currentColor"></path><path d="M42 2.5c-.835 0-1.489.606-1.485 1.332l.08 9.193c.006.732.678 1.344 1.517 1.344h12c.835 0 1.489-.606 1.485-1.333l-.08-9.192C55.511 3.111 54.839 2.5 54 2.5H42z" fill="#ffffff" stroke="currentColor"></path><path d="M40.785 2.789h14.464l.027 3.171H40.812z" fill="currentColor"></path><path d="M43 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.967c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C42.74.553 42.867.5 43 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.967c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C51.74.553 51.867.5 52 .5" fill="#ffffff" stroke="currentColor"></path><path d="M62 2h12c1.105 0 2 .831 2 1.857v9.286C76 14.169 75.105 15 74 15H62c-1.105 0-2-.831-2-1.857V3.857C60 2.831 60.895 2 62 2z" fill="currentColor"></path><path d="M62 2.5c-.833 0-1.471.589-1.461 1.293l.207 9.043c.015.719.701 1.323 1.544 1.323h12c.833 0 1.471-.589 1.461-1.293l-.207-9.043C75.528 3.104 74.843 2.5 74 2.5H62z" fill="#ffffff" stroke="currentColor"></path><path d="M60.796 2.776H75.26l.071 3.119H60.867z" fill="currentColor"></path><path d="M63 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.915c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C62.74.553 62.867.5 63 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.915c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C71.74.553 71.867.5 72 .5" fill="#ffffff" stroke="currentColor"></path><path d="M82 2h12c1.105 0 2 .831 2 1.857v9.286C96 14.169 95.105 15 94 15H82c-1.105 0-2-.831-2-1.857V3.857C80 2.831 80.895 2 82 2z" fill="currentColor"></path><path d="M82 2.5c-.831 0-1.441.561-1.42 1.226l.426 8.785c.032.696.741 1.287 1.591 1.287h12c.83 0 1.44-.561 1.42-1.225l-.426-8.785C95.559 3.091 94.85 2.5 94 2.5H82z" fill="#ffffff" stroke="currentColor"></path><path d="M80.815 2.754h14.464l.147 3.03H80.962z" fill="currentColor"></path><path d="M83 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.825c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C82.74.553 82.867.5 83 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.825c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C91.74.553 91.867.5 92 .5" fill="#ffffff" stroke="currentColor"></path><g><path d="M102 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M102 2.5c-.826 0-1.396.52-1.361 1.127l.748 8.407c.057.663.799 1.236 1.659 1.236h12c.827 0 1.396-.52 1.361-1.127l-.748-8.407c-.056-.664-.798-1.236-1.659-1.236h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M100.842 2.721h14.464l.258 2.901H101.1z" fill="currentColor"></path><path d="M103 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.693c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.693c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M122 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M122 2.5c-.822 0-1.345.473-1.292 1.015l1.113 7.977c.084.625.864 1.177 1.737 1.177h12c.821 0 1.345-.473 1.292-1.015l-1.113-7.978c-.084-.625-.864-1.176-1.737-1.176h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M120.874 2.685h14.464l.383 2.752h-14.464z" fill="currentColor"></path><path d="M123 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.543c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.543c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M142 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M142 2.5c-.818 0-1.3.431-1.232.915l1.437 7.597c.109.591.923 1.123 1.806 1.123h12c.818 0 1.3-.431 1.232-.914l-1.437-7.597c-.109-.592-.923-1.124-1.806-1.124h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M140.901 2.652h14.464l.496 2.621h-14.464z" fill="currentColor"></path><path d="M143 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.41c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.41c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M162 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M162 2.5c-.814 0-1.264.398-1.184.836l1.692 7.297c.128.565.968 1.083 1.861 1.083h12c.813 0 1.264-.399 1.183-.837l-1.691-7.297c-.129-.565-.969-1.082-1.861-1.082h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M160.923 2.626h14.464l.584 2.517h-14.464z" fill="currentColor"></path><path d="M163 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.305c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.305c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M182 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M182 2.5c-.812 0-1.237.373-1.148.776l1.888 7.067c.143.544 1.004 1.051 1.902 1.051h12c.812 0 1.237-.373 1.147-.776l-1.886-7.067C195.759 3.006 194.898 2.5 194 2.5h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M180.94 2.606h14.464l.651 2.439h-14.464z" fill="currentColor"></path><path d="M183 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.224c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.224c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M202 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M202 2.5c-.81 0-1.216.354-1.12.73l2.038 6.891c.154.528 1.03 1.026 1.934 1.026h12c.809 0 1.216-.354 1.119-.73l-2.037-6.891C215.78 2.997 214.903 2.5 214 2.5h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M200.953 2.591h14.464l.702 2.378h-14.464z" fill="currentColor"></path><path d="M203 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.163c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.163c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M222 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M222 2.5c-.809 0-1.2.339-1.098.695l2.152 6.755c.163.516 1.052 1.008 1.959 1.008h12c.808 0 1.201-.339 1.098-.695l-2.152-6.755C235.795 2.99 234.907 2.5 234 2.5h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M220.963 2.579h14.464l.742 2.331h-14.464z" fill="currentColor"></path><path d="M223 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.116c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.116c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M242 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M242 2.5c-.807 0-1.188.328-1.082.667l2.241 6.652c.17.507 1.068.993 1.978.993h12c.807 0 1.188-.328 1.081-.667l-2.24-6.652c-.17-.508-1.068-.993-1.978-.993h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M240.97 2.57h14.464l.773 2.296h-14.464z" fill="currentColor"></path><path d="M243 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.079c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.079c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M262 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M262 2.5c-.807 0-1.179.319-1.069.647l2.308 6.573c.174.5 1.079.982 1.992.982h12c.806 0 1.178-.319 1.068-.647l-2.307-6.573c-.175-.501-1.08-.982-1.992-.982h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M260.976 2.564h14.464l.796 2.268h-14.464z" fill="currentColor"></path><path d="M263 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.052c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.052c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M282 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M282 2.5c-.806 0-1.172.313-1.06.631l2.358 6.515c.178.495 1.088.974 2.003.974h12c.805 0 1.171-.313 1.059-.631l-2.357-6.515c-.179-.496-1.089-.974-2.003-.974h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M280.98 2.559h14.464l.813 2.247h-14.464z" fill="currentColor"></path><path d="M283 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.031c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.031c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M302 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M302 2.5c-.806 0-1.167.308-1.054.62l2.394 6.473c.181.491 1.095.969 2.01.969h12c.805 0 1.167-.309 1.053-.621l-2.393-6.472c-.182-.493-1.095-.969-2.01-.969h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M300.984 2.555h14.464l.825 2.234h-14.464z" fill="currentColor"></path><path d="M303 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.017c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.017c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M322 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M322 2.5c-.805 0-1.163.305-1.049.613l2.417 6.445c.182.489 1.099.965 2.015.965h12c.804 0 1.163-.305 1.048-.613l-2.416-6.445c-.183-.49-1.1-.965-2.015-.965h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M320.986 2.553h14.464l.833 2.224h-14.464z" fill="currentColor"></path><path d="M323 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.007c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.007c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M342 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M342 2.5c-.805 0-1.162.304-1.047.609l2.43 6.43c.184.487 1.101.963 2.018.963h12c.804 0 1.162-.304 1.046-.61l-2.429-6.429c-.185-.489-1.102-.963-2.018-.963h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M340.987 2.551h14.464l.837 2.219h-14.464z" fill="currentColor"></path><path d="M343 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.002c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.002c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M362 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M362 2.5c-.805 0-1.161.303-1.046.608l2.434 6.425c.184.487 1.102.962 2.019.962h12c.804 0 1.161-.303 1.045-.608l-2.433-6.425c-.185-.488-1.103-.962-2.019-.962h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M360.987 2.551h14.464l.839 2.217h-14.464z" fill="currentColor"></path><path d="M363 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g></svg></div></button></div></div></div><div class="StyledBox-kXZdic bBYhrC"><p data-ink="true" class="styles__CustomTextElement-hYlwXS jNtDSs">to</p></div><div class="StyledBox-kXZdic bBYhrC"><div id="datepicker-id-capital-account-end-date-picker" class="ControllerWrapper-kIrDQG coWgpo"><div class="ControllerWrapper-kIrDQG coWgpo"><input mask="_" align="left" id="capital-account-end-date-picker" name="capital-account-end-date-picker-Pztb2IPdN8" placeholder=" " data-track-events="blur" theme="[object Object]" data-ink="true" aria-invalid="false" type="text" class="CoreInput__StyledDateFormat-fTbBpH dWWRjL" prefix="" suffix="" value="12/31/2025"><button type="button" aria-label="Open the calendar" class="Affix-kintYm ClickableAffix-jlfelK styles__CalendarClickableAffix-jXoPXs jhfEho"><div class="CalendarButtonIcon__CalendarIconWrapper-ifiUPD bkwLGV"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 15" width="380" height="15"><path d="M2 2h12c1.105 0 2 .831 2 1.857v9.286C16 14.169 15.105 15 14 15H2c-1.105 0-2-.831-2-1.857V3.857C0 2.831.895 2 2 2z" fill="currentColor"></path><path d="M2 2.5c-.836 0-1.5.616-1.5 1.357v9.286c0 .741.664 1.357 1.5 1.357h12c.836 0 1.5-.616 1.5-1.357V3.857c0-.741-.664-1.357-1.5-1.357H2z" fill="#ffffff" stroke="currentColor"></path><path d="M.778 2.797h14.464V6H.778z" fill="currentColor"></path><path d="M3 .5h1c.133 0 .26.053.354.146C4.447.74 4.5.867 4.5 1v2c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146H3c-.133 0-.26-.053-.354-.146C2.553 3.26 2.5 3.133 2.5 3V1c0-.133.053-.26.146-.354C2.74.553 2.867.5 3 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v2c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C11.74.553 11.867.5 12 .5" fill="#ffffff" stroke="currentColor"></path><path d="M22 2h12c1.105 0 2 .831 2 1.857v9.286C36 14.169 35.105 15 34 15H22c-1.105 0-2-.831-2-1.857V3.857C20 2.831 20.895 2 22 2z" fill="currentColor"></path><path d="M22 2.5c-.836 0-1.498.614-1.497 1.352l.018 9.265c.001.739.667 1.354 1.504 1.354h12c.835 0 1.497-.614 1.496-1.351l-.017-9.266C35.502 3.115 34.837 2.5 34 2.5H22z" fill="#ffffff" stroke="currentColor"></path><path d="M20.78 2.795h14.464l.006 3.196H20.786z" fill="currentColor"></path><path d="M23 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.993c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C22.74.553 22.867.5 23 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.993c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C31.74.553 31.867.5 32 .5" fill="#ffffff" stroke="currentColor"></path><path d="M42 2h12c1.105 0 2 .831 2 1.857v9.286C56 14.169 55.105 15 54 15H42c-1.105 0-2-.831-2-1.857V3.857C40 2.831 40.895 2 42 2z" fill="currentColor"></path><path d="M42 2.5c-.835 0-1.489.606-1.485 1.332l.08 9.193c.006.732.678 1.344 1.517 1.344h12c.835 0 1.489-.606 1.485-1.333l-.08-9.192C55.511 3.111 54.839 2.5 54 2.5H42z" fill="#ffffff" stroke="currentColor"></path><path d="M40.785 2.789h14.464l.027 3.171H40.812z" fill="currentColor"></path><path d="M43 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.967c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C42.74.553 42.867.5 43 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.967c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C51.74.553 51.867.5 52 .5" fill="#ffffff" stroke="currentColor"></path><path d="M62 2h12c1.105 0 2 .831 2 1.857v9.286C76 14.169 75.105 15 74 15H62c-1.105 0-2-.831-2-1.857V3.857C60 2.831 60.895 2 62 2z" fill="currentColor"></path><path d="M62 2.5c-.833 0-1.471.589-1.461 1.293l.207 9.043c.015.719.701 1.323 1.544 1.323h12c.833 0 1.471-.589 1.461-1.293l-.207-9.043C75.528 3.104 74.843 2.5 74 2.5H62z" fill="#ffffff" stroke="currentColor"></path><path d="M60.796 2.776H75.26l.071 3.119H60.867z" fill="currentColor"></path><path d="M63 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.915c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C62.74.553 62.867.5 63 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.915c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C71.74.553 71.867.5 72 .5" fill="#ffffff" stroke="currentColor"></path><path d="M82 2h12c1.105 0 2 .831 2 1.857v9.286C96 14.169 95.105 15 94 15H82c-1.105 0-2-.831-2-1.857V3.857C80 2.831 80.895 2 82 2z" fill="currentColor"></path><path d="M82 2.5c-.831 0-1.441.561-1.42 1.226l.426 8.785c.032.696.741 1.287 1.591 1.287h12c.83 0 1.44-.561 1.42-1.225l-.426-8.785C95.559 3.091 94.85 2.5 94 2.5H82z" fill="#ffffff" stroke="currentColor"></path><path d="M80.815 2.754h14.464l.147 3.03H80.962z" fill="currentColor"></path><path d="M83 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.825c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C82.74.553 82.867.5 83 .5m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.825c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354C91.74.553 91.867.5 92 .5" fill="#ffffff" stroke="currentColor"></path><g><path d="M102 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M102 2.5c-.826 0-1.396.52-1.361 1.127l.748 8.407c.057.663.799 1.236 1.659 1.236h12c.827 0 1.396-.52 1.361-1.127l-.748-8.407c-.056-.664-.798-1.236-1.659-1.236h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M100.842 2.721h14.464l.258 2.901H101.1z" fill="currentColor"></path><path d="M103 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.693c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.693c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M122 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M122 2.5c-.822 0-1.345.473-1.292 1.015l1.113 7.977c.084.625.864 1.177 1.737 1.177h12c.821 0 1.345-.473 1.292-1.015l-1.113-7.978c-.084-.625-.864-1.176-1.737-1.176h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M120.874 2.685h14.464l.383 2.752h-14.464z" fill="currentColor"></path><path d="M123 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.543c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.543c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M142 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M142 2.5c-.818 0-1.3.431-1.232.915l1.437 7.597c.109.591.923 1.123 1.806 1.123h12c.818 0 1.3-.431 1.232-.914l-1.437-7.597c-.109-.592-.923-1.124-1.806-1.124h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M140.901 2.652h14.464l.496 2.621h-14.464z" fill="currentColor"></path><path d="M143 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.41c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.41c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M162 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M162 2.5c-.814 0-1.264.398-1.184.836l1.692 7.297c.128.565.968 1.083 1.861 1.083h12c.813 0 1.264-.399 1.183-.837l-1.691-7.297c-.129-.565-.969-1.082-1.861-1.082h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M160.923 2.626h14.464l.584 2.517h-14.464z" fill="currentColor"></path><path d="M163 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.305c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.305c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M182 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M182 2.5c-.812 0-1.237.373-1.148.776l1.888 7.067c.143.544 1.004 1.051 1.902 1.051h12c.812 0 1.237-.373 1.147-.776l-1.886-7.067C195.759 3.006 194.898 2.5 194 2.5h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M180.94 2.606h14.464l.651 2.439h-14.464z" fill="currentColor"></path><path d="M183 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.224c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.224c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M202 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M202 2.5c-.81 0-1.216.354-1.12.73l2.038 6.891c.154.528 1.03 1.026 1.934 1.026h12c.809 0 1.216-.354 1.119-.73l-2.037-6.891C215.78 2.997 214.903 2.5 214 2.5h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M200.953 2.591h14.464l.702 2.378h-14.464z" fill="currentColor"></path><path d="M203 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.163c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.163c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M222 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M222 2.5c-.809 0-1.2.339-1.098.695l2.152 6.755c.163.516 1.052 1.008 1.959 1.008h12c.808 0 1.201-.339 1.098-.695l-2.152-6.755C235.795 2.99 234.907 2.5 234 2.5h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M220.963 2.579h14.464l.742 2.331h-14.464z" fill="currentColor"></path><path d="M223 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.116c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.116c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M242 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M242 2.5c-.807 0-1.188.328-1.082.667l2.241 6.652c.17.507 1.068.993 1.978.993h12c.807 0 1.188-.328 1.081-.667l-2.24-6.652c-.17-.508-1.068-.993-1.978-.993h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M240.97 2.57h14.464l.773 2.296h-14.464z" fill="currentColor"></path><path d="M243 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.079c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.079c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M262 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M262 2.5c-.807 0-1.179.319-1.069.647l2.308 6.573c.174.5 1.079.982 1.992.982h12c.806 0 1.178-.319 1.068-.647l-2.307-6.573c-.175-.501-1.08-.982-1.992-.982h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M260.976 2.564h14.464l.796 2.268h-14.464z" fill="currentColor"></path><path d="M263 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.052c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.052c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M282 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M282 2.5c-.806 0-1.172.313-1.06.631l2.358 6.515c.178.495 1.088.974 2.003.974h12c.805 0 1.171-.313 1.059-.631l-2.357-6.515c-.179-.496-1.089-.974-2.003-.974h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M280.98 2.559h14.464l.813 2.247h-14.464z" fill="currentColor"></path><path d="M283 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.031c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.031c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M302 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M302 2.5c-.806 0-1.167.308-1.054.62l2.394 6.473c.181.491 1.095.969 2.01.969h12c.805 0 1.167-.309 1.053-.621l-2.393-6.472c-.182-.493-1.095-.969-2.01-.969h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M300.984 2.555h14.464l.825 2.234h-14.464z" fill="currentColor"></path><path d="M303 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.017c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.017c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M322 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M322 2.5c-.805 0-1.163.305-1.049.613l2.417 6.445c.182.489 1.099.965 2.015.965h12c.804 0 1.163-.305 1.048-.613l-2.416-6.445c-.183-.49-1.1-.965-2.015-.965h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M320.986 2.553h14.464l.833 2.224h-14.464z" fill="currentColor"></path><path d="M323 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.007c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.007c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M342 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M342 2.5c-.805 0-1.162.304-1.047.609l2.43 6.43c.184.487 1.101.963 2.018.963h12c.804 0 1.162-.304 1.046-.61l-2.429-6.429c-.185-.489-1.102-.963-2.018-.963h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M340.987 2.551h14.464l.837 2.219h-14.464z" fill="currentColor"></path><path d="M343 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.002c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1.002c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g><g><path d="M362 2h12c1.105 0 2 .831 2 1.857v9.286c0 1.026-.895 1.857-2 1.857h-12c-1.105 0-2-.831-2-1.857V3.857c0-1.026.895-1.857 2-1.857z" fill="currentColor"></path><path d="M362 2.5c-.805 0-1.161.303-1.046.608l2.434 6.425c.184.487 1.102.962 2.019.962h12c.804 0 1.161-.303 1.045-.608l-2.433-6.425c-.185-.488-1.103-.962-2.019-.962h-12z" fill="#ffffff" stroke="currentColor"></path><path d="M360.987 2.551h14.464l.839 2.217h-14.464z" fill="currentColor"></path><path d="M363 .5h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146m9 0h1c.133 0 .26.053.354.146.093.094.146.221.146.354v1c0 .133-.053.26-.146.354-.094.093-.221.146-.354.146h-1c-.133 0-.26-.053-.354-.146-.093-.094-.146-.221-.146-.354V1c0-.133.053-.26.146-.354.094-.093.221-.146.354-.146" fill="#ffffff" stroke="currentColor"></path></g></svg></div></button></div></div></div></div></div></div></div></div><div data-testid="capital-account-summary-fa"><div data-testid="capital-account-summary"><section data-ink="true" class="styles__StyledSection-lpdJMc eMMqIt"><div class="styles__SectionHeader-dqPOkE lmPMVs"><div class="StyledBox-kXZdic glalbm"><h3 data-ink="true" class="styles__CustomTextElement-hYlwXS fvpmpq">Capital account summary</h3></div></div><div class="styles__SectionBody-hDGWpD bBKJnj"><div class="wrapper-ink-table"><table id="TTr9H94Ut" class="ink-table" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><colgroup><col class="ink-table--col__width-33"><col class="ink-table--col__width-33"><col class="ink-table--col__width-34"></colgroup><thead><tr class="ink-table--head--row"><th class="ink-table--header" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true"></th><th class="ink-table--header ink-table--header__right" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true">Statement period</th><th class="ink-table--header ink-table--header__right" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true">Inception to date</th></tr></thead><tbody><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Beginning balance</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">755,189.15</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Capital contributions</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">245,285.71</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Capital distributions</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Syndication costs</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Net unrealized gain (loss)</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">56,174.54</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">599,951.48</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Management fees</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">9,540.12</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">6,431.43</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Net operating income (loss)</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">2,616.20</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">1,678.38</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Net realized gain (loss)</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Deemed gain</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Transfers</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">149,425.00</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">149,425.00</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Contributions outside commitment</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">1,868.00</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">1,198.00</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Other operating expenses</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">1,366.64</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">946.45</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell ink-table--cell__checkbox_" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Carried interest accrued</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">8,530.32</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">118,179.04</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td></tr><tr class="ink-table--total-row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Ending balance</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">569,774.89</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">569,774.89</span></span></td></tr></tbody></table></div></div></section><section data-ink="true" class="styles__StyledSection-lpdJMc eMMqIt"><div class="styles__SectionHeader-dqPOkE lmPMVs"><div class="StyledBox-kXZdic glalbm"><h3 data-ink="true" class="styles__CustomTextElement-hYlwXS fvpmpq">Commitment summary</h3></div></div><div class="styles__SectionBody-hDGWpD bBKJnj"><div class="wrapper-ink-table"><table id="TTr9H94Ut" class="ink-table" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><colgroup><col class="ink-table--col__width-33"><col class="ink-table--col__width-33"><col class="ink-table--col__width-34"></colgroup><thead><tr class="ink-table--head--row"><th class="ink-table--header" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true"></th><th class="ink-table--header ink-table--header__right" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true">Statement period</th><th class="ink-table--header ink-table--header__right" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true">Inception to date</th></tr></thead><tbody><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Initial commitment</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">95,860.71</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">95,860.71</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Total Contributions</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">151,293.00</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">97,058.71</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Less paid outside commitment</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">1,868.00</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">1,198.00</span></span></td></tr><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Contributions inside commitment</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyParenthesesPre-evjlvq dAcTGA">(</span><span class="styles__CurrencyValue-gFoDim eygmvk">149,425.00</span><span class="styles__CurrencyParenthesesPost-cNQGTx fxZjWa">)</span></span></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">95,860.71</span></span></td></tr><tr class="ink-table--total-row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Unfunded commitment</td><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"></td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">0.00</span></span></td></tr></tbody></table></div></div></section><section data-ink="true" class="styles__StyledSection-lpdJMc eMMqIt"><div class="styles__SectionHeader-dqPOkE lmPMVs"><div class="StyledBox-kXZdic glalbm"><h3 data-ink="true" class="styles__CustomTextElement-hYlwXS fvpmpq">Deferred/prepaid contributions as of 12/31/2025</h3></div></div><div class="styles__SectionBody-hDGWpD bBKJnj"><div class="wrapper-ink-table"><table id="TTr9H94Ut" class="ink-table" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><thead><tr class="ink-table--head--row"><th class="ink-table--header" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true"></th><th class="ink-table--header ink-table--header__right" colspan="1" data-ink="true" data-ink-sunset="true" data-ink-ink-sass="true">Amount</th></tr></thead><tbody><tr class="ink-table--body--row" data-ink="true" data-ink-deprecated="true"><td class="ink-table--cell" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true">Deferred/prepaid</td><td class="ink-table--cell ink-table--cell__right" colspan="1" data-ink="true" data-ink-deprecated="true" data-ink-ink-sass="true"><span data-ink="true" class="styles__StyledCurrency-jMFoZi bENWas"><span title="USD" class="styles__CurrencySymbolPre-hlPOkU cvuQBZ">$</span><span class="styles__CurrencyValue-gFoDim eygmvk">19.06</span></span></td></tr></tbody></table></div></div></section></div></div></div></div><div class="StyledBox-kXZdic ifahGE" data-testid="fep-global-footer"><div class="StyledBox-kXZdic grTQXW"><div class="StyledBox-kXZdic gaZMZK"><small data-ink="true" class="styles__CustomTextElement-hYlwXS ktaflT">© Copyright 2026, eShares, Inc. DBA Carta, Inc. All rights reserved.</small></div><div class="StyledBox-kXZdic gaZMZK"><a href="https://www.carta.com/terms-of-service/" to="https://www.carta.com/terms-of-service/" data-ink="true" target="_blank" rel="noopener noreferrer" data-track-events="click" aria-disabled="false" tabindex="0" class="Anchor__StyledAnchor-hDGKPZ fzSnvD"><p data-ink="true" class="styles__CustomTextElement-hYlwXS fxXeAm">Terms of service</p></a></div><div class="StyledBox-kXZdic gaZMZK"><a href="https://www.carta.com/privacy/" to="https://www.carta.com/privacy/" data-ink="true" target="_blank" rel="noopener noreferrer" data-track-events="click" aria-disabled="false" tabindex="0" class="Anchor__StyledAnchor-hDGKPZ fzSnvD"><p data-ink="true" class="styles__CustomTextElement-hYlwXS fxXeAm">Privacy policy</p></a></div></div></div><div class="dev-footer"></div></div></div></div></div>
+    <script src="/static/bundles/d1735737-new-investor-portfolio.js"></script>
+
+
+                </div>
+
+                
+
+                
+            </main>
+        </div>
+    </div>
+    
+        <div id="js-loading" class="magna-loading hide">
+            <div>
+    <svg class="magna-loading-svg" viewBox="-70 -70 140 140" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" xml:space="preserve">
+        <path class="loading-path" d="M-5 -61a10 10 0 0 1 10 0l45.425625842204 26.226497308104a10 10 0 0 1 5 8.6602540378444l0 52.452994616207a10 10 0 0 1 -5 8.6602540378444l-45.425625842204 26.226497308104a10 10 0 0 1 -10 0l-45.425625842204 -26.226497308104a10 10 0 0 1 -5 -8.6602540378444l0 -52.452994616207a10 10 0 0 1 5 -8.6602540378444 Z"></path>
+        <path class="loading-path" d="M-5 -61a10 10 0 0 1 10 0l45.425625842204 26.226497308104a10 10 0 0 1 5 8.6602540378444l0 52.452994616207a10 10 0 0 1 -5 8.6602540378444l-45.425625842204 26.226497308104a10 10 0 0 1 -10 0l-45.425625842204 -26.226497308104a10 10 0 0 1 -5 -8.6602540378444l0 -52.452994616207a10 10 0 0 1 5 -8.6602540378444 Z"></path>
+        <path class="loading-path" d="M-5 -61a10 10 0 0 1 10 0l45.425625842204 26.226497308104a10 10 0 0 1 5 8.6602540378444l0 52.452994616207a10 10 0 0 1 -5 8.6602540378444l-45.425625842204 26.226497308104a10 10 0 0 1 -10 0l-45.425625842204 -26.226497308104a10 10 0 0 1 -5 -8.6602540378444l0 -52.452994616207a10 10 0 0 1 5 -8.6602540378444 Z"></path>
+    </svg>
+</div>
+
+        </div>
+    
+
+    <!-- global modal containers -->
+    <div id="legacy-modals">
+        <div class="modal fade" id="js-modal" tabindex="-1"></div>
+        <div class="modal fade certificate-modal" id="certificate-modal-front" tabindex="-1"></div>
+        <div class="modal fade certificate-modal" id="certificate-modal-back" tabindex="-1"></div>
+    </div>
+
+    
+        
+        
+        <script type="text/javascript" src="/static/js/app_base-e7aacdc378ae5cefa7df5a4f53c674dd86ada066.js" charset="utf-8"></script>
+    
+
+    
+        <div id="fep-cookie-consent"></div>
+        <script src="/static/bundles/2ae46f5b-fep-cookie-consent.js" charset="UTF-8"></script>
+    
+
+    <script type="text/javascript">
+        Magna.timeout = 21600 * 1000;
+        // Magna and Magna.urls are deprecated. If you're updating them also update MagnaUrlsAPIView
+        Magna.urls = {
+            
+                documentset_list: "/corporations/2115793/security_templates/",
+                bulk_modify_asc718_modal: "/corporations/2115793/ASC718/bulk_modify_asc718_modal/",
+                bulk_modify_asc718_rsa_modal: "/corporations/2115793/ASC718/bulk_modify_asc718_rsa_modal/",
+                create_asc718_reports_modal: "/corporations/2115793/ASC718/create_reports/",
+                delete_asc718_period: "/corporations/2115793/ASC718/delete_period/",
+                bulk_modify_asc718_modifications_modal: "/corporations/2115793/ASC718/bulk_modify_asc718_modifications_modal",
+                bulk_modify_asc718_rsa_modifications_modal: "/corporations/2115793/ASC718/bulk_modify_asc718_rsa_modifications_modal",
+                request_feature_info: "/common/request_feature_info/2115793/",
+                tender_offers_update_seller: '/corporations/2115793/tender_offers/update_seller/',
+                tender_offers_get_total_vested_shares: '/corporations/2115793/tender_offers/get_total_vested_shares/',
+                edit_tender_offer_seller_modal: '/corporations/2115793/tender_offers/edit/seller/modal/',
+                tender_offers_save_wire_info: '/corporations/2115793/tender_offers/save_wire_info/',
+                tender_offers_upload_tax_docs: '/corporations/2115793/tender_offers/upload_tax_docs/',
+                tender_offers_upload_spousal_consent: '/corporations/2115793/tender_offers/upload_spousal_consent/',
+                toggle_setup_complete: "/corporations/2115793/toggle_setup_complete/",
+                onboarding_invite_legal_contact: "/api/onboarding/2115793/onboarding/invite_legal_admin/",
+                generate_vesting: "/certificates/vesting/generate/2115793/",
+                multiple_fund_document_importer_modal: "/investors/fund/2115793/fund_document/importer/",
+                fund_document_divider_modal: "/investors/fund/2115793/document_divider/importer/",
+                delete_fund_document: "/api/investors/funds/2115793/documents/delete/",
+                vesting_schedules_form: "/corporations/2115793/templates/vesting_schedule/",
+                health_checks_count_api: "/api/health/2115793/health_check_count/",
+                health_checks_dashboard: "/corporations/2115793/health-checks/dashboard/",
+                get_corporation_analytics_properties: "/api/anltcs/corporations/2115793/properties/",
+                get_qsbs_eligibility_history: "/issuer/2115793/api/v1/qsbs/eligibility-history/",
+            
+            issuable_filter_modal: "/issuables/issuable_filter_modal/",
+            attach_documents_modal: "/issuables/attach_documents_modal/",
+            attach_documents: "/issuables/attach_documents/",
+            create_security_template: "/corporations/create_security_template/",
+            edit_security_template: "/corporations/edit_security_template/",
+            delete_security_template: "/corporations/delete_security_template/",
+            invite_multiple_investor_modal: "/financings/invite_multiple_investor_modal/",
+            send_bulk_investor_task: "/financings/send_bulk_investor_task/",
+            deposit_financing_funds: "/financings/deposit_financing_funds/",
+            set_financing_investor_portfolio: "/financings/review_financing/",
+            tasks_exist: "/profiles/tasks_exist/",
+            dashboard_redirect: "/profiles/dashboard/",
+            onboarding_invite_legal_admin_modal: "/corporations/onboarding/invite_legal_admin_modal/",
+            onboarding_request_activation_modal: "/corporations/onboarding/get_request_activation_modal/",
+            onboarding_setup_settings_modal: "/corporations/onboarding/onboarding_setup_settings_modal/",
+            mark_manual_complete_task_as_complete: "/api/onboarding/mark_manual_complete_task_as_complete/",
+            save_onboarding_schedule: "/api/onboarding/save_onboarding_schedule/",
+            send_follow_up_email_manual: "/api/onboarding/send_follow_up_email_manual/",
+            celery_task_status: "/common/queued_task_status/",
+            login_url: "/accounts/login/",
+            update_authorized_shares: "/certificates/update_authorized_shares/",
+            certificates_resend: "/certificates/resend/",
+            certificates_bulk_resend: "/certificates/bulk_resend/",
+            certificates_preview: "/certificates/get_preview_modal/",
+            create_legend_modal: "/certificates/create_legend_modal/",
+            create_legend: "/certificates/create_legend/",
+            delete_legend: "/certificates/delete_legend/",
+            certificates_modal: "/certificates/get_modal/",
+            cancel_exercise_in_portfolio_modal: "/options/cancel_exercise_in_portfolio_modal/",
+            edit_certificates_of_incorporation_modal: "/corporations/edit_certificates_incorporation_modal/",
+            warrant_blocks_modal: "/warrants/get_modal/blocks/",
+            note_blocks_modal: "/convertiblenotes/get_modal/block/",
+            outstanding_shares: "/certificates/outstanding/",
+            bulk_modify_certificate_modal: "/certificates/bulk_modify/",
+            bulk_modify_rsu_modal: "/options/bulk_modify_rsu_modal/",
+            bulk_modify_sar_modal: "/options/bulk_modify_sar_modal/",
+            bulk_modify_cbu_modal: "/options/bulk_modify_cbu_modal/",
+            bulk_modify_warrant_modal: "/warrants/bulk_modify/",
+            bulk_modify_note_modal: "/convertiblenotes/bulk_modify_note_modal/",
+            bulk_cancel_certificates_modal: "/certificates/bulk_cancel_certificates/modal/",
+            bulk_cancel_certificates: "/certificates/bulk_cancel_certificates/complete/",
+            get_tax_withholdings: "/options/get_tax_withholdings",
+            bulk_cancel_warrants_modal: "/warrants/bulk_cancel_warrants/modal/",
+            bulk_cancel_warrants: "/warrants/bulk_cancel_warrants/complete/",
+            bulk_cancel_convertible_notes_modal: "/convertiblenotes/bulk_cancel_note/modal/",
+            bulk_cancel_convertible_notes: "/convertiblenotes/bulk_cancel_note/complete/",
+
+            bulk_retract_certificates_modal: "/certificates/bulk_retract_certificates/modal/",
+            bulk_retract_grants_modal: "/options/bulk_retract_grants/modal/",
+            bulk_retract_warrants_modal: "/warrants/bulk_retract_warrants/modal/",
+            bulk_retract_convertible_notes_modal: "/convertiblenotes/bulk_retract_convertible_notes/modal/",
+
+            terminate_repurchase_modal: "/certificates/terminate/modal/",
+            terminate_repurchase: "/certificates/terminate/complete/",
+            reverse_repurchase_termination_modal: "/certificates/reverse_termination/modal/",
+            reverse_repurchase_termination: "/certificates/reverse_termination/complete/",
+            private_note_modal: "/issuables/private_note/",
+            cancel_issuable_modal: "/issuables/cancel_issuable_modal/",
+            cancel_issuable: "/issuables_api/cancel_issuable/",
+            realize_modal: "/investors/realize_issuable/",
+            repurchase_update_available_shares: "/certificates/repurchase/available/",
+            corporations_create_corporation: "/corporations/create",
+            corporations_create_corporation_modal: "/corporations/create_corporation_modal",
+            request_info_law_firm: "/api/law_firms/contact/form/",
+            request_info_law_firm_logged_in: "/api/law_firms/contact/request-info-logged-in/",
+            corporations_go_live_modal: "/corporations/go_live_modal/",
+            corporations_go_live: "/corporations/go_live/",
+            corporations_reset: "/corporations/reset/",
+            corporations_resend_corporate_role_invite: "/corporations/resend/corporate_role_invite/",
+            corporations_permissions_save: "/corporations/save_permissions/",
+            corporations_permissions_delete: "/corporations/delete_permissions/",
+            get_modal_document: "/corporations/modal_document/",
+            icebox_modal: "/corporations/icebox/modal/",
+            share_fund_doc_modal: "/investors/fund/docs/modal/share/",
+            fund_doc_notification_modal: "/investors/fund/docs/modal/notify/",
+            profile_summary_modal: "/profiles/summary/",
+            profile_modify: "/profiles/modify/",
+            api_extra_emails: "/api/profiles/extra_emails/",
+            profiles_change_signature: "/profiles/change/signature/",
+            profiles_save_signature: "/profiles/save/signature/",
+            vesting_delete_vesting_schedule: "/vesting/delete/vesting_schedule/",
+            vesting_reapply_vesting_schedule: "/vesting/reapply/vesting_schedule/",
+            vesting_accelerate_schedule: "/vesting/modify/issuable/schedule/accelerate/",
+            vesting_save_accelerate_schedule: "/vesting/modify/issuable/schedule/accelerate/save/",
+            vesting_create_vesting_schedule: "/vesting/create/vesting_schedule/",
+            vesting_create_custom_vesting_schedule: "/vesting/custom_vesting_schedule/",
+            vesting_modify_schedule: "/vesting/modify/issuable/schedule/",
+            save_vesting_changes: "/vesting/modify/issuable/schedule/save/",
+            vesting_modify_milestone_schedule: "/vesting/modify/issuable/milestone/",
+            save_vesting_milestone_changes: "/vesting/modify/issuable/schedule_milestone/save/",
+            option_grant_modal: '/options/modal/',
+            warrant_modal: "/warrants/get_modal/",
+            warrant_preview: "/warrants/get_preview_modal/",
+            warrants_resend: "/warrants/resend/warrant/",
+            warrants_bulk_resend: "/warrants/bulk_resend/warrant/",
+            warrant_to_cert: "/warrants/convert_warrant/",
+            exercise_warrant_modal: "/warrants/warrant_exercise/",
+            convertible_notes_modal: "/convertiblenotes/get_modal/",
+            convertible_notes_preview: "/convertiblenotes/get_preview_modal/",
+            convertible_notes_resend: "/convertiblenotes/resend/note/",
+            convertible_notes_bulk_resend: "/convertiblenotes/bulk_resend/note/",
+            delete_note_block: "/convertiblenotes/delete_note_block/",
+            grants_resend: "/options/resend/grant/",
+            grants_bulk_resend: "/options/bulk_resend/grant/",
+            grant_preview: "/options/modal/preview/",
+            grant_to_cert: "/options/exercise/ledger/complete/",
+            cashless_sell_modal_missing_info: "/options/cashless_sell_modal_missing_info/",
+            grants_exercise_instructions: "/options/exercise/instructions/",
+            grants_exercise_request: "/options/exercise/owner/request/",
+            grants_exercise_modal: "/options/exercise/ledger/modal/",
+            sell_modal_missing_info: "/options/sell_modal_missing_info/",
+            sell_modal_tax_form_awaiting_review: "/options/sell_modal_tax_form_awaiting_review/",
+            sell_modal_tax_form_missing: "/options/sell_modal_tax_form_missing/",
+            bulk_cancel_grants_modal: "/options/bulk_cancel_grants/modal/",
+            bulk_cancel_grants: "/options/bulk_cancel_grants/complete/",
+            confirm_exercise_funds_modal: "/options/confirm_exercise_funds_modal/",
+            delete_option_plan: "/options/delete/",
+            termination_modal: "/options/terminate_modal/",
+            bulk_termination_modal: "/options/bulk_terminate_modal/",
+            undo_termination_modal: "/options/undo_termination_modal/",
+            grant_compliance_check: "/options/compliance/run/",
+            common_loading_gif: "/static/lib/eshares/css/img/loading_inplace.gif",
+            common_file_upload: "/common/file/upload/",
+            encrypted_file_upload: "/common/file/encrypted_upload/",
+            common_accept_issuable: "/issuables/accept/",
+            common_accept_modal: "/issuables/accept/modal",
+            pick_firm_portfolio_modal: "/issuables/pick_firm_portfolio_modal/",
+            multi_file_upload: "/common/file/multi/upload/",
+            multi_file_remove: "/common/file/multi/remove/",
+            options_update_available_shares: "/options/exercise/available/",
+            remove_law_firm: "/api/corporations/law_firm/",
+            user_permissions_modal: "/corporations/user_permissions/",
+            user_permissions_resend_modal: "/corporations/user_permissions/resend/",
+            organization_summary_modal: "/organizations/organization_summary/",
+            stock_split_modal: "/corporations/stocksplit/",
+            typeahead: '/corporations/typeahead/',
+            transaction_modal: '/payments/transactions/modal/',
+            account_modal: '/payments/accounts/modal/',
+            verify_ach: "/payments/accounts/verify/ajax/",
+            verify_ach_modal: "/payments/accounts/verify/modal/",
+            add_document_to_portfolio: "/portfolio/add_document_to_portfolio/",
+            request_cap_table_modal: "/portfolio/request_cap_table_modal/",
+            create_vesting_schedule_modal: "/vesting/vesting_schedules/create/modal/",
+            stock_prices: '/common/stock_prices/',
+            get_summary_exercises_financing: '/corporations/get_summary_exercises_financing/',
+            get_corporation_totals: '/corporations/get_corporation_totals/',
+            get_summary_stakeholders_captable: '/corporations/get_summary_stakeholders_captable/',
+            get_summary_latest_transactions: '/corporations/get_summary_latest_transactions/',
+            get_summary_valuations: '/corporations/get_summary_valuations/',
+            get_summary_securities_status: '/corporations/get_summary_securities_status/',
+            verify_captable_modal: '/corporations/onboarding/get_verify_modal/',
+            verify_rights_preferences_modal: '/corporations/onboarding/get_verify_rights_preferences_modal/',
+            common_file_chunk_upload: "/common/file/chunk/upload/",
+            list_report_cached: "/list_cached/?only_xlsx=true&darkwizards=" + Math.random().toString(),
+            two_factor_auth_required_modal: "/profiles/two_factor/ajax-2fa-required/",
+            two_factor_auth_staff_setup: "/carta-login/2fa/update",
+            safe_redirect: "/common/safe_redirect/?next=",
+
+            
+        };
+
+        
+            Magna.exemptions = [];
+        
+
+        
+            Magna.relationship_choices = [];
+        
+
+        
+            Magna.rsa_draft_statuses = {};
+        
+
+        Magna.waiting_for_payment_options = {  };
+
+        // Set datepicker defaults
+        $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+        $.fn.datepicker.defaults.autoclose = true;
+
+        $('.js-environment-tag').click(function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            $(this).hide();
+            $('.account__with-environment-tag').removeClass('account__with-environment-tag');
+        });
+
+    </script>
+    <script>
+        (function() {
+            const header = document.querySelector('.app-shell--header');
+            if (!header) return;
+
+            function updateHeaderHeight() {
+                const { height } = header.getBoundingClientRect();
+                document.documentElement.style.setProperty('--app-shell-header-height', `${height}px`);
+            }
+
+            // Initial measurement on load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updateHeaderHeight);
+            } else {
+                updateHeaderHeight();
+            }
+
+            // Use ResizeObserver for modern browsers (preferred)
+            if (typeof ResizeObserver !== 'undefined') {
+                const observer = new ResizeObserver(function (entries) {
+                    const { height } = entries[0].contentRect;
+                    document.documentElement.style.setProperty('--app-shell-header-height', `${height}px`);
+                });
+                observer.observe(header);
+            } else {
+                // Fallback to window resize events for older browsers
+                let resizeTimeout;
+                window.addEventListener('resize', function () {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(updateHeaderHeight, 100);
+                });
+            }
+        })();
+    </script>
+    
+
+    
+
+    
+
+    
+        <script type="text/javascript">
+            $(function(){
+                Magna.setupAutologout();
+            });
+        </script>
+    
+
+    
+        
+        
+    
+
+    
+        
+        
+    
+
+    
+
+    <div id="fep-keyboard-shortcuts"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div></div>
+    <script src="/static/bundles/9cfebae7-fep-keyboard-shortcuts.js"></script>
+
+    
+        
+            
+<div id="fep-pendo-container"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div></div>
+<script src="/static/bundles/c47076b3-pendo.js"></script>
+
+        
+        <!-- Third-party script includes start -->
+        
+<div id="virtual-tour"></div>
+<script src="/static/bundles/1338a07e-virtual-tour.js"></script>
+
+    
+
+    
+        
+<div id="fep-legacy-delighted-entry"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div></div>
+<script src="/static/bundles/b590083b-delighted.js"></script>
+
+    
+
+
+    
+        
+            <div id="support-hub"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div id="support-hub-escalator" data-testid="test-support-hub-escalator" class="support-hub-escalator" tabindex="0" aria-label="Talk to Webchat Chatbot" role="button" style="background: rgb(34, 33, 32); border-radius: 50%; position: fixed; z-index: 10000; box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 12px 0px; width: 58px; height: 58px; bottom: 15px; right: 16px; padding: 9px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" height="40px" width="40px" color="#ffffff" xml:space="preserve"><g stroke-width="0"></g><rect xmlns="http://www.w3.org/2000/svg" width="500" height="320" rx="60" ry="60" transform="matrix(.463922 0 0 0.525653 49.0195 77.465957)" fill="currentColor"></rect><path xmlns="http://www.w3.org/2000/svg" d="M131.284332,397.070364v75.333507l64.347369-75.333507h-64.347369Z" transform="matrix(.854021 0 0 0.901916-24.828436-127.837835)" fill="currentColor"></path></svg></div></div>
+        
+    
+    <!-- Third-party script includes end -->
+
+    
+<div id="fep-dead-code-tracker"><div class="AlertContextWrapper-sc-a1ew5e cmaiTb"><div></div></div><div class="ink-modal" role="button" tabindex="0" data-ink="true" data-ink-ink-sass="true"><div></div></div></div>
+<script src="/static/bundles/60df8083-fep-dead-code-tracker.js"></script>
+
+
+    
+    <link href="/static/bundles/styles-b28acf1b.css" rel="stylesheet">
+
+
+<div id="fep-dev-client-tools"></div><div data-ink="true" role="progressbar" aria-live="polite" aria-label="loading" aria-valuetext="loading" aria-busy="false" aria-hidden="true" class="WrapperLoader-sc-vt6j8y euBgfe"><div class="StyledLoader-sc-x747vb fyMHzv"><div class="LoaderBackdrop-sc-17yoi1z hbWwqs"></div><div class="LoaderBody-sc-433vah erQqZY"><svg role="img" viewBox="-70 -70 140 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="LoaderShape-sc-h4cte9 fanwsw"><title>loading</title><path d="
+M -5 -61
+a 10 10 0 01 10 0
+l 45 26
+a 10 10 0 01 5 9
+l 0 52
+a 10 10 0 01 -5 9
+l -45 26
+a 10 10 0 01 -10 0
+l -45 -26
+a 10 10 0 01 -5 -9
+l 0 -52
+a 10 10 0 01 5 -9
+Z" class="LoaderShapePath-sc-1wjl4em hbyHTV"></path><path d="
+M -5 -61
+a 10 10 0 01 10 0
+l 45 26
+a 10 10 0 01 5 9
+l 0 52
+a 10 10 0 01 -5 9
+l -45 26
+a 10 10 0 01 -10 0
+l -45 -26
+a 10 10 0 01 -5 -9
+l 0 -52
+a 10 10 0 01 5 -9
+Z" class="LoaderShapePath-sc-1wjl4em hbyHTV"></path><path d="
+M -5 -61
+a 10 10 0 01 10 0
+l 45 26
+a 10 10 0 01 5 9
+l 0 52
+a 10 10 0 01 -5 9
+l -45 26
+a 10 10 0 01 -10 0
+l -45 -26
+a 10 10 0 01 -5 -9
+l 0 -52
+a 10 10 0 01 5 -9
+Z" class="LoaderShapePath-sc-1wjl4em hbyHTV"></path></svg></div></div></div><div id="ujet-widget" data-testid="test-ujet-widget" style="--ujet-right: 15px; --ujet-bottom: 80px; --accent-1: #FBFDFF; --accent-2: #F4F4F4; --accent-3: #E6F4FE; --accent-4: #FFFFFF; --accent-5: #F4F4F4; --accent-6: #7B8080; --accent-7: #394040; --accent-8: #222120; --accent-9: #222120; --accent-10: #222120; --accent-11: #394040; --accent-12: #222120;"></div><iframe src="https://carta.ujet.co/web-sdk/v3/bridge.html?5.0.0" style="display:none"></iframe><iframe name="stonly-stat-id" src="https://s.stonly.com/stonly-stat-id.html?widgetId=bd2a2086-cb4b-11ee-bc11-06cb0cb2a85e&amp;v=1.7" data-loaded="true" data-is-local-storage-supported="true" data-is-extension-storage-available="false" style="display: none; height: 0px; opacity: 0; position: absolute; visibility: hidden; width: 0px;"></iframe><div class="stn-wdgt"><div class="stonly-widget-1uy074m e1081snp0"></div></div></body></html>

@@ -1,6 +1,6 @@
-# OpenClaw + Carta Automation
+# Carta Automation
 
-Automated portfolio data export system for Carta via OpenClaw AI agent.
+Automated portfolio data export system for Carta via Playwright.
 
 **Author:** Ankur Kumar | **Team:** Elevation AI | **Status:** Active
 
@@ -230,7 +230,5 @@ openclaw_carta/
 
 ## Contact
 
-- **Ankur Kumar** — project lead
-- **Saumya Garg** — stakeholder
-- **Hanzel Corella** — provides company lists
-- **Alan Abraham** — stakeholder
+- **Ankur Kumar** — Project Lead
+- **Alan Abraham** — Project Manager

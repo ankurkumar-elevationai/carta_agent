@@ -1,482 +1,871 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Carta Intelligence MCP — Endpoint Specification v1.1</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;color:#1a1a2e;line-height:1.6;padding:40px 60px;max-width:1100px;margin:0 auto;font-size:13px}
-@media print{body{padding:20px 40px;font-size:11px}h1{font-size:22px!important}.page-break{page-break-before:always}}
-h1{font-size:28px;font-weight:700;color:#0f0f23;border-bottom:3px solid #4361ee;padding-bottom:10px;margin-bottom:6px}
-h2{font-size:18px;font-weight:700;color:#4361ee;margin:28px 0 12px;border-bottom:1px solid #e0e0e0;padding-bottom:4px}
-h3{font-size:14px;font-weight:600;color:#1a1a2e;margin:16px 0 6px}
-.subtitle{color:#666;font-size:14px;margin-bottom:20px}
-.meta{display:flex;gap:30px;margin-bottom:24px;font-size:12px;color:#555}
-.meta span{background:#f0f4ff;padding:4px 10px;border-radius:4px}
-table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:12px}
-th{background:#4361ee;color:#fff;padding:8px 10px;text-align:left;font-weight:600}
-td{padding:7px 10px;border-bottom:1px solid #e8e8e8}
-tr:nth-child(even){background:#f8f9ff}
-.tool-card{background:#f8f9ff;border-left:4px solid #4361ee;padding:12px 16px;margin:10px 0;border-radius:0 6px 6px 0}
-.tool-card h3{margin:0 0 4px;color:#4361ee;font-size:14px}
-.tool-card .desc{color:#444;margin-bottom:6px}
-.label{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:600;margin-right:4px}
-.label-get{background:#d4edda;color:#155724}
-.label-post{background:#cce5ff;color:#004085}
-.label-mcp{background:#e8daef;color:#6c3483}
-.label-system{background:#fff3cd;color:#856404}
-code{background:#eef;padding:1px 5px;border-radius:3px;font-size:11px;font-family:'Courier New',monospace}
-.arch-box{background:#0f0f23;color:#e0e0e0;padding:16px;border-radius:8px;font-family:'Courier New',monospace;font-size:12px;margin:12px 0;white-space:pre;line-height:1.5}
-.note{background:#fff8e1;border-left:4px solid #ffc107;padding:8px 12px;margin:10px 0;font-size:12px;border-radius:0 4px 4px 0}
-.section-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{text-align:center;background:#f0f4ff;padding:12px;border-radius:6px}
-.stat .num{font-size:28px;font-weight:700;color:#4361ee}
-.stat .lbl{font-size:11px;color:#666}
-hr{border:none;border-top:1px solid #ddd;margin:20px 0}
-</style>
+       <meta charset="UTF-8">
+       <title>Carta Intelligence MCP — Endpoint Specification v1.1</title>
+       <style>
+              @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+              * {
+                     margin: 0;
+                     padding: 0;
+                     box-sizing: border-box
+              }
+
+              body {
+                     font-family: 'Inter', sans-serif;
+                     color: #1a1a2e;
+                     line-height: 1.6;
+                     padding: 40px 60px;
+                     max-width: 1100px;
+                     margin: 0 auto;
+                     font-size: 13px
+              }
+
+              @media print {
+                     body {
+                            padding: 20px 40px;
+                            font-size: 11px
+                     }
+
+                     h1 {
+                            font-size: 22px !important
+                     }
+
+                     .page-break {
+                            page-break-before: always
+                     }
+              }
+
+              h1 {
+                     font-size: 28px;
+                     font-weight: 700;
+                     color: #0f0f23;
+                     border-bottom: 3px solid #4361ee;
+                     padding-bottom: 10px;
+                     margin-bottom: 6px
+              }
+
+              h2 {
+                     font-size: 18px;
+                     font-weight: 700;
+                     color: #4361ee;
+                     margin: 28px 0 12px;
+                     border-bottom: 1px solid #e0e0e0;
+                     padding-bottom: 4px
+              }
+
+              h3 {
+                     font-size: 14px;
+                     font-weight: 600;
+                     color: #1a1a2e;
+                     margin: 16px 0 6px
+              }
+
+              .subtitle {
+                     color: #666;
+                     font-size: 14px;
+                     margin-bottom: 20px
+              }
+
+              .meta {
+                     display: flex;
+                     gap: 30px;
+                     margin-bottom: 24px;
+                     font-size: 12px;
+                     color: #555
+              }
+
+              .meta span {
+                     background: #f0f4ff;
+                     padding: 4px 10px;
+                     border-radius: 4px
+              }
+
+              table {
+                     width: 100%;
+                     border-collapse: collapse;
+                     margin: 10px 0 18px;
+                     font-size: 12px
+              }
+
+              th {
+                     background: #4361ee;
+                     color: #fff;
+                     padding: 8px 10px;
+                     text-align: left;
+                     font-weight: 600
+              }
+
+              td {
+                     padding: 7px 10px;
+                     border-bottom: 1px solid #e8e8e8
+              }
+
+              tr:nth-child(even) {
+                     background: #f8f9ff
+              }
+
+              .tool-card {
+                     background: #f8f9ff;
+                     border-left: 4px solid #4361ee;
+                     padding: 12px 16px;
+                     margin: 10px 0;
+                     border-radius: 0 6px 6px 0
+              }
+
+              .tool-card h3 {
+                     margin: 0 0 4px;
+                     color: #4361ee;
+                     font-size: 14px
+              }
+
+              .tool-card .desc {
+                     color: #444;
+                     margin-bottom: 6px
+              }
+
+              .label {
+                     display: inline-block;
+                     padding: 2px 8px;
+                     border-radius: 3px;
+                     font-size: 10px;
+                     font-weight: 600;
+                     margin-right: 4px
+              }
+
+              .label-get {
+                     background: #d4edda;
+                     color: #155724
+              }
+
+              .label-post {
+                     background: #cce5ff;
+                     color: #004085
+              }
+
+              .label-mcp {
+                     background: #e8daef;
+                     color: #6c3483
+              }
+
+              .label-system {
+                     background: #fff3cd;
+                     color: #856404
+              }
+
+              code {
+                     background: #eef;
+                     padding: 1px 5px;
+                     border-radius: 3px;
+                     font-size: 11px;
+                     font-family: 'Courier New', monospace
+              }
+
+              .arch-box {
+                     background: #0f0f23;
+                     color: #e0e0e0;
+                     padding: 16px;
+                     border-radius: 8px;
+                     font-family: 'Courier New', monospace;
+                     font-size: 12px;
+                     margin: 12px 0;
+                     white-space: pre;
+                     line-height: 1.5
+              }
+
+              .note {
+                     background: #fff8e1;
+                     border-left: 4px solid #ffc107;
+                     padding: 8px 12px;
+                     margin: 10px 0;
+                     font-size: 12px;
+                     border-radius: 0 4px 4px 0
+              }
+
+              .section-grid {
+                     display: grid;
+                     grid-template-columns: 1fr 1fr;
+                     gap: 10px
+              }
+
+              .stat {
+                     text-align: center;
+                     background: #f0f4ff;
+                     padding: 12px;
+                     border-radius: 6px
+              }
+
+              .stat .num {
+                     font-size: 28px;
+                     font-weight: 700;
+                     color: #4361ee
+              }
+
+              .stat .lbl {
+                     font-size: 11px;
+                     color: #666
+              }
+
+              hr {
+                     border: none;
+                     border-top: 1px solid #ddd;
+                     margin: 20px 0
+              }
+       </style>
 </head>
+
 <body>
 
-<h1>Carta Intelligence MCP Server</h1>
-<p class="subtitle">Endpoint &amp; Platform Import Specification — Production Architecture v1.1</p>
-<div class="meta">
-<span><strong>Author:</strong> Ankur Kumar</span>
-<span><strong>Team:</strong> Elevation AI</span>
-<span><strong>Date:</strong> June 15, 2026</span>
-<span><strong>Status:</strong> Planned</span>
-</div>
+       <h1>Carta Intelligence MCP Server</h1>
+       <p class="subtitle">Endpoint &amp; Platform Import Specification — Production Architecture v1.1</p>
+       <div class="meta">
+              <span><strong>Author:</strong> Ankur Kumar</span>
+              <span><strong>Team:</strong> Elevation AI</span>
+              <span><strong>Date:</strong> June 15, 2026</span>
+              <span><strong>Status:</strong> Planned</span>
+       </div>
 
-<div class="section-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:20px">
-<div class="stat"><div class="num">32</div><div class="lbl">MCP Tools</div></div>
-<div class="stat"><div class="num">3</div><div class="lbl">MCP Resources</div></div>
-<div class="stat"><div class="num">12</div><div class="lbl">DB Tables</div></div>
-<div class="stat"><div class="num">11</div><div class="lbl">Canonical Models</div></div>
-<div class="stat"><div class="num">15</div><div class="lbl">Platform Objects</div></div>
-</div>
+       <div class="section-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:20px">
+              <div class="stat">
+                     <div class="num">32</div>
+                     <div class="lbl">MCP Tools</div>
+              </div>
+              <div class="stat">
+                     <div class="num">3</div>
+                     <div class="lbl">MCP Resources</div>
+              </div>
+              <div class="stat">
+                     <div class="num">12</div>
+                     <div class="lbl">DB Tables</div>
+              </div>
+              <div class="stat">
+                     <div class="num">11</div>
+                     <div class="lbl">Canonical Models</div>
+              </div>
+              <div class="stat">
+                     <div class="num">15</div>
+                     <div class="lbl">Platform Objects</div>
+              </div>
+       </div>
 
-<h2>1. Architecture Overview</h2>
-<div class="arch-box">Carta Browser Extraction (Playwright + CDP)
-       ↓
-Normalization Pipeline (Python)
-       ↓
-PostgreSQL (canonical multi-tenant tables)
-       ↓
-FastAPI + MCP Server (port 8082)
-       ↓
-Platform / LLM Agents / Claude Desktop</div>
+       <h2>1. Architecture Overview</h2>
+       <div class="arch-box">Carta Browser Extraction (Playwright + CDP)
+              ↓
+              Normalization Pipeline (Python)
+              ↓
+              PostgreSQL (canonical multi-tenant tables)
+              ↓
+              FastAPI + MCP Server (port 8082)
+              ↓
+              Platform / LLM Agents / Claude Desktop</div>
 
-<div class="note"><strong>Key Principle:</strong> MCP tools query PostgreSQL only. They never touch raw extraction files directly. All data is normalized, deduplicated, and tenant-isolated before serving.</div>
+       <div class="note"><strong>Key Principle:</strong> MCP tools query PostgreSQL only. They never touch raw
+              extraction files directly. All data is normalized, deduplicated, and tenant-isolated before serving.</div>
 
-<h2>2. Security &amp; Governance</h2>
-<table>
-<tr><th>Layer</th><th>Implementation</th></tr>
-<tr><td><strong>Authentication</strong></td><td>API Keys via <code>X-API-Key</code> header → mapped to <code>tenant_id</code></td></tr>
-<tr><td><strong>Multi-Tenancy</strong></td><td>Every query includes <code>AND tenant_id = $tenant</code>; tenant derived from API key, never from input</td></tr>
-<tr><td><strong>Rate Limiting</strong></td><td>100 req/min per IP · 1,000 req/min per tenant · Max 5 concurrent extraction jobs</td></tr>
-<tr><td><strong>Soft Delete</strong></td><td>Every query includes <code>AND deleted_at IS NULL</code></td></tr>
-<tr><td><strong>Audit Logging</strong></td><td>All writes logged: <code>timestamp, tenant_id, api_key_id, tool_name, duration_ms</code></td></tr>
-<tr><td><strong>Entity Resolution</strong></td><td>UUID parse → external_id lookup → fuzzy name match (pg_trgm)</td></tr>
-</table>
+       <h2>2. Security &amp; Governance</h2>
+       <table>
+              <tr>
+                     <th>Layer</th>
+                     <th>Implementation</th>
+              </tr>
+              <tr>
+                     <td><strong>Authentication</strong></td>
+                     <td>API Keys via <code>X-API-Key</code> header → mapped to <code>tenant_id</code></td>
+              </tr>
+              <tr>
+                     <td><strong>Multi-Tenancy</strong></td>
+                     <td>Every query includes <code>AND tenant_id = $tenant</code>; tenant derived from API key, never
+                            from input</td>
+              </tr>
+              <tr>
+                     <td><strong>Rate Limiting</strong></td>
+                     <td>100 req/min per IP · 1,000 req/min per tenant · Max 5 concurrent extraction jobs</td>
+              </tr>
+              <tr>
+                     <td><strong>Soft Delete</strong></td>
+                     <td>Every query includes <code>AND deleted_at IS NULL</code></td>
+              </tr>
+              <tr>
+                     <td><strong>Audit Logging</strong></td>
+                     <td>All writes logged: <code>timestamp, tenant_id, api_key_id, tool_name, duration_ms</code></td>
+              </tr>
+              <tr>
+                     <td><strong>Entity Resolution</strong></td>
+                     <td>UUID parse → external_id lookup → fuzzy name match (pg_trgm)</td>
+              </tr>
+       </table>
 
-<h2>3. MCP Resources</h2>
-<table>
-<tr><th>URI Pattern</th><th>Description</th></tr>
-<tr><td><code>carta://{tenant_id}/entities/funds</code></td><td>Lists all funds available to the tenant</td></tr>
-<tr><td><code>carta://{tenant_id}/entities/companies</code></td><td>Lists all portfolio companies</td></tr>
-<tr><td><code>carta://{tenant_id}/jobs/latest</code></td><td>Latest extraction manifest and success metrics</td></tr>
-</table>
+       <h2>3. MCP Resources</h2>
+       <table>
+              <tr>
+                     <th>URI Pattern</th>
+                     <th>Description</th>
+              </tr>
+              <tr>
+                     <td><code>carta://{tenant_id}/entities/funds</code></td>
+                     <td>Lists all funds available to the tenant</td>
+              </tr>
+              <tr>
+                     <td><code>carta://{tenant_id}/entities/companies</code></td>
+                     <td>Lists all portfolio companies</td>
+              </tr>
+              <tr>
+                     <td><code>carta://{tenant_id}/jobs/latest</code></td>
+                     <td>Latest extraction manifest and success metrics</td>
+              </tr>
+       </table>
 
-<div class="page-break"></div>
-<h2>4. MCP Tools — Complete Specification</h2>
+       <div class="page-break"></div>
+       <h2>4. MCP Tools — Complete Specification</h2>
 
-<h3>4.1 System &amp; Coverage Tools (3)</h3>
+       <h3>4.1 System &amp; Coverage Tools (3)</h3>
 
-<div class="tool-card">
-<h3><span class="label label-system">SYSTEM</span> get_status</h3>
-<div class="desc">Health check — verifies MCP server, FastAPI, and PostgreSQL connectivity.</div>
-<strong>Input:</strong> <code>{}</code><br>
-<strong>Response:</strong> <code>{ "mcp": "running", "api": "reachable", "database": "connected", "last_extraction": "ISO date" }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-system">SYSTEM</span> get_status</h3>
+              <div class="desc">Health check — verifies MCP server, FastAPI, and PostgreSQL connectivity.</div>
+              <strong>Input:</strong> <code>{}</code><br>
+              <strong>Response:</strong>
+              <code>{ "mcp": "running", "api": "reachable", "database": "connected", "last_extraction": "ISO date" }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-system">SYSTEM</span> get_extraction_status</h3>
-<div class="desc">Returns latest extraction manifest with per-category coverage metrics.</div>
-<strong>Input:</strong> <code>{}</code><br>
-<strong>Response:</strong> <code>{ "extraction_id", "status", "total_extracted", "total_failed", "duration_seconds", "coverage": {...} }</code><br>
-<strong>SQL:</strong> <code>SELECT * FROM extraction_jobs WHERE tenant_id = $1 ORDER BY created_at DESC LIMIT 1</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-system">SYSTEM</span> get_extraction_status</h3>
+              <div class="desc">Returns latest extraction manifest with per-category coverage metrics.</div>
+              <strong>Input:</strong> <code>{}</code><br>
+              <strong>Response:</strong>
+              <code>{ "extraction_id", "status", "total_extracted", "total_failed", "duration_seconds", "coverage": {...} }</code><br>
+              <strong>SQL:</strong>
+              <code>SELECT * FROM extraction_jobs WHERE tenant_id = $1 ORDER BY created_at DESC LIMIT 1</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-system">SYSTEM</span> get_data_coverage</h3>
-<div class="desc">Exposes total ingestion and extraction counts across the DB tables to verify ingestion quality and check for gaps.</div>
-<strong>Input:</strong> <code>{}</code><br>
-<strong>Response:</strong> <code>{ "organizations": 1, "funds": 5, "companies": 104, "investors": 212, "holdings": 612, "securities": 1240, "valuations": 308, "transactions": 482, "documents": 3421, "relationships": 1285 }</code><br>
-<strong>SQL:</strong> <code>SELECT (SELECT COUNT(*) FROM organizations WHERE tenant_id = $1) as orgs, (SELECT COUNT(*) FROM funds WHERE tenant_id = $1) as funds, ...</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-system">SYSTEM</span> get_data_coverage</h3>
+              <div class="desc">Exposes total ingestion and extraction counts across the DB tables to verify ingestion
+                     quality and check for gaps.</div>
+              <strong>Input:</strong> <code>{}</code><br>
+              <strong>Response:</strong>
+              <code>{ "organizations": 1, "funds": 5, "companies": 104, "investors": 212, "holdings": 612, "securities": 1240, "valuations": 308, "transactions": 482, "documents": 3421, "relationships": 1285 }</code><br>
+              <strong>SQL:</strong>
+              <code>SELECT (SELECT COUNT(*) FROM organizations WHERE tenant_id = $1) as orgs, (SELECT COUNT(*) FROM funds WHERE tenant_id = $1) as funds, ...</code>
+       </div>
 
-<h3>4.2 Extraction Tools (2)</h3>
+       <h3>4.2 Extraction Tools (2)</h3>
 
-<div class="tool-card">
-<h3><span class="label label-post">POST</span><span class="label label-mcp">MCP</span> download_report</h3>
-<div class="desc">Downloads/exports a structured data report for a company from Carta. Submits an async task and polls until completion.</div>
-<strong>Input:</strong> <code>{ "company_name": string (required) }</code><br>
-<strong>Behavior:</strong> POST → <code>/api/download-report</code> → poll <code>/api/status/{task_id}</code> until completed/failed/timeout
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-post">POST</span><span class="label label-mcp">MCP</span> download_report
+              </h3>
+              <div class="desc">Downloads/exports a structured data report for a company from Carta. Submits an async
+                     task and polls until completion.</div>
+              <strong>Input:</strong> <code>{ "company_name": string (required) }</code><br>
+              <strong>Behavior:</strong> POST → <code>/api/download-report</code> → poll
+              <code>/api/status/{task_id}</code> until completed/failed/timeout
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-post">POST</span><span class="label label-mcp">MCP</span> download_batch</h3>
-<div class="desc">Exports Carta data for a list of companies. Submits all tasks in parallel and polls until all complete.</div>
-<strong>Input:</strong> <code>{ "companies": string[] (required) }</code><br>
-<strong>Response:</strong> <code>{ "total", "success", "failed", "results": [{ "company", "response" }] }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-post">POST</span><span class="label label-mcp">MCP</span> download_batch</h3>
+              <div class="desc">Exports Carta data for a list of companies. Submits all tasks in parallel and polls
+                     until all complete.</div>
+              <strong>Input:</strong> <code>{ "companies": string[] (required) }</code><br>
+              <strong>Response:</strong>
+              <code>{ "total", "success", "failed", "results": [{ "company", "response" }] }</code>
+       </div>
 
-<h3>4.3 Core Entity Tools (9)</h3>
+       <h3>4.3 Core Entity Tools (9)</h3>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_organization</h3>
-<div class="desc">Returns the firm/GP organization profile with fund and company counts.</div>
-<strong>Input:</strong> <code>{}</code><br>
-<strong>Response:</strong> <code>{ "id", "name", "admin_name", "admin_email", "admin_title", "fund_count", "company_count" }</code><br>
-<strong>Errors:</strong> <code>DATA_NOT_LOADED</code> if no org exists
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_organization</h3>
+              <div class="desc">Returns the firm/GP organization profile with fund and company counts.</div>
+              <strong>Input:</strong> <code>{}</code><br>
+              <strong>Response:</strong>
+              <code>{ "id", "name", "admin_name", "admin_email", "admin_title", "fund_count", "company_count" }</code><br>
+              <strong>Errors:</strong> <code>DATA_NOT_LOADED</code> if no org exists
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_entity</h3>
-<div class="desc">Generic entity resolver — returns any entity by ID across the entire registry with its general details.</div>
-<strong>Input:</strong> <code>{ "entity_id": string (required), "entity_type": "Organization|Fund|PortfolioCompany|Investor|Person" (optional) }</code><br>
-<strong>Response:</strong> Mapped entity dictionary containing fields, type, metadata, and relations.
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_entity</h3>
+              <div class="desc">Generic entity resolver — returns any entity by ID across the entire registry with its
+                     general details.</div>
+              <strong>Input:</strong>
+              <code>{ "entity_id": string (required), "entity_type": "Organization|Fund|PortfolioCompany|Investor|Person" (optional) }</code><br>
+              <strong>Response:</strong> Mapped entity dictionary containing fields, type, metadata, and relations.
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_funds</h3>
-<div class="desc">Lists all funds, SPVs, GP entities managed by the firm.</div>
-<strong>Input:</strong> <code>{ "fund_type": "all|Fund|SPV|GPEntity|FundFamily" (default: all), "limit": 50, "offset": 0 }</code><br>
-<strong>Response:</strong> <code>{ "total", "funds": [{ "id", "name", "fund_type", "currency" }] }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_funds</h3>
+              <div class="desc">Lists all funds, SPVs, GP entities managed by the firm.</div>
+              <strong>Input:</strong>
+              <code>{ "fund_type": "all|Fund|SPV|GPEntity|FundFamily" (default: all), "limit": 50, "offset": 0 }</code><br>
+              <strong>Response:</strong> <code>{ "total", "funds": [{ "id", "name", "fund_type", "currency" }] }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_fund</h3>
-<div class="desc">Returns detailed fund information including linked companies.</div>
-<strong>Input:</strong> <code>{ "fund_id": string (required) }</code> — accepts UUID or external_fund_id<br>
-<strong>Errors:</strong> <code>ENTITY_NOT_FOUND</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_fund</h3>
+              <div class="desc">Returns detailed fund information including linked companies.</div>
+              <strong>Input:</strong> <code>{ "fund_id": string (required) }</code> — accepts UUID or
+              external_fund_id<br>
+              <strong>Errors:</strong> <code>ENTITY_NOT_FOUND</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_companies</h3>
-<div class="desc">Lists all portfolio companies with optional holdings summary.</div>
-<strong>Input:</strong> <code>{ "include_holdings": false, "industry": string, "limit": 50, "offset": 0 }</code><br>
-<strong>SQL:</strong> <code>SELECT c.*, h.cash_cost, h.ownership_pct FROM companies c LEFT JOIN holdings h ...</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_companies</h3>
+              <div class="desc">Lists all portfolio companies with optional holdings summary.</div>
+              <strong>Input:</strong>
+              <code>{ "include_holdings": false, "industry": string, "limit": 50, "offset": 0 }</code><br>
+              <strong>SQL:</strong>
+              <code>SELECT c.*, h.cash_cost, h.ownership_pct FROM companies c LEFT JOIN holdings h ...</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_company</h3>
-<div class="desc">Returns complete company profile with holdings, latest valuation, and contacts.</div>
-<strong>Input:</strong> <code>{ "company_id": string (required) }</code> — UUID, external_company_id, or fuzzy name<br>
-<strong>Resolution:</strong> Fuzzy name match via <code>pg_trgm</code> similarity if UUID/external_id not found<br>
-<strong>Errors:</strong> <code>ENTITY_NOT_FOUND</code> with <code>closest_matches</code> from trigram search
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_company</h3>
+              <div class="desc">Returns complete company profile with holdings, latest valuation, and contacts.</div>
+              <strong>Input:</strong> <code>{ "company_id": string (required) }</code> — UUID, external_company_id, or
+              fuzzy name<br>
+              <strong>Resolution:</strong> Fuzzy name match via <code>pg_trgm</code> similarity if UUID/external_id not
+              found<br>
+              <strong>Errors:</strong> <code>ENTITY_NOT_FOUND</code> with <code>closest_matches</code> from trigram
+              search
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_investors</h3>
-<div class="desc">Lists all investors/LPs with total ownership.</div>
-<strong>Input:</strong> <code>{ "sort_by": "ownership|name", "limit": 50, "offset": 0 }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_investors</h3>
+              <div class="desc">Lists all investors/LPs with total ownership.</div>
+              <strong>Input:</strong> <code>{ "sort_by": "ownership|name", "limit": 50, "offset": 0 }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_investor</h3>
-<div class="desc">Returns investor profile with all investments.</div>
-<strong>Input:</strong> <code>{ "investor_id": string (required) }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_investor</h3>
+              <div class="desc">Returns investor profile with all investments.</div>
+              <strong>Input:</strong> <code>{ "investor_id": string (required) }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> search_entities</h3>
-<div class="desc">Fuzzy search across funds, companies, investors by name using pg_trgm similarity.</div>
-<strong>Input:</strong> <code>{ "query": string (required), "entity_type": "all|fund|company|investor", "limit": 10 }</code><br>
-<strong>SQL:</strong> UNION ALL across funds, companies, investors with <code>similarity(name, $1) > 0.3</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> search_entities</h3>
+              <div class="desc">Fuzzy search across funds, companies, investors by name using pg_trgm similarity.</div>
+              <strong>Input:</strong>
+              <code>{ "query": string (required), "entity_type": "all|fund|company|investor", "limit": 10 }</code><br>
+              <strong>SQL:</strong> UNION ALL across funds, companies, investors with
+              <code>similarity(name, $1) > 0.3</code>
+       </div>
 
-<div class="page-break"></div>
-<h3>4.4 Relationship &amp; Graph Tools (3)</h3>
+       <div class="page-break"></div>
+       <h3>4.4 Relationship &amp; Graph Tools (3)</h3>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_relationships</h3>
-<div class="desc">Exposes raw relationships list from the database, allowing filtering by source, target, or relationship type.</div>
-<strong>Input:</strong> <code>{ "source_entity_id": string (optional), "target_entity_id": string (optional), "relationship_type": string (optional), "limit": 100 }</code><br>
-<strong>Response:</strong> <code>[{ "id", "source_entity_id", "source_entity_type", "target_entity_id", "target_entity_type", "relationship_type", "weight" }]</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_relationships
+              </h3>
+              <div class="desc">Exposes raw relationships list from the database, allowing filtering by source, target,
+                     or relationship type.</div>
+              <strong>Input:</strong>
+              <code>{ "source_entity_id": string (optional), "target_entity_id": string (optional), "relationship_type": string (optional), "limit": 100 }</code><br>
+              <strong>Response:</strong>
+              <code>[{ "id", "source_entity_id", "source_entity_type", "target_entity_id", "target_entity_type", "relationship_type", "weight" }]</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_neighbors</h3>
-<div class="desc">Gets the immediate 1-hop inward and outward neighbors of a specific entity. Essential for navigating Investor → Fund → Company connections.</div>
-<strong>Input:</strong> <code>{ "entity_id": string (required), "direction": "in|out|both" (default: both) }</code><br>
-<strong>Response:</strong> <code>{ "inbound": [{ "entity_id", "entity_type", "relationship_type", "name" }], "outbound": [...] }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_neighbors</h3>
+              <div class="desc">Gets the immediate 1-hop inward and outward neighbors of a specific entity. Essential
+                     for navigating Investor → Fund → Company connections.</div>
+              <strong>Input:</strong>
+              <code>{ "entity_id": string (required), "direction": "in|out|both" (default: both) }</code><br>
+              <strong>Response:</strong>
+              <code>{ "inbound": [{ "entity_id", "entity_type", "relationship_type", "name" }], "outbound": [...] }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_entity_graph</h3>
-<div class="desc">Exposes the full traversal subgraph starting from a node up to a specified depth.</div>
-<strong>Input:</strong> <code>{ "entity_id": string (required), "depth": integer (default: 2, max: 4) }</code><br>
-<strong>Response:</strong> <code>{ "nodes": [{ "id", "name", "type" }], "edges": [{ "source", "target", "type", "weight" }] }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_entity_graph</h3>
+              <div class="desc">Exposes the full traversal subgraph starting from a node up to a specified depth.</div>
+              <strong>Input:</strong>
+              <code>{ "entity_id": string (required), "depth": integer (default: 2, max: 4) }</code><br>
+              <strong>Response:</strong>
+              <code>{ "nodes": [{ "id", "name", "type" }], "edges": [{ "source", "target", "type", "weight" }] }</code>
+       </div>
 
-<h3>4.5 Financial, Equity &amp; Instruction Tools (9)</h3>
+       <h3>4.5 Financial, Equity &amp; Instruction Tools (9)</h3>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_holdings</h3>
-<div class="desc">Lists all fund holdings across portfolio companies.</div>
-<strong>Input:</strong> <code>{ "fund_id": string (optional), "limit": 50, "offset": 0 }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_holdings</h3>
+              <div class="desc">Lists all fund holdings across portfolio companies.</div>
+              <strong>Input:</strong> <code>{ "fund_id": string (optional), "limit": 50, "offset": 0 }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_holding</h3>
-<div class="desc">Detailed holding for a specific company including transactions.</div>
-<strong>Input:</strong> <code>{ "company_id": string (required) }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_holding</h3>
+              <div class="desc">Detailed holding for a specific company including transactions.</div>
+              <strong>Input:</strong> <code>{ "company_id": string (required) }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_cap_table</h3>
-<div class="desc">Returns cap table for a portfolio company — stakeholders, share classes, ownership percentages.</div>
-<strong>Input:</strong> <code>{ "company_id": string (required) }</code><br>
-<strong>SQL:</strong> <code>SELECT s.*, i.name as owner_name, f.name as fund_name FROM securities s LEFT JOIN investors i ... LEFT JOIN funds f ... WHERE s.company_id = $1 AND s.tenant_id = $2</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_cap_table</h3>
+              <div class="desc">Returns cap table for a portfolio company — stakeholders, share classes, ownership
+                     percentages.</div>
+              <strong>Input:</strong> <code>{ "company_id": string (required) }</code><br>
+              <strong>SQL:</strong>
+              <code>SELECT s.*, i.name as owner_name, f.name as fund_name FROM securities s LEFT JOIN investors i ... LEFT JOIN funds f ... WHERE s.company_id = $1 AND s.tenant_id = $2</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_securities</h3>
-<div class="desc">Returns all securities/option plans for a company.</div>
-<strong>Input:</strong> <code>{ "company_id": string (required), "security_type": string (optional) }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_securities</h3>
+              <div class="desc">Returns all securities/option plans for a company.</div>
+              <strong>Input:</strong>
+              <code>{ "company_id": string (required), "security_type": string (optional) }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_valuation</h3>
-<div class="desc">Returns latest valuation for a company (PostMoney, 409A, or ASC820).</div>
-<strong>Input:</strong> <code>{ "company_id": string (required), "valuation_type": "PostMoney|409A|ASC820" (optional) }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_valuation</h3>
+              <div class="desc">Returns latest valuation for a company (PostMoney, 409A, or ASC820).</div>
+              <strong>Input:</strong>
+              <code>{ "company_id": string (required), "valuation_type": "PostMoney|409A|ASC820" (optional) }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_valuation_history</h3>
-<div class="desc">Returns full valuation history (all rounds) for a company.</div>
-<strong>Input:</strong> <code>{ "company_id": string (required) }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_valuation_history
+              </h3>
+              <div class="desc">Returns full valuation history (all rounds) for a company.</div>
+              <strong>Input:</strong> <code>{ "company_id": string (required) }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_fund_financials</h3>
-<div class="desc">Returns fund-level financial summary (total invested, value, returns).</div>
-<strong>Input:</strong> <code>{ "fund_id": string (required) }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_fund_financials
+              </h3>
+              <div class="desc">Returns fund-level financial summary (total invested, value, returns).</div>
+              <strong>Input:</strong> <code>{ "fund_id": string (required) }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_performance</h3>
-<div class="desc">Returns IRR, multiple, and transaction history for a company.</div>
-<strong>Input:</strong> <code>{ "company_id": string (required) }</code><br>
-<strong>Response:</strong> <code>{ "company_name", "irr_percentage", "multiple", "total_invested", "total_proceeds", "transactions": [...] }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_performance</h3>
+              <div class="desc">Returns IRR, multiple, and transaction history for a company.</div>
+              <strong>Input:</strong> <code>{ "company_id": string (required) }</code><br>
+              <strong>Response:</strong>
+              <code>{ "company_name", "irr_percentage", "multiple", "total_invested", "total_proceeds", "transactions": [...] }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_payment_instructions</h3>
-<div class="desc">First-class PM tool to retrieve wiring instructions and payment details associated with a fund or GP capital calls.</div>
-<strong>Input:</strong> <code>{ "fund_id": string (required) }</code><br>
-<strong>Response:</strong> <code>{ "bank_name", "account_number", "routing_number", "swift_code", "beneficiary_name", "reference_notes" }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span>
+                     get_payment_instructions</h3>
+              <div class="desc">First-class PM tool to retrieve wiring instructions and payment details associated with
+                     a fund or GP capital calls.</div>
+              <strong>Input:</strong> <code>{ "fund_id": string (required) }</code><br>
+              <strong>Response:</strong>
+              <code>{ "bank_name", "account_number", "routing_number", "swift_code", "beneficiary_name", "reference_notes" }</code>
+       </div>
 
-<div class="page-break"></div>
-<h3>4.6 Supporting, Document &amp; Communication Tools (5)</h3>
+       <div class="page-break"></div>
+       <h3>4.6 Supporting, Document &amp; Communication Tools (5)</h3>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_people</h3>
-<div class="desc">Lists contacts and team members.</div>
-<strong>Input:</strong> <code>{ "company_id": string (optional), "role": string, "limit": 50 }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_people</h3>
+              <div class="desc">Lists contacts and team members.</div>
+              <strong>Input:</strong> <code>{ "company_id": string (optional), "role": string, "limit": 50 }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_person</h3>
-<div class="desc">Returns person profile with associated entities.</div>
-<strong>Input:</strong> <code>{ "person_id": string (required) }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_person</h3>
+              <div class="desc">Returns person profile with associated entities.</div>
+              <strong>Input:</strong> <code>{ "person_id": string (required) }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_documents</h3>
-<div class="desc">Lists documents with type and entity filters.</div>
-<strong>Input:</strong> <code>{ "entity_id": string, "document_type": string, "limit": 50 }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_documents</h3>
+              <div class="desc">Lists documents with type and entity filters.</div>
+              <strong>Input:</strong> <code>{ "entity_id": string, "document_type": string, "limit": 50 }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_document</h3>
-<div class="desc">Retrieves metadata for a specific document including document ID, title, type, and associated entity ID.</div>
-<strong>Input:</strong> <code>{ "document_id": string (required) }</code><br>
-<strong>Response:</strong> <code>{ "document_id", "title", "document_type", "entity_id", "file_type", "document_date", "created_at" }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> get_document</h3>
+              <div class="desc">Retrieves metadata for a specific document including document ID, title, type, and
+                     associated entity ID.</div>
+              <strong>Input:</strong> <code>{ "document_id": string (required) }</code><br>
+              <strong>Response:</strong>
+              <code>{ "document_id", "title", "document_type", "entity_id", "file_type", "document_date", "created_at" }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> download_document</h3>
-<div class="desc">Returns download URL for a document file.</div>
-<strong>Input:</strong> <code>{ "document_id": string (required) }</code><br>
-<strong>Response:</strong> <code>{ "document_id", "download_url", "file_type": "PDF" }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> download_document
+              </h3>
+              <div class="desc">Returns download URL for a document file.</div>
+              <strong>Input:</strong> <code>{ "document_id": string (required) }</code><br>
+              <strong>Response:</strong> <code>{ "document_id", "download_url", "file_type": "PDF" }</code>
+       </div>
 
-<div class="tool-card">
-<h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_activities</h3>
-<div class="desc">First-class PM tool that lists user log activities, notes, and firm-level communications.</div>
-<strong>Input:</strong> <code>{ "entity_id": string (optional), "limit": 50 }</code><br>
-<strong>Response:</strong> <code>{ "activities": [{ "activity_id", "entity_id", "entity_type", "title", "note_body", "created_at" }] }</code>
-</div>
+       <div class="tool-card">
+              <h3><span class="label label-get">GET</span><span class="label label-mcp">MCP</span> list_activities</h3>
+              <div class="desc">First-class PM tool that lists user log activities, notes, and firm-level
+                     communications.</div>
+              <strong>Input:</strong> <code>{ "entity_id": string (optional), "limit": 50 }</code><br>
+              <strong>Response:</strong>
+              <code>{ "activities": [{ "activity_id", "entity_id", "entity_type", "title", "note_body", "created_at" }] }</code>
+       </div>
 
-<div class="page-break"></div>
-<h2>5. Platform Import Contract &amp; Data Mapping</h2>
-<p class="subtitle">Mapping from Product Management (PM) Category to Database, MCP Tools, and Ingestion Platform Objects</p>
-<table>
-<thead>
-<tr>
-<th>PM Business Category</th>
-<th>DB Table</th>
-<th>MCP Tool(s)</th>
-<th>Platform Object Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Firm / GP</strong></td>
-<td><code>organizations</code></td>
-<td><code>get_organization</code></td>
-<td><code>OrganizationNode</code></td>
-</tr>
-<tr>
-<td><strong>Fund / Vehicle</strong></td>
-<td><code>funds</code> (type=Fund)</td>
-<td><code>list_funds</code>, <code>get_fund</code></td>
-<td><code>FundNode</code></td>
-</tr>
-<tr>
-<td><strong>SPV</strong></td>
-<td><code>funds</code> (type=SPV)</td>
-<td><code>list_funds</code> (type=SPV)</td>
-<td><code>SPVNode</code></td>
-</tr>
-<tr>
-<td><strong>Fund Family</strong></td>
-<td><code>funds</code> (type=FundFamily)</td>
-<td><code>list_funds</code> (type=FundFamily)</td>
-<td><code>FundFamilyNode</code></td>
-</tr>
-<tr>
-<td><strong>Portfolio Company</strong></td>
-<td><code>companies</code></td>
-<td><code>list_companies</code>, <code>get_company</code></td>
-<td><code>CompanyNode</code></td>
-</tr>
-<tr>
-<td><strong>Investment / Holding</strong></td>
-<td><code>holdings</code></td>
-<td><code>list_holdings</code>, <code>get_holding</code></td>
-<td><code>HoldingNode</code></td>
-</tr>
-<tr>
-<td><strong>Investor / LP</strong></td>
-<td><code>investors</code></td>
-<td><code>list_investors</code>, <code>get_investor</code></td>
-<td><code>InvestorNode</code></td>
-</tr>
-<tr>
-<td><strong>Cap Table</strong></td>
-<td><code>securities</code></td>
-<td><code>get_cap_table</code></td>
-<td><code>CapTableSubgraph</code></td>
-</tr>
-<tr>
-<td><strong>Securities</strong></td>
-<td><code>securities</code></td>
-<td><code>get_securities</code></td>
-<td><code>SecurityNode</code></td>
-</tr>
-<tr>
-<td><strong>Valuations / 409A</strong></td>
-<td><code>valuations</code></td>
-<td><code>get_valuation</code>, <code>get_valuation_history</code></td>
-<td><code>ValuationNode</code></td>
-</tr>
-<tr>
-<td><strong>Performance Metrics</strong></td>
-<td><code>performance_metrics</code></td>
-<td><code>get_performance</code></td>
-<td><code>PerformanceNode</code></td>
-</tr>
-<tr>
-<td><strong>People / Users</strong></td>
-<td><code>people</code></td>
-<td><code>list_people</code>, <code>get_person</code></td>
-<td><code>ContactNode</code></td>
-</tr>
-<tr>
-<td><strong>Documents</strong></td>
-<td><code>documents</code></td>
-<td><code>list_documents</code>, <code>get_document</code>, <code>download_document</code></td>
-<td><code>DocumentNode</code></td>
-</tr>
-<tr>
-<td><strong>Communications</strong></td>
-<td><code>documents</code> (type=Note)</td>
-<td><code>list_activities</code></td>
-<td><code>CommunicationNode</code></td>
-</tr>
-<tr>
-<td><strong>Wire Instructions</strong></td>
-<td><code>raw_metadata</code> / custom</td>
-<td><code>get_payment_instructions</code></td>
-<td><code>WireInstructionNode</code></td>
-</tr>
-<tr>
-<td><strong>Entity Registry</strong></td>
-<td><code>organizations</code></td>
-<td><code>get_entity</code></td>
-<td><code>RegistryNode</code></td>
-</tr>
-</tbody>
-</table>
+       <div class="page-break"></div>
+       <h2>5. Platform Import Contract &amp; Data Mapping</h2>
+       <p class="subtitle">Mapping from Product Management (PM) Category to Database, MCP Tools, and Ingestion Platform
+              Objects</p>
+       <table>
+              <thead>
+                     <tr>
+                            <th>PM Business Category</th>
+                            <th>DB Table</th>
+                            <th>MCP Tool(s)</th>
+                            <th>Platform Object Name</th>
+                     </tr>
+              </thead>
+              <tbody>
+                     <tr>
+                            <td><strong>Firm / GP</strong></td>
+                            <td><code>organizations</code></td>
+                            <td><code>get_organization</code></td>
+                            <td><code>OrganizationNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Fund / Vehicle</strong></td>
+                            <td><code>funds</code> (type=Fund)</td>
+                            <td><code>list_funds</code>, <code>get_fund</code></td>
+                            <td><code>FundNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>SPV</strong></td>
+                            <td><code>funds</code> (type=SPV)</td>
+                            <td><code>list_funds</code> (type=SPV)</td>
+                            <td><code>SPVNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Fund Family</strong></td>
+                            <td><code>funds</code> (type=FundFamily)</td>
+                            <td><code>list_funds</code> (type=FundFamily)</td>
+                            <td><code>FundFamilyNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Portfolio Company</strong></td>
+                            <td><code>companies</code></td>
+                            <td><code>list_companies</code>, <code>get_company</code></td>
+                            <td><code>CompanyNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Investment / Holding</strong></td>
+                            <td><code>holdings</code></td>
+                            <td><code>list_holdings</code>, <code>get_holding</code></td>
+                            <td><code>HoldingNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Investor / LP</strong></td>
+                            <td><code>investors</code></td>
+                            <td><code>list_investors</code>, <code>get_investor</code></td>
+                            <td><code>InvestorNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Cap Table</strong></td>
+                            <td><code>securities</code></td>
+                            <td><code>get_cap_table</code></td>
+                            <td><code>CapTableSubgraph</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Securities</strong></td>
+                            <td><code>securities</code></td>
+                            <td><code>get_securities</code></td>
+                            <td><code>SecurityNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Valuations / 409A</strong></td>
+                            <td><code>valuations</code></td>
+                            <td><code>get_valuation</code>, <code>get_valuation_history</code></td>
+                            <td><code>ValuationNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Performance Metrics</strong></td>
+                            <td><code>performance_metrics</code></td>
+                            <td><code>get_performance</code></td>
+                            <td><code>PerformanceNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>People / Users</strong></td>
+                            <td><code>people</code></td>
+                            <td><code>list_people</code>, <code>get_person</code></td>
+                            <td><code>ContactNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Documents</strong></td>
+                            <td><code>documents</code></td>
+                            <td><code>list_documents</code>, <code>get_document</code>, <code>download_document</code>
+                            </td>
+                            <td><code>DocumentNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Communications</strong></td>
+                            <td><code>documents</code> (type=Note)</td>
+                            <td><code>list_activities</code></td>
+                            <td><code>CommunicationNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Wire Instructions</strong></td>
+                            <td><code>raw_metadata</code> / custom</td>
+                            <td><code>get_payment_instructions</code></td>
+                            <td><code>WireInstructionNode</code></td>
+                     </tr>
+                     <tr>
+                            <td><strong>Entity Registry</strong></td>
+                            <td><code>organizations</code></td>
+                            <td><code>get_entity</code></td>
+                            <td><code>RegistryNode</code></td>
+                     </tr>
+              </tbody>
+       </table>
 
-<h2>6. Error Code Catalog</h2>
-<table>
-<tr><th>Code</th><th>HTTP</th><th>Trigger</th></tr>
-<tr><td><code>ENTITY_NOT_FOUND</code></td><td>404</td><td>Entity ID or fuzzy name match fails</td></tr>
-<tr><td><code>INVALID_PARAMETERS</code></td><td>400</td><td>Missing required field or invalid type</td></tr>
-<tr><td><code>DATA_NOT_LOADED</code></td><td>503</td><td>PostgreSQL empty — normalization not run</td></tr>
-<tr><td><code>EXTRACTION_REQUIRED</code></td><td>503</td><td>No extraction data exists for entity</td></tr>
-<tr><td><code>PARTIAL_DATA</code></td><td>206</td><td>Some fields missing due to extraction failures</td></tr>
-<tr><td><code>DB_ERROR</code></td><td>500</td><td>PostgreSQL connection or query failure</td></tr>
-<tr><td><code>TENANT_UNAUTHORIZED</code></td><td>403</td><td>API key not mapped to requested tenant</td></tr>
-<tr><td><code>RATE_LIMITED</code></td><td>429</td><td>Exceeded request quota</td></tr>
-</table>
+       <h2>6. Error Code Catalog</h2>
+       <table>
+              <tr>
+                     <th>Code</th>
+                     <th>HTTP</th>
+                     <th>Trigger</th>
+              </tr>
+              <tr>
+                     <td><code>ENTITY_NOT_FOUND</code></td>
+                     <td>404</td>
+                     <td>Entity ID or fuzzy name match fails</td>
+              </tr>
+              <tr>
+                     <td><code>INVALID_PARAMETERS</code></td>
+                     <td>400</td>
+                     <td>Missing required field or invalid type</td>
+              </tr>
+              <tr>
+                     <td><code>DATA_NOT_LOADED</code></td>
+                     <td>503</td>
+                     <td>PostgreSQL empty — normalization not run</td>
+              </tr>
+              <tr>
+                     <td><code>EXTRACTION_REQUIRED</code></td>
+                     <td>503</td>
+                     <td>No extraction data exists for entity</td>
+              </tr>
+              <tr>
+                     <td><code>PARTIAL_DATA</code></td>
+                     <td>206</td>
+                     <td>Some fields missing due to extraction failures</td>
+              </tr>
+              <tr>
+                     <td><code>DB_ERROR</code></td>
+                     <td>500</td>
+                     <td>PostgreSQL connection or query failure</td>
+              </tr>
+              <tr>
+                     <td><code>TENANT_UNAUTHORIZED</code></td>
+                     <td>403</td>
+                     <td>API key not mapped to requested tenant</td>
+              </tr>
+              <tr>
+                     <td><code>RATE_LIMITED</code></td>
+                     <td>429</td>
+                     <td>Exceeded request quota</td>
+              </tr>
+       </table>
 
-<h2>7. Validation Rules (All Tools)</h2>
-<table>
-<tr><th>Rule</th><th>Implementation</th></tr>
-<tr><td>Entity ID resolution</td><td>UUID parse → external_id lookup → fuzzy name match (pg_trgm)</td></tr>
-<tr><td>Tenant isolation</td><td>Every query: <code>AND tenant_id = $tenant</code></td></tr>
-<tr><td>Soft delete filter</td><td>Every query: <code>AND deleted_at IS NULL</code></td></tr>
-<tr><td>Pagination</td><td>Default limit=50, max limit=200</td></tr>
-<tr><td>Date format</td><td>ISO 8601 in responses; accept MM/DD/YYYY in input</td></tr>
-<tr><td>Currency</td><td>Always include <code>currency</code> field with ISO 4217 code</td></tr>
-</table>
+       <h2>7. Validation Rules (All Tools)</h2>
+       <table>
+              <tr>
+                     <th>Rule</th>
+                     <th>Implementation</th>
+              </tr>
+              <tr>
+                     <td>Entity ID resolution</td>
+                     <td>UUID parse → external_id lookup → fuzzy name match (pg_trgm)</td>
+              </tr>
+              <tr>
+                     <td>Tenant isolation</td>
+                     <td>Every query: <code>AND tenant_id = $tenant</code></td>
+              </tr>
+              <tr>
+                     <td>Soft delete filter</td>
+                     <td>Every query: <code>AND deleted_at IS NULL</code></td>
+              </tr>
+              <tr>
+                     <td>Pagination</td>
+                     <td>Default limit=50, max limit=200</td>
+              </tr>
+              <tr>
+                     <td>Date format</td>
+                     <td>ISO 8601 in responses; accept MM/DD/YYYY in input</td>
+              </tr>
+              <tr>
+                     <td>Currency</td>
+                     <td>Always include <code>currency</code> field with ISO 4217 code</td>
+              </tr>
+       </table>
 
-<h2>8. Database Schema Summary</h2>
-<table>
-<tr><th>Table</th><th>Unique Key</th><th>Primary Indexes</th></tr>
-<tr><td><code>organizations</code></td><td>(tenant_id, external_org_pk)</td><td>tenant_id</td></tr>
-<tr><td><code>funds</code></td><td>(tenant_id, external_fund_id)</td><td>tenant_id, name_trgm</td></tr>
-<tr><td><code>companies</code></td><td>(tenant_id, external_company_id)</td><td>tenant_id, name_trgm</td></tr>
-<tr><td><code>investors</code></td><td>(tenant_id, external_investor_id)</td><td>tenant_id, name_trgm</td></tr>
-<tr><td><code>holdings</code></td><td>(tenant_id, fund_id, company_id)</td><td>tenant_id, company_id</td></tr>
-<tr><td><code>securities</code></td><td>(tenant_id, external_security_id)</td><td>tenant_id, company_id</td></tr>
-<tr><td><code>valuations</code></td><td>—</td><td>tenant_id, (company_id, valuation_date DESC)</td></tr>
-<tr><td><code>transactions</code></td><td>—</td><td>tenant_id, (company_id, transaction_date DESC)</td></tr>
-<tr><td><code>documents</code></td><td>—</td><td>tenant_id, (entity_id, entity_type)</td></tr>
-<tr><td><code>people</code></td><td>(tenant_id, email)</td><td>tenant_id, company_id</td></tr>
-<tr><td><code>relationships</code></td><td>(tenant_id, source, target, type)</td><td>source_entity_id, target_entity_id</td></tr>
-<tr><td><code>performance_metrics</code></td><td>—</td><td>tenant_id, company_id</td></tr>
-</table>
+       <h2>8. Database Schema Summary</h2>
+       <table>
+              <tr>
+                     <th>Table</th>
+                     <th>Unique Key</th>
+                     <th>Primary Indexes</th>
+              </tr>
+              <tr>
+                     <td><code>organizations</code></td>
+                     <td>(tenant_id, external_org_pk)</td>
+                     <td>tenant_id</td>
+              </tr>
+              <tr>
+                     <td><code>funds</code></td>
+                     <td>(tenant_id, external_fund_id)</td>
+                     <td>tenant_id, name_trgm</td>
+              </tr>
+              <tr>
+                     <td><code>companies</code></td>
+                     <td>(tenant_id, external_company_id)</td>
+                     <td>tenant_id, name_trgm</td>
+              </tr>
+              <tr>
+                     <td><code>investors</code></td>
+                     <td>(tenant_id, external_investor_id)</td>
+                     <td>tenant_id, name_trgm</td>
+              </tr>
+              <tr>
+                     <td><code>holdings</code></td>
+                     <td>(tenant_id, fund_id, company_id)</td>
+                     <td>tenant_id, company_id</td>
+              </tr>
+              <tr>
+                     <td><code>securities</code></td>
+                     <td>(tenant_id, external_security_id)</td>
+                     <td>tenant_id, company_id</td>
+              </tr>
+              <tr>
+                     <td><code>valuations</code></td>
+                     <td>—</td>
+                     <td>tenant_id, (company_id, valuation_date DESC)</td>
+              </tr>
+              <tr>
+                     <td><code>transactions</code></td>
+                     <td>—</td>
+                     <td>tenant_id, (company_id, transaction_date DESC)</td>
+              </tr>
+              <tr>
+                     <td><code>documents</code></td>
+                     <td>—</td>
+                     <td>tenant_id, (entity_id, entity_type)</td>
+              </tr>
+              <tr>
+                     <td><code>people</code></td>
+                     <td>(tenant_id, email)</td>
+                     <td>tenant_id, company_id</td>
+              </tr>
+              <tr>
+                     <td><code>relationships</code></td>
+                     <td>(tenant_id, source, target, type)</td>
+                     <td>source_entity_id, target_entity_id</td>
+              </tr>
+              <tr>
+                     <td><code>performance_metrics</code></td>
+                     <td>—</td>
+                     <td>tenant_id, company_id</td>
+              </tr>
+       </table>
 
-<hr>
-<p style="text-align:center;color:#888;font-size:11px;margin-top:30px">
-Carta Intelligence MCP Server — Endpoint Specification v1.1 · Elevation AI · Confidential
-</p>
+       <hr>
+       <p style="text-align:center;color:#888;font-size:11px;margin-top:30px">
+              Carta Intelligence MCP Server — Endpoint Specification v1.1 · Elevation AI · Confidential
+       </p>
 </body>
+
 </html>

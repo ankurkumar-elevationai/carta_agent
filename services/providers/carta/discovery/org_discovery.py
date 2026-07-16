@@ -25,6 +25,8 @@ from ..api.replay_client import (
     ReplayScenario,
     ReplayException,
 )
+from ..api.url_builder import URLBuilder
+
 from ..models.extraction import OrganizationNode
 
 log = logging.getLogger(__name__)
@@ -103,8 +105,116 @@ class OrganizationDiscoveryEngine:
             OrgMatchError if no org matches the target company above min_score.
         """
         all_orgs = await self.discover()
-        matched = self.match_target(target_company, all_orgs, min_score=min_score)
+        try:
+            matched = self.match_target(target_company, all_orgs, min_score=min_score)
+        except OrgMatchError as e:
+            log.info(f"[OrgDiscovery] Direct organization match failed. Searching portfolios of accessible investment firms...")
+            matched_firm = await self._match_via_investments(target_company, all_orgs)
+            if matched_firm:
+                matched = OrganizationNode(
+                    org_pk=matched_firm.org_pk,
+                    name=matched_firm.name,
+                    account_type=matched_firm.account_type,
+                    landing_url=matched_firm.landing_url,
+                    is_target=True,
+                    is_favorite=matched_firm.is_favorite,
+                    most_recent_rank=matched_firm.most_recent_rank,
+                )
+                log.info(
+                    f"[OrgDiscovery] [OK] Resolved target company '{target_company}' via portfolio investments "
+                    f"to firm: '{matched.name}' (org_pk={matched.org_pk})"
+                )
+            else:
+                raise e
         return matched, all_orgs
+
+    async def _match_via_investments(
+        self, target_company: str, orgs: list[OrganizationNode]
+    ) -> Optional[OrganizationNode]:
+        """
+        Query the investments of each investment firm to see if the target company
+        belongs to any of them.
+        """
+        query_lower = target_company.lower().strip()
+        
+        for org in orgs:
+            if org.account_type != "investment firm":
+                continue
+                
+            log.info(f"[OrgDiscovery] Checking if '{target_company}' is in portfolio of '{org.name}'...")
+            
+            # Query firm investments endpoint
+            endpoint = f"/api/investors/portfolio/firm/{org.org_pk}/list_firm_investments/"
+            target = ReplayTarget(
+                method="GET",
+                url=URLBuilder.build_api_url(endpoint),
+                headers={},
+                body_hash=None,
+                inferred_capabilities={"entity_list", "portfolio_data"},
+            )
+            
+            try:
+                result = await self.replay_client.get(
+                    target=target,
+                    scenario=ReplayScenario.AUTO_FALLBACK,
+                )
+                if not result or not result.payload:
+                    continue
+                
+                payload = result.payload
+                # Parse candidates list
+                items = []
+                if isinstance(payload, list):
+                    items = payload
+                elif isinstance(payload, dict):
+                    # Check common keys: 'investments', 'results', 'data', 'items'
+                    for key in ["investments", "results", "data", "items"]:
+                        if key in payload and isinstance(payload[key], list):
+                            items = payload[key]
+                            break
+                    if not items:
+                        # Fallback: check if any value is a list
+                        for val in payload.values():
+                            if isinstance(val, list):
+                                items = val
+                                break
+                                
+                for item in items:
+                    if not isinstance(item, dict):
+                        continue
+                    
+                    name = (
+                        item.get("legal_name")
+                        or item.get("dba")
+                        or item.get("company_name")
+                        or item.get("companyName")
+                        or (item.get("company", {}).get("name") if isinstance(item.get("company"), dict) else item.get("company"))
+                        or item.get("name")
+                    )
+                    if not name:
+                        continue
+                        
+                    name_lower = str(name).lower().strip()
+                    partial = fuzz.partial_ratio(query_lower, name_lower)
+                    token_sort = fuzz.token_sort_ratio(query_lower, name_lower)
+                    score = max(partial, token_sort)
+                    
+                    if name_lower.startswith(query_lower):
+                        score += 15.0
+                    if name_lower == query_lower:
+                        score = 100.0
+                        
+                    if score >= 75.0:
+                        log.info(
+                            f"[OrgDiscovery] [OK] Found matching investment '{name}' "
+                            f"(score={score:.1f}) in '{org.name}' portfolio!"
+                        )
+                        return org
+            except Exception as e:
+                log.warning(f"[OrgDiscovery] Failed to query investments for {org.name}: {e}")
+                continue
+                
+        return None
 
     def match_target(
         self,
@@ -166,6 +276,17 @@ class OrganizationDiscoveryEngine:
                 f"Available: {[o.name for o in orgs]}"
             )
 
+        # If the matched organization is a company (not an investment firm), switch to Krakatoa Ventures to allow portfolio drilldown
+        if best_org.account_type == "company":
+            krakatoa_org = next((o for o in orgs if o.name == "Krakatoa Ventures"), None)
+            if krakatoa_org:
+                log.info(
+                    f"[OrgDiscovery] Matched org '{best_org.name}' is of type 'company'. "
+                    f"Switching to investor firm '{krakatoa_org.name}' (org_pk={krakatoa_org.org_pk}) "
+                    f"to allow portfolio drilldown."
+                )
+                best_org = krakatoa_org
+
         # Mark as target
         matched = OrganizationNode(
             org_pk=best_org.org_pk,
@@ -178,7 +299,7 @@ class OrganizationDiscoveryEngine:
         )
 
         log.info(
-            f"[OrgDiscovery] ✓ Matched '{target_company}' → "
+            f"[OrgDiscovery] [OK] Matched '{target_company}' → "
             f"'{matched.name}' (org_pk={matched.org_pk}, type={matched.account_type}, score={best_score:.1f})"
         )
         return matched
@@ -186,8 +307,8 @@ class OrganizationDiscoveryEngine:
     async def _replay_account_switcher(self, endpoint: str) -> list[OrganizationNode]:
         """Replay the account-switcher API and parse the response."""
         # Build the full URL using the replay client's page context
-        base_url = "https://app.playground.carta.team"  # Will be overridden by replay client
-        full_url = f"{base_url}{endpoint}"
+        base_url = URLBuilder.API_BASE_URL  # Will be overridden by replay client
+        full_url = URLBuilder.build_api_url(endpoint)
 
         target = ReplayTarget(
             method="GET",

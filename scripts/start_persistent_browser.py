@@ -4,6 +4,10 @@ import os
 import urllib.request
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from services.providers.carta.utils.settings import settings
+
+
 
 def start_persistent_browser():
     """
@@ -45,7 +49,7 @@ def start_persistent_browser():
             "--disable-background-networking",
             "--disable-sync",
             "--metrics-recording-only",
-            "https://login.playground.carta.team/credentials/login/",  # Start on Carta login page
+            f"{settings.login_base_url}/credentials/login/",  # Start on Carta login page
         ],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,

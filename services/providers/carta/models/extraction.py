@@ -149,11 +149,7 @@ class CapTableEntity(msgspec.Struct, kw_only=True):
     issued: int | None = None
     identity: EntityIdentity | None = None
 
-class EntityGraph(msgspec.Struct, kw_only=True):
-    firm_id: str
-    investments: list[InvestmentEntity] = []
-    valuations: list[ValuationEntity] = []
-    cap_tables: list[CapTableEntity] = []
+
 
 
 # ────────────────────────────────────────────────────────────────────

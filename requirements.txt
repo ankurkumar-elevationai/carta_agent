@@ -11,10 +11,9 @@ rapidfuzz
 pydantic-settings
 httpx
 polars
-pyarrow
 duckdb
-networkx
 orjson
 msgspec
 mcp
-starlette
+starlettesqlalchemy
+sqlalchmey

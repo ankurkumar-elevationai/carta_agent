@@ -56,7 +56,8 @@ async def init_db():
                 status       TEXT,
                 export_url   TEXT,
                 error        TEXT,
-                created_at   REAL
+                created_at   REAL,
+                targets      TEXT
             )
         ''')
         # Index for download worker polling: quickly find oldest pending task
@@ -69,6 +70,7 @@ async def init_db():
         for col, default in [
             ("created_at", "REAL"),
             ("export_url", "TEXT"),
+            ("targets", "TEXT"),
         ]:
             try:
                 await db.execute(f"ALTER TABLE tasks ADD COLUMN {col} {default}")
@@ -172,12 +174,12 @@ async def claim_next_task(source_status: str, target_status: str) -> tuple | Non
                 ORDER BY created_at ASC
                 LIMIT 1
             )
-            RETURNING task_id, company_name
+            RETURNING task_id, company_name, targets
             ''',
             (target_status, source_status),
         )
         row = await cursor.fetchone()
         await db.commit()
-        return row  # (task_id, company_name) or None
+        return row  # (task_id, company_name, targets) or None
     finally:
         await db.close()

@@ -9,11 +9,12 @@ entity's detail page to stimulate and capture entity-specific APIs
 import asyncio
 import logging
 import time
-from typing import List
+from typing import List, Optional
 from playwright.async_api import Page
 
 from ..models.extraction import DiscoveredEntity, DrilldownResult, ActiveEntityContext, active_entity_context_var
 from ..browser.traversal import CartaEntityTraversalEngine
+from ..api.url_builder import URLBuilder
 import uuid
 
 log = logging.getLogger(__name__)
@@ -30,19 +31,21 @@ class InvestmentDrilldownEngine:
         self,
         page: Page,
         api_collector,
-        app_base_url: str = "https://app.playground.carta.team",
+        app_base_url: Optional[str] = None,
         max_entities: int = 50,
         max_depth: int = 2,
         tab_timeout: int = 3000,
         entity_cooldown: float = 2.0,
+        targets: Optional[List[str]] = None,
     ):
         self.page = page
         self.api_collector = api_collector
-        self.app_base_url = app_base_url
+        self.app_base_url = app_base_url or URLBuilder.APP_BASE_URL
         self.max_entities = max_entities
         self.max_depth = max_depth
         self.tab_timeout = tab_timeout
         self.entity_cooldown = entity_cooldown
+        self.targets = targets
 
     async def drilldown(self, entities: List[DiscoveredEntity]) -> List[DrilldownResult]:
         """
@@ -110,7 +113,8 @@ class InvestmentDrilldownEngine:
             traversal_engine = CartaEntityTraversalEngine(
                 page=self.page, 
                 collector=self.api_collector,
-                max_depth=self.max_depth
+                max_depth=self.max_depth,
+                targets=self.targets
             )
             
             # Hook the interaction tracker if the collector has one

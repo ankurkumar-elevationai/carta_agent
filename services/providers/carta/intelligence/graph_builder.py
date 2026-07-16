@@ -104,7 +104,7 @@ class EntityGraphBuilder:
         org_id = org_canon.canonical_id
 
         # 1.5 Seed registry from Entity Manifest (Guaranteed Nodes)
-        for entity_ctx in self.entity_manifest:
+        for entity_ctx in self.entity_manifest.values():
             norm = ResponseNormalizer.normalize_entity(
                 entity_id=entity_ctx.entity_id,
                 entity_type=entity_ctx.entity_type,

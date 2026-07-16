@@ -1,0 +1,132 @@
+{
+  "investments": {
+    "lower-bound-date": "07/14/2026",
+    "upper-bound-date": "12/31/2025",
+    "look-back-date": "12/31/2025",
+    "is-portfolio-tab-view": true,
+    "is-staff": false,
+    "is-invsts-96-fix-as-of-date-staff-users-enabled": true,
+    "ledger-url": "/api/investors/fund/1967488/lp-soi/2115793/",
+    "export-soi-api-url": "/api/investors/fund/1967488/reports/2115793/lp-soi/",
+    "export-financials-report-api-url": "/api/investors/fund/1967488/reports/financials/",
+    "corporation_currency": "USD"
+  },
+  "capital-account-statements": {
+    "sharing-date": "2025-12-31",
+    "fund_uuid": "db2be2c9-f1a9-4d82-aa74-945f32712a7b",
+    "organization_uuid": "57d7aa77-506c-4941-af9a-7e3414043e37",
+    "corporation_currency": "USD"
+  },
+  "fund-transactions": {
+    "show-partner": false,
+    "is_portfolio_view": true,
+    "corporation-pk": 1967488,
+    "base-url": "/api/investors/transactions/fund/2115793/entity/1967488/transactions/",
+    "transaction-types-filter": [
+      {
+        "label": "Other operating expenses",
+        "value": "Other operating expenses",
+        "count": 1
+      },
+      {
+        "label": "Management fees",
+        "value": "Management fees",
+        "count": 1
+      },
+      {
+        "label": "Capital contribution",
+        "value": "Capital contribution",
+        "count": 1
+      },
+      {
+        "label": "Contributions outside commitment",
+        "value": "Contributions outside commitment",
+        "count": 1
+      }
+    ],
+    "corporation_currency": "USD"
+  },
+  "fund-documents": {
+    "base-url": "/api/investors/fund/2115793/get_received_documents/sent_from/1967488/",
+    "fund-filter": [],
+    "show_funds": false,
+    "bulk-download-url": "/api/investors/fund/2115793/bulk-download-received-limited-partner-documents/queue/",
+    "lp-document-center-url": "/investors/individual/2115793/portfolio/get_received_documents/",
+    "lp-organization-uuid": "57d7aa77-506c-4941-af9a-7e3414043e37",
+    "partner-uuid": "3d201604-a439-4fe5-91d3-b437e9460683",
+    "partner-interest-group-uuid": "3d201604-a439-4fe5-91d3-b437e9460683",
+    "document-types-filter": "[{\"label\": \"Annual and quarterly report\", \"count\": 16, \"value\": \"Annual and quarterly report\"}, {\"label\": \"Annual meeting\", \"count\": 0, \"value\": \"Annual meeting\"}, {\"label\": \"Capital account statements\", \"count\": 17, \"value\": \"Capital account statements\"}, {\"label\": \"Capital calls\", \"count\": 2, \"value\": \"Capital calls\"}, {\"label\": \"Distributions\", \"count\": 0, \"value\": \"Distributions\"}, {\"label\": \"General\", \"count\": 25, \"value\": \"General\"}, {\"label\": \"Legal\", \"count\": 0, \"value\": \"Legal\"}, {\"label\": \"Tax\", \"count\": 5, \"value\": \"Tax\"}]",
+    "received-documents": true,
+    "corporation_currency": "USD"
+  },
+  "wire-instructions": {
+    "payments_settings_url": null,
+    "lp_wire_confirmation_flow_enabled": false,
+    "entity_id": 1967488,
+    "portfolio_id": 2115793,
+    "show_wire_account_allocations": true,
+    "fund_admin_partner_uuid": "3d201604-a439-4fe5-91d3-b437e9460683",
+    "fund_admin_partner_id": 138730,
+    "partner_interest_group_uuid": "3d201604-a439-4fe5-91d3-b437e9460683",
+    "fund_uuid": "db2be2c9-f1a9-4d82-aa74-945f32712a7b",
+    "address_api_url": "/api/investors/organization/1881616/address_api/",
+    "organization_id": 1881616,
+    "organization_uuid": "57d7aa77-506c-4941-af9a-7e3414043e37",
+    "beneficiary_name": "EC Space Tech I, LLC",
+    "user_email": "operations@eaiinvestments.com",
+    "user_phone": null,
+    "is_staff_or_impersonate": false,
+    "corporation_currency": "USD"
+  },
+  "securities-account": {
+    "entity_id": 1967488,
+    "portfolio_id": 2115793,
+    "portfolio_uuid": "f2b35542-7b67-44a5-90e8-60d212b131e1",
+    "fund_admin_partner_uuid": "3d201604-a439-4fe5-91d3-b437e9460683",
+    "fund_admin_partner_id": 138730,
+    "partner_interest_group_uuid": "3d201604-a439-4fe5-91d3-b437e9460683",
+    "fund_uuid": "db2be2c9-f1a9-4d82-aa74-945f32712a7b",
+    "organization_id": 1881616,
+    "organization_uuid": "57d7aa77-506c-4941-af9a-7e3414043e37",
+    "beneficiary_name": "EC Space Tech I, LLC",
+    "user_email": "operations@eaiinvestments.com",
+    "user_phone": null,
+    "is_staff_or_impersonate": false,
+    "corporation_currency": "USD"
+  },
+  "overview": {
+    "fund-investments-api-url": "/api/investors/holdings/portfolio/2115793/corporation/1967488/fund-investments/v2/",
+    "is-paper-company": false,
+    "name": "EC Space Tech I, LLC",
+    "show_ownership": false,
+    "effective_captable_permission_for_analytics": null,
+    "is_eshares_company": true,
+    "show_paid_features": false,
+    "show_holdings_cards_on_mobile": true,
+    "has_fund_admin_features": false,
+    "should_show_fund_admin_data": null,
+    "user_is_staff": false,
+    "is_impersonate": false,
+    "firm_id": 1881616,
+    "feature_flags": {
+      "is_capx2_4492_consolidated_investment_capitalization_tab_enabled": true
+    },
+    "is_admin": false,
+    "show-merge-suggestion": false,
+    "portfolio-merge-url": "/shareholders/tools/merge/portfolios",
+    "documents-url": "/api/investors/fund/2115793/get_received_documents/sent_from/1967488/",
+    "portfolio-id": 2115793,
+    "hide_exercise_btn": false,
+    "can_view_all_409a": false,
+    "shares-api-url": null,
+    "organization-uuid": "57d7aa77-506c-4941-af9a-7e3414043e37",
+    "fund-uuid": "db2be2c9-f1a9-4d82-aa74-945f32712a7b",
+    "entity-id": 1967488,
+    "currency": "USD",
+    "show-409A-valuations": false,
+    "portco-409A-valuations-url": "/valuate/v2/firms/1881616/investments/core-llcs/1967488/409a-fmvs/",
+    "portco-409A-valuations-export-url": "/investors/firm/1881616/investments/1967488/valuation-409a/queue/",
+    "show-portfolio-events-company-overview": false,
+    "corporation_currency": "USD"
+  }
+}

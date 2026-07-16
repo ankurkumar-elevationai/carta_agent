@@ -22,6 +22,7 @@ from ..api.replay_client import (
     ReplayScenario,
     ReplayException,
 )
+from ..api.url_builder import URLBuilder
 from ..models.extraction import (
     OrganizationNode,
     DiscoveredEntity,
@@ -74,11 +75,11 @@ class EntityDiscoveryEngine:
         self,
         replay_client: CartaReplayClient,
         target_org: OrganizationNode,
-        app_base_url: str = "https://app.playground.carta.team",
+        app_base_url: Optional[str] = None,
     ):
         self.replay_client = replay_client
         self.target_org = target_org
-        self.app_base_url = app_base_url
+        self.app_base_url = app_base_url or URLBuilder.APP_BASE_URL
         self._entities: list[DiscoveredEntity] = []
         self._raw_responses: dict[str, dict] = {}  # source → raw payload
 
@@ -196,6 +197,7 @@ class EntityDiscoveryEngine:
             name = (
                 item.get("legal_name")
                 or item.get("dba")
+                or item.get("company")
                 or item.get("company_name")
                 or item.get("companyName")
                 or item.get("name")
@@ -285,6 +287,7 @@ class EntityDiscoveryEngine:
                         name = (
                             item.get("legal_name")
                             or item.get("dba")
+                            or item.get("company")
                             or item.get("name")
                             or item.get("company_name")
                             or "unknown"

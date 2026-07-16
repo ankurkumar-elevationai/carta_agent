@@ -129,11 +129,8 @@ class ReplaySchemaDriftError(Exception):
     pass
 
 def is_cloudflare(headers: Dict[str, str], content: str) -> bool:
-    headers_lower = {k.lower(): v.lower() for k, v in headers.items()}
-    if "cf-ray" in headers_lower or ("server" in headers_lower and "cloudflare" in headers_lower["server"]):
-        return True
     content_lower = content.lower()
-    if "cf-browser-verification" in content_lower or "challenge-platform" in content_lower or "just a moment..." in content_lower:
+    if "cf-browser-verification" in content_lower or "challenge-platform" in content_lower or "just a moment..." in content_lower or "cf_challenge" in content_lower:
         return True
     return False
 
@@ -420,9 +417,9 @@ class CartaReplayClient:
             raise ReplayException("Browser context invalid: page is on login domain", page_url=url)
         
         try:
-            await self.page.wait_for_load_state("networkidle", timeout=1000)
+            await self.page.wait_for_load_state("domcontentloaded", timeout=1000)
         except Exception as e:
-            log.warning(f"wait_for_load_state networkidle timed out or failed: {e}")
+            log.warning(f"wait_for_load_state domcontentloaded timed out or failed: {e}")
 
     async def _execute_httpx(self, path: str, params: Optional[dict], trace_id: str, start_time: float) -> ReplayResult:
         absolute_url = URLBuilder.build_api_url(path)
@@ -465,7 +462,7 @@ class CartaReplayClient:
             
             failure = None
             if response.status_code != 200:
-                if is_cf:
+                if response.status_code != 400 and is_cf:
                     failure = ReplayFailureType.CLOUDFLARE
                 elif response.status_code in (401, 403):
                     if "permission" in content.lower():
@@ -554,10 +551,12 @@ class CartaReplayClient:
             
             failure = None
             if status != 200:
-                if is_cf:
+                if status != 400 and is_cf:
                     failure = ReplayFailureType.CLOUDFLARE
                 elif status in (401, 403):
                     failure = ReplayFailureType.SESSION_EXPIRED
+                elif status == 400:
+                    failure = ReplayFailureType.INVALID_REQUEST
                 else:
                     failure = ReplayFailureType.FORBIDDEN
                     

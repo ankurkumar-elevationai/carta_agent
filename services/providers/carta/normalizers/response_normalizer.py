@@ -214,7 +214,6 @@ class ResponseNormalizer:
                     origin_artifact_id=artifact_id,
                     metadata={"target_type": "valuation", "payload_ref": payload}
                 ))
-                ))
 
         # 6. Generic Universal UUID edges
         org_uuid = payload.get("organization_uuid") or payload.get("organization_id")

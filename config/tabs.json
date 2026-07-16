@@ -1,0 +1,52 @@
+[
+  {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@25f5b661e5b08141ec24b17d1ce96c5ceb5828da/inspector.html?ws=127.0.0.1:9222/devtools/page/AE49CA276011F90BD080B9A244DAEC55",
+    "faviconUrl": "https://app.carta.com/static/lib/eshares/img/carta-favicon-dark.png",
+    "id": "AE49CA276011F90BD080B9A244DAEC55",
+    "title": "SiO Space I LLC - Carta",
+    "type": "page",
+    "url": "https://app.carta.com/investors/individual/2430901/portfolio/2422820/overview",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/AE49CA276011F90BD080B9A244DAEC55"
+  },
+  {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@25f5b661e5b08141ec24b17d1ce96c5ceb5828da/inspector.html?ws=127.0.0.1:9222/devtools/page/BC08BBD3843868A9E612AC730FFC2C5C",
+    "faviconUrl": "https://app.carta.com/static/lib/eshares/img/carta-favicon-dark.png",
+    "id": "BC08BBD3843868A9E612AC730FFC2C5C",
+    "parentId": "AE49CA276011F90BD080B9A244DAEC55",
+    "title": "https://carta.ujet.co/web-sdk/v3/bridge.html?5.0.0",
+    "type": "iframe",
+    "url": "https://carta.ujet.co/web-sdk/v3/bridge.html?5.0.0",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/BC08BBD3843868A9E612AC730FFC2C5C"
+  },
+  {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@25f5b661e5b08141ec24b17d1ce96c5ceb5828da/inspector.html?ws=127.0.0.1:9222/devtools/page/A6875F6E6EEABCD68F6AD0466D3FE6EF",
+    "faviconUrl": "https://app.carta.com/static/lib/eshares/img/carta-favicon-dark.png",
+    "id": "A6875F6E6EEABCD68F6AD0466D3FE6EF",
+    "parentId": "AE49CA276011F90BD080B9A244DAEC55",
+    "title": "https://s.stonly.com/stonly-stat-id.html?widgetId=bd2a2086-cb4b-11ee-bc11-06cb0cb2a85e&amp;v=1.7",
+    "type": "iframe",
+    "url": "https://s.stonly.com/stonly-stat-id.html?widgetId=bd2a2086-cb4b-11ee-bc11-06cb0cb2a85e&v=1.7",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/A6875F6E6EEABCD68F6AD0466D3FE6EF"
+  },
+  {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@25f5b661e5b08141ec24b17d1ce96c5ceb5828da/inspector.html?ws=127.0.0.1:9222/devtools/page/AC8C3437DD552B1CC29F55EA638A6A9F",
+    "id": "AC8C3437DD552B1CC29F55EA638A6A9F",
+    "title": "Krakatoa Ventures \u2014 Intelligence Dashboard",
+    "type": "page",
+    "url": "http://localhost:8082/",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/AC8C3437DD552B1CC29F55EA638A6A9F"
+  },
+  {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@25f5b661e5b08141ec24b17d1ce96c5ceb5828da/worker_app.html?ws=127.0.0.1:9222/devtools/page/4AEED4D58C8C5842685589E6A66ABB44",
+    "id": "4AEED4D58C8C5842685589E6A66ABB44",
+    "title": "websdk",
+    "type": "shared_worker",
+    "url": "data:text/javascript;base64,dmFyIE09T2JqZWN0LmRlZmluZVByb3BlcnR5O3ZhciBmPShzLG4sYSk9Pm4gaW4gcz9NKHMsbix7ZW51bWVyYWJsZTohMCxjb25maWd1cmFibGU6ITAsd3JpdGFibGU6ITAsdmFsdWU6YX0pOnNbbl09YTt2YXIgcj0ocyxuLGEpPT5mKHMsdHlwZW9mIG4hPSJzeW1ib2wiP24rIiI6bixhKTsoZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7Y2xhc3Mgc3tjb25zdHJ1Y3Rvcigpe3IodGhpcywibWFpbiIpO3IodGhpcywiY2xpZW50cyIsW10pO3IodGhpcywicG9ydHMiLFtdKX1zdGFydCh0LGkpe2NvbnNvbGUuaW5mbyhgW01haW5Xb3JrZXJdIFN0YXJ0aW5nIHdpdGggaWQoJHt0fSkuLmApO2NvbnN0IGU9e2lkOnQscG9ydDppfTtpZih0aGlzLmNsaWVudHMuc29tZShvPT5vLmlkPT09dCkpe2NvbnNvbGUuaW5mbyhgW01haW5Xb3JrZXJdIENsaWVudCgke3R9KSBhbHJlYWR5IGV4aXN0cy5gKTtyZXR1cm59dGhpcy5jbGllbnRzLnB1c2goZSksY29uc29sZS5kZWJ1ZyhgW01haW5Xb3JrZXJdIENsaWVudCgke3R9KSBhZGRlZC4gY291bnQ6ICR7dGhpcy5jbGllbnRzLmxlbmd0aH1gKSx0aGlzLnRyeVRvTWFya0FzTWFpbihlKX1zdG9wKHQpe2NvbnNvbGUuaW5mbyhgW01haW5Xb3JrZXJdIFN0b3BwaW5nIHdpdGggaWQoJHt0fSkuLmApO2NvbnN0IGk9dGhpcy5jbGllbnRzLmZpbmRJbmRleChvPT5vLmlkPT09dCk7aWYoaT09PS0xKXtjb25zb2xlLmluZm8oYFtNYWluV29ya2VyXSBDbGllbnQoJHt0fSkgZG9lcyBub3QgZXhpc3QuYCk7cmV0dXJufWNvbnN0IGU9dGhpcy5jbGllbnRzW2ldO3RoaXMuY2xpZW50cy5zcGxpY2UoaSwxKSxjb25zb2xlLmRlYnVnKGBbTWFpbldvcmtlcl0gQ2xpZW50KCR7dH0pIHJlbW92ZWQuIGNvdW50OiAke3RoaXMuY2xpZW50cy5sZW5ndGh9YCksdGhpcy50cnlUb1BpY2tNYWluKGUpfXRyeVRvTWFya0FzTWFpbih0KXtpZih0aGlzLm1haW4pe2NvbnNvbGUuaW5mbyhgW01haW5Xb3JrZXJdIEFub3RoZXIgY2xpZW50KCR7dGhpcy5tYWluLmlkfSkgaXMgYWxyZWFkeSB0aGUgbWFpbi5gKTtyZXR1cm59dGhpcy5tYWluPXQsdC5wb3J0LnBvc3RNZXNzYWdlKHt0eXBlOiJNQUlOIn0pLGNvbnNvbGUuaW5mbyhgW01haW5Xb3JrZXJdIENsaWVudCgke3QuaWR9KSBpcyBhIG5ldyBtYWluLmApfXRyeVRvUGlja01haW4odCl7aWYoISh0aGlzLm1haW4mJnRoaXMubWFpbi5pZD09PXQuaWQpKXtjb25zb2xlLmluZm8oYFtNYWluV29ya2VyXSBDbGllbnQoJHt0LmlkfSkgaXMgbm90IHRoZSBtYWluLiBBbm90aGVyIGNsaWVudCgke3RoaXMubWFpbi5pZH0pIGlzIHRoZSBtYWluLmApO3JldHVybn10aGlzLm1haW49dm9pZCAwLHRoaXMuY2xpZW50cy5sZW5ndGg+MCYmdGhpcy50cnlUb01hcmtBc01haW4odGhpcy5jbGllbnRzWzBdKX1icm9hZGNhc3QodCxpLGUpe3RoaXMucG9ydHMuZm9yRWFjaChvPT57byE9PWkmJm8ucG9zdE1lc3NhZ2Uoe3R5cGU6IkJST0FEQ0FTVCIsaWQ6dCx2YWx1ZTplfSl9KX19Y29uc3Qgbj1uZXcgcyxhPXtTVEFSVDpuLnN0YXJ0LmJpbmQobiksU1RPUDpuLnN0b3AuYmluZChuKSxCUk9BRENBU1Q6bi5icm9hZGNhc3QuYmluZChuKX07c2VsZi5hZGRFdmVudExpc3RlbmVyKCJjb25uZWN0IixjPT57Y29uc29sZS5kZWJ1ZygiW01haW5Xb3JrZXJdIG9uY29ubmVjdDoiLGMpO2NvbnN0IHQ9Yy5wb3J0c1swXTtuLnBvcnRzLnB1c2godCksdC5vbm1lc3NhZ2U9aT0+e2NvbnNvbGUuZGVidWcoIltNYWluV29ya2VyXSBvbm1lc3NhZ2U6IixpKTtjb25zdCBlPWkuZGF0YS5jYXRlZ29yeSxvPWkuZGF0YS5pZCxsPWkuZGF0YS50eXBlLGg9aS5kYXRhLnZhbHVlO2lmKGUmJmwmJm8pe2NvbnN0IGQ9YVtsXTtkP2Qobyx0LGgpOmNvbnNvbGUuZGVidWcoYE5vIGV4ZWN1dG9yIGZvciBjYXRlZ29yeSgke2V9KSBhbmQgdHlwZSgke2x9KS5gKX19LHQuc3RhcnQoKX0sITEpfSkoKTsK",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9222/devtools/page/4AEED4D58C8C5842685589E6A66ABB44"
+  }
+]

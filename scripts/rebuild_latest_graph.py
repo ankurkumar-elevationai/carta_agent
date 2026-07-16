@@ -89,14 +89,14 @@ def rebuild_latest_graph():
     
     print(f"Graph built successfully: {len(graph.nodes)} nodes, {len(graph.edges)} edges.")
     
-    # Copy to frontend
-    frontend_data_dir = project_root / "frontend" / "data"
-    frontend_data_dir.mkdir(parents=True, exist_ok=True)
+    # Copy to output
+    output_dir = project_root / "output"
+    output_dir.mkdir(parents=True, exist_ok=True)
     
-    shutil.copy2(graph_out_dir / "nodes.json", frontend_data_dir / "nodes.json")
-    shutil.copy2(graph_out_dir / "edges.json", frontend_data_dir / "edges.json")
+    shutil.copy2(graph_out_dir / "nodes.json", output_dir / "nodes.json")
+    shutil.copy2(graph_out_dir / "edges.json", output_dir / "edges.json")
     
-    print(f"Graph data copied to {frontend_data_dir}")
+    print(f"Graph data copied to {output_dir}")
     print("Refresh your browser to see the canonicalized data!")
 
 if __name__ == "__main__":

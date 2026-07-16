@@ -1,0 +1,72 @@
+[
+  {
+    "name": "EAI Space I LLC",
+    "org_id": "2925615",
+    "firm_id": "3288983",
+    "entity_id": 3272607,
+    "org_uuid": "549f1e61-c78f-49dd-9f81-310dd0101ac6",
+    "fund_uuid": "1f0d6eb1-e9b9-461a-8194-97f3d56ed462",
+    "partner_uuid": "b49735b6-23d4-4a50-afa1-7cb8f336a155",
+    "partner_id": 100008
+  },
+  {
+    "name": "EC Space Tech I LLC",
+    "org_id": "2508022",
+    "firm_id": "2827726",
+    "entity_id": 2152476,
+    "org_uuid": "20b94206-9098-460f-aa46-5cf632824548",
+    "fund_uuid": "1261b84c-ff22-40b9-bbed-99870e733f11",
+    "partner_uuid": "53dac32a-5341-4a0c-937c-5faec6d3d917",
+    "partner_id": 16668
+  },
+  {
+    "name": "EC Space Tech I, LLC",
+    "org_id": "1881616",
+    "firm_id": "2115793",
+    "entity_id": 1967488,
+    "org_uuid": "57d7aa77-506c-4941-af9a-7e3414043e37",
+    "fund_uuid": "db2be2c9-f1a9-4d82-aa74-945f32712a7b",
+    "partner_uuid": "3d201604-a439-4fe5-91d3-b437e9460683",
+    "partner_id": 211270
+  },
+  {
+    "name": "EC SpaceX II, LLC",
+    "org_id": "2508471",
+    "firm_id": "2828201",
+    "entity_id": 1809408,
+    "org_uuid": "3a3d5b53-bb1b-46db-a6e8-9f9e43ba2e06",
+    "fund_uuid": "8d5947dc-850b-4441-bf70-9a99258261ec",
+    "partner_uuid": "b3deb085-9699-4716-af8b-4ba3587811c9",
+    "partner_id": 188303
+  },
+  {
+    "name": "EC SpaceX IV, LLC",
+    "org_id": "2508018",
+    "firm_id": "2827722",
+    "entity_id": 2152476,
+    "org_uuid": "ca4492e1-cebd-4239-a3fa-545ecf2833c9",
+    "fund_uuid": "1261b84c-ff22-40b9-bbed-99870e733f11",
+    "partner_uuid": "b5714ce7-1e2b-47c6-866c-30142efa3d83",
+    "partner_id": 156470
+  },
+  {
+    "name": "EC Stripe, LLC",
+    "org_id": "2508104",
+    "firm_id": "2827812",
+    "entity_id": 2152451,
+    "org_uuid": "cd296bf6-e04f-4bba-b22d-fd03805bef5a",
+    "fund_uuid": "cd91f256-a9da-4d3b-899d-7f6cbaecebe1",
+    "partner_uuid": "6352fac7-c7ac-4997-954b-7ebf5b17dfae",
+    "partner_id": 156369
+  },
+  {
+    "name": "SiO Space I LLC",
+    "org_id": "2160604",
+    "firm_id": "2430901",
+    "entity_id": 2422820,
+    "org_uuid": "c468c5e3-8847-4bf1-a7cf-2051abc4c306",
+    "fund_uuid": "7248bb0f-4f45-4b51-b358-878824b27998",
+    "partner_uuid": "f99b8964-f4ca-4f93-9b46-1b88f2906be4",
+    "partner_id": 205428
+  }
+]

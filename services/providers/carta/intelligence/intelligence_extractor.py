@@ -148,6 +148,48 @@ class IntelligenceExtractor:
     5. Produces an extraction manifest
     """
 
+    TARGET_SCHEMA_KEYWORDS = {
+        "get_investments": ["investment", "holding", "valuation", "ownership", "cap_table"],
+        "get_investment_extra_info": ["profile", "extra_info"],
+        "get_investment_team": ["people", "contact", "team"],
+        "get_investment_valuations": ["valuation", "valuate", "409a", "fmv"],
+        "get_capital_calls": ["transaction", "performance", "cashflow", "activity", "capital_call"],
+        "get_investment_log": ["investment", "holding"],
+        "get_investment_transactions": ["transaction", "performance", "cashflow"],
+        "get_investment_firm": ["firm", "organization"],
+        "get_investment_focus": ["investment", "holding", "valuation", "ownership"],
+        "get_investment_sectors": ["profile", "sector"],
+        "get_investment_certificates": ["cap", "security", "ownership", "holding", "certificate"],
+        "get_distribution_history": ["transaction", "performance", "cashflow", "distribution"],
+        "get_liquidity_distributions": ["transaction", "performance", "cashflow", "liquidity"],
+        "get_investment_expenses": ["expense", "transaction", "performance", "cashflow"],
+        "get_investment_interest": ["interest", "transaction", "performance", "cashflow"],
+        "get_investment_services": ["service", "vendor", "cost"],
+        "get_usage_logs": ["usage", "log", "asset"],
+        "get_recent_developments": ["news", "development", "extra_info", "profile"],
+        "get_growth_signals": ["traction", "growth", "signal", "research"],
+        
+        "inv_investment": ["investment", "holding", "valuation", "ownership", "cap_table"],
+        "inv_asset_extra_info": ["profile", "extra_info"],
+        "inv_asset_team": ["people", "contact", "team"],
+        "inv_asset_valuation": ["valuation", "valuate", "409a", "fmv"],
+        "inv_cap_call": ["transaction", "performance", "cashflow", "activity", "capital_call"],
+        "investment_log": ["investment", "holding"],
+        "inv_investment_transaction": ["transaction", "performance", "cashflow"],
+        "inv_investment_firm": ["firm", "organization"],
+        "inv_investment_focus": ["investment", "holding", "valuation", "ownership"],
+        "inv_investment_sector": ["profile", "sector"],
+        "inv_investment_certificate": ["cap", "security", "ownership", "holding", "certificate"],
+        "inv_investment_distribution_history": ["transaction", "performance", "cashflow", "distribution"],
+        "inv_liquidity_distribution": ["transaction", "performance", "cashflow", "liquidity"],
+        "inv_investment_expense": ["expense", "transaction", "performance", "cashflow"],
+        "inv_investment_interest": ["interest", "transaction", "performance", "cashflow"],
+        "inv_investment_service": ["service", "vendor", "cost"],
+        "inv_asset_usage_log": ["usage", "log", "asset"],
+        "extra_info_recent_development": ["news", "development", "extra_info", "profile"],
+        "research_growing_traction": ["traction", "growth", "signal", "research"],
+    }
+
     def __init__(
         self,
         classifier: EndpointClassifier,
@@ -157,6 +199,7 @@ class IntelligenceExtractor:
         entity_manifest: list[DiscoveredEntity] = None,
         api_collector = None,
         min_replay_score: float = 50.0,
+        target_platform_schemas: Optional[list[str]] = None,
     ):
         self.classifier = classifier
         self.replay_client = replay_client
@@ -166,6 +209,7 @@ class IntelligenceExtractor:
         self.manifest = ExtractionManifest()
         self.api_collector = api_collector
         self.min_replay_score = min_replay_score
+        self.target_platform_schemas = target_platform_schemas
         self.roi_yield: dict[str, int] = {}
         self.roi_attempts: dict[str, int] = {}
 
@@ -318,6 +362,32 @@ class IntelligenceExtractor:
                 return family
         return category.value
 
+    def _endpoint_matches_targets(self, url: str, category: EndpointCategory) -> bool:
+        if not self.target_platform_schemas:
+            return True
+            
+        path_lower = url.lower()
+        cat_name = category.value.lower()
+        
+        # Always allow core discovery/init endpoints to reconstruct entity hierarchies
+        discovery_keywords = ["list_firm_investments", "fund_admin_nav_info_list", "firm-dashboard-app-init", "investors/portfolio"]
+        if any(kw in path_lower for kw in discovery_keywords):
+            return True
+        
+        for t in self.target_platform_schemas:
+            if t.lower() in path_lower:
+                return True
+                
+            keywords = self.TARGET_SCHEMA_KEYWORDS.get(t)
+            if keywords:
+                if any(kw in path_lower or kw in cat_name for kw in keywords):
+                    return True
+            else:
+                if t.lower() in path_lower or t.lower() in cat_name:
+                    return True
+                    
+        return False
+
     def _discover_replay_targets(self) -> list[tuple[str, ClassificationResult]]:
         """
         Scan the classifier's history and return deduplicated high-value targets.
@@ -328,6 +398,11 @@ class IntelligenceExtractor:
 
         for url, classification in self.classifier._history.items():
             clean_path = url.split("?")[0].split("#")[0]
+            
+            # Filter based on target platform schemas
+            if not self._endpoint_matches_targets(url, classification.category):
+                self.manifest.record_skip(url, f"target_mismatch (allowed: {self.target_platform_schemas})")
+                continue
             
             # Fetch cached response metadata
             metadata = getattr(self.classifier, "response_metadata", {}).get(clean_path, {})
@@ -447,7 +522,7 @@ class IntelligenceExtractor:
                     )
 
                     log.info(
-                        f"[IntelligenceExtractor] ✓ {classification.category.value}: "
+                        f"[IntelligenceExtractor] [OK] {classification.category.value}: "
                         f"{url.split('?')[0]} → {output_path.name} "
                         f"({result.latency_ms}ms, entities={entity_count}, keys={top_keys[:5]})"
                     )
@@ -463,7 +538,7 @@ class IntelligenceExtractor:
             except Exception as e:
                 family = self._get_endpoint_family(url, classification.category)
                 self.roi_attempts[family] = self.roi_attempts.get(family, 0) + 1
-                log.warning(f"[IntelligenceExtractor] ✗ Failed to replay {url}: {e}")
+                log.warning(f"[IntelligenceExtractor] [FAIL] Failed to replay {url}: {e}")
                 self.manifest.record_failure(
                     url=url,
                     category=classification.category.value,
@@ -502,6 +577,8 @@ class IntelligenceExtractor:
             json.dumps(manifest_data, indent=2, default=str),
             encoding="utf-8",
         )
+        
+        self._generate_data_map_report(manifest_data)
 
         log.info(
             f"[IntelligenceExtractor] Extraction complete: "
@@ -563,3 +640,74 @@ class IntelligenceExtractor:
         except ReplayException as e:
             log.warning(f"[IntelligenceExtractor] Replay failed for {url}: {e}")
             raise
+
+    def _generate_data_map_report(self, manifest_data):
+        try:
+            report_lines = [
+                "# Extraction Data & Target Schema Mapping Report",
+                "",
+                "This report maps every replayed or discovered API endpoint from the extraction run to its corresponding category, target schema, and payload structure.",
+                "",
+                "## Summary",
+                f"- **Total Extracted**: {manifest_data['summary']['total_extracted']}",
+                f"- **Total Skipped**: {manifest_data['summary']['total_skipped']}",
+                f"- **Total Failed**: {manifest_data['summary']['total_failed']}",
+                "",
+                "## Target Schema Matching Table",
+                "Below is the mapping of each extracted URL to the selective target schemas that allow it.",
+                "",
+                "| Category | Target Schemas | Extracted URL | Payload Keys / Fields |",
+                "| :--- | :--- | :--- | :--- |"
+            ]
+            
+            for entry in manifest_data.get("extracted", []):
+                url = entry.get("url", "")
+                category = entry.get("category", "")
+                top_keys = entry.get("top_level_keys", [])
+                
+                # Check which schemas would match this URL
+                matching_schemas = []
+                for schema in self.TARGET_SCHEMA_KEYWORDS.keys():
+                    path_lower = url.lower()
+                    cat_name = category.lower()
+                    matched = False
+                    if schema.lower() in path_lower:
+                        matched = True
+                    else:
+                        keywords = self.TARGET_SCHEMA_KEYWORDS.get(schema)
+                        if keywords:
+                            if any(kw in path_lower or kw in cat_name for kw in keywords):
+                                matched = True
+                    if matched:
+                        matching_schemas.append(schema)
+                
+                schemas_str = ", ".join(matching_schemas) if matching_schemas else "*None (skipped in selective runs)*"
+                keys_str = ", ".join(top_keys[:10]) if top_keys else "*None or Raw List*"
+                
+                report_lines.append(f"| {category} | {schemas_str} | `{url}` | {keys_str} |")
+                
+            report_lines.append("")
+            report_lines.append("## Skipped Endpoints")
+            report_lines.append("These endpoints were skipped because they did not match target schemas or were classified as platform noise.")
+            report_lines.append("")
+            report_lines.append("| Reason | URL |")
+            report_lines.append("| :--- | :--- |")
+            for entry in manifest_data.get("skipped", []):
+                reason = entry.get("reason", "")
+                url = entry.get("url", "")
+                report_lines.append(f"| {reason} | `{url}` |")
+                
+            report_content = "\n".join(report_lines)
+            
+            # Write to run directory
+            run_report_path = self.output_dir / "extraction_data_map.md"
+            run_report_path.write_text(report_content, encoding="utf-8")
+            
+            # Write to central output directory
+            central_report_path = Path("output/latest_extraction_data_map.md")
+            central_report_path.parent.mkdir(parents=True, exist_ok=True)
+            central_report_path.write_text(report_content, encoding="utf-8")
+            
+            log.info(f"[IntelligenceExtractor] Generated data map report at: {run_report_path}")
+        except Exception as e:
+            log.error(f"[IntelligenceExtractor] Failed to generate data map report: {e}", exc_info=True)

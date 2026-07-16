@@ -93,3 +93,7 @@ FETCH_HEAD
 config/settings.json
 config/companies.json
 config/login_state.json
+
+# Local Cache Directory
+cache/
+

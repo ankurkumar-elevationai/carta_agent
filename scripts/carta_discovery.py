@@ -54,8 +54,8 @@ if __name__ == "__main__":
     if sys.platform == "win32":
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
         
-    # By default, use a test company string
-    target_company = "Acme Corp"
+    # By default, use target company from env
+    target_company = os.environ.get("TARGET_COMPANY", "Acme Corp")
     if len(sys.argv) > 1:
         target_company = sys.argv[1]
         

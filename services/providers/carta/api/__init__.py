@@ -1,8 +1,10 @@
 from .auth import CartaAuthContext, CartaRuntimeContext, CartaUIRoutes
 from .registry import EndpointIdentity
 from .replay_client import CartaReplayClient, CartaReplayStrategy, ReplayMode, ReplayTarget
-from .discovery_analyzer import DiscoveryAnalyzer
-from .exceptions import SessionExpiredError, InvalidRouteError, PersonaMismatchError
+from .exceptions import SessionExpiredError, InvalidRouteError
+from .route_registry import RouteRegistry, EntityContext, ResolvedRoute
+from .session_manager import SessionManager
+from .direct_fetch import DirectFetchService, DirectFetchResult
 
 __all__ = [
     "CartaAuthContext",
@@ -13,8 +15,12 @@ __all__ = [
     "CartaReplayClient",
     "CartaReplayStrategy",
     "ReplayMode",
-    "DiscoveryAnalyzer",
     "SessionExpiredError",
     "InvalidRouteError",
-    "PersonaMismatchError",
+    "RouteRegistry",
+    "EntityContext",
+    "ResolvedRoute",
+    "SessionManager",
+    "DirectFetchService",
+    "DirectFetchResult",
 ]

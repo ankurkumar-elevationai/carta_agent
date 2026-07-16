@@ -402,3 +402,327 @@ body {
 }
 .domain-pill .icon { font-size: 1rem; }
 .domains-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* ─── Agent Testing UI ─── */
+.tab-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+}
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.03);
+}
+.tab-btn.active {
+    color: var(--accent-blue);
+    background: rgba(79,124,255,0.1);
+    font-weight: 600;
+}
+.subtab-content {
+    display: none;
+    animation: fadeIn 0.25s ease;
+}
+.subtab-content.active {
+    display: block;
+}
+.milestone-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.85rem;
+    background: var(--bg-table-row);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+}
+.milestone-item .name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+.milestone-item .status {
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+}
+.milestone-item.passed .status {
+    color: var(--accent-emerald);
+}
+.milestone-item.failed .status {
+    color: var(--accent-rose);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.status-badge.pass {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--accent-emerald);
+}
+.status-badge.fail {
+    background: rgba(244, 114, 182, 0.15);
+    color: var(--accent-rose);
+}
+
+.coverage-status {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+}
+.coverage-status.full {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--accent-emerald);
+}
+.coverage-status.partial {
+    background: rgba(251, 191, 54, 0.15);
+    color: var(--accent-amber);
+}
+.coverage-status.stub {
+    background: rgba(244, 114, 182, 0.15);
+    color: var(--accent-rose);
+}
+.coverage-status.missing {
+    background: rgba(90, 101, 128, 0.15);
+    color: var(--text-muted);
+}
+
+/* ─── Platform Explorer UI Preview Styles ─── */
+.explorer-tab-btn {
+    transition: all 0.2s ease;
+}
+.explorer-tab-btn:hover {
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+.explorer-tab-btn.active {
+    background: rgba(79, 124, 255, 0.15) !important;
+    color: var(--accent-blue) !important;
+}
+
+/* Share Certificate UI styling */
+.certificate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+}
+.certificate-card {
+    background: radial-gradient(circle at top right, #1a2238, #111625);
+    border: 3px double #d97706; /* gold/amber double border */
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    overflow: hidden;
+}
+.certificate-card::after {
+    content: "CARTA CERTIFIED";
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: rgba(217, 119, 6, 0.03);
+    transform: rotate(-15deg);
+    pointer-events: none;
+    font-family: var(--font);
+}
+.certificate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(217, 119, 6, 0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+.certificate-title {
+    font-family: Georgia, serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fbbf24;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.certificate-number {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: #f59e0b;
+    font-weight: 600;
+}
+.certificate-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.certificate-holder {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.certificate-meta {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+.certificate-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    border-top: 1px dashed rgba(217, 119, 6, 0.2);
+    padding-top: 0.5rem;
+}
+.certificate-seal {
+    width: 32px;
+    height: 32px;
+    background: #d97706;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 10px rgba(217, 119, 6, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.certificate-seal::before {
+    content: "★";
+    color: #000;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+.certificate-status-pill {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+.certificate-status-pill.active {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--accent-emerald);
+}
+.certificate-status-pill.cancelled {
+    background: rgba(244, 114, 182, 0.15);
+    color: var(--accent-rose);
+}
+
+/* Coverage visualizer classes */
+.coverage-progress-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+.coverage-progress-bar-wrap {
+    height: 12px;
+    background: var(--bg-table-row);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0.75rem 0;
+}
+.coverage-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    border-radius: 6px;
+    transition: width 0.8s ease;
+}
+
+/* Grid layout for explorer views */
+.explorer-grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+.explorer-info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.explorer-info-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.explorer-keyvalue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+.explorer-keyvalue-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+.explorer-keyvalue-label {
+    color: var(--text-secondary);
+}
+.explorer-keyvalue-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.explorer-profile-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.explorer-profile-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+.explorer-profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.explorer-profile-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+.explorer-profile-designation {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+.explorer-profile-email {
+    font-size: 0.75rem;
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+

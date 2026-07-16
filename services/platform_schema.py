@@ -2,15 +2,6 @@ from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 from enum import Enum
 
-class CoverageStatus(str, Enum):
-    DIRECT_MAP = "DIRECT_MAP"
-    COMPUTED = "COMPUTED"
-    DECOMPOSED = "DECOMPOSED"
-    AGGREGATED = "AGGREGATED"
-    ENRICHMENT_REQUIRED = "ENRICHMENT_REQUIRED"
-    NA_FOR_VENTURE = "NA_FOR_VENTURE"
-    STUB = "STUB"
-
 class PlatformBaseModel(BaseModel):
     """Base model for all platform schema entities."""
     pass
@@ -50,6 +41,7 @@ class InvAssetValuation(PlatformBaseModel):
     investment_id: str
     amount: float
     year: str
+    date: Optional[str] = None
 
 class InvCapCall(PlatformBaseModel):
     investment_id: str
@@ -137,3 +129,17 @@ class ExtraInfoRecentDevelopment(PlatformBaseModel):
 class ResearchGrowingTraction(PlatformBaseModel):
     investment_id: str
     description: str
+
+class PartnerCapitalAccountSummary(PlatformBaseModel):
+    investment_id: str
+    partner_id: str
+    fund_uuid: str
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    beginning_balance: Optional[float] = None
+    contributions: Optional[float] = None
+    distributions: Optional[float] = None
+    net_income: Optional[float] = None
+    ending_balance: Optional[float] = None
+    currency: Optional[str] = "USD"
+

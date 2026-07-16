@@ -1,5 +1,6 @@
 import os
 from enum import Enum
+from typing import Optional
 from pydantic_settings import BaseSettings
 
 class CartaRuntimeMode(str, Enum):
@@ -13,6 +14,7 @@ class CartaSettings(BaseSettings):
     login_base_url: str = "https://login.playground.carta.team"
     app_base_url: str = "https://app.playground.carta.team"
     api_base_url: str = "https://app.playground.carta.team/api"
+    target_url: Optional[str] = None
     
     # Discovery mode settings
     enable_har: bool = False

@@ -67,6 +67,7 @@ class Holding:
     currency: Optional[str] = None
     irr_percentage: Optional[float] = None
     multiple: Optional[float] = None
+    net_asset_value: Optional[float] = None
     source_provider: str = ""
 
 @dataclass
